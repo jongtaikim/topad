@@ -1,0 +1,33 @@
+<div style="width:1124px">
+<div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading bg-white">
+          <i class=" glyphicon   glyphicon-user"></i>
+	    
+	    관리자 암호 변경<br>
+          <small class="text-muted">관리자 계정의 암호를 설정합니다..</small>
+        </div>
+        <div class="panel-body">
+		<form name="basicinfo" method="post"  enctype='multipart/form-data'>
+            <div class="form-group">
+              <label for="def_passwd">기존암호 입력</label>
+              <input type="password" size="30" name="def_passwd"  id="def_passwd" hname="기존암호입력"  class="form-control" required trim="trim"  pattern="^([a-zA-Z0-9]{4,10})?$"  />
+            </div>
+
+		<div class="form-group">
+              <label for="str_passwd">새로운 암호입력</label>
+		 <input type="password" size="30" name="str_passwd" id="str_passwd" hname="새로운 암호" class="form-control"  trim="trim" pattern="^([a-zA-Z0-9]{4,10})?$" match="str_passwd2" required/>
+            </div>
+
+		<div class="form-group">
+              <label for="str_passwd2">새로운 암호 확인</label>
+             <input type="password" size="30" name="str_passwd2" id="str_passwd2" hname="새로운 암호 확인" class="form-control"  trim="trim" required/>
+            </div>
+
+
+		<button type="submit" class="btn btn-dark m-b waves-effect">저장하기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>

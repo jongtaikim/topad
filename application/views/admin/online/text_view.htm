@@ -1,0 +1,114 @@
+<?
+$viewpage = "/admin/keyword/keyword_view";
+
+?>
+
+
+<div class="panel-body ">
+ <form role="form"  data-validate="parsley" enctype='multipart/form-data' method="POST" name="dataForm" id="dataForm">
+	<input type="hidden" name="idx" value="{idx}"/>
+	<input type="hidden" name="db_company_idx" value="{company_idx}"/>
+	
+	
+	<div class="col-sm-12">
+        <div class="md-form-group">
+          <input class="md-input parsley-validated" name="db_keyword" id="db_keyword" value="{keyword}"  placeholder="키워드 입력" hname="키워드">
+          <label>키워드</label>
+        </div>
+      </div>
+
+	<div class="col-sm-12">
+        <div class="md-form-group">
+          <input class="md-input parsley-validated" name="db_target_url" id="db_target_url" value="{target_url}"  placeholder="대상 URL" hname="대상URL">
+          <label>대상URL</label>
+        </div>
+      </div>
+
+	<div class="col-sm-12">
+        <div class="md-form-group">
+          <input class="md-input parsley-validated" name="db_content_title" id="db_content_title" value="{content_title}"  placeholder="대상 컨텐츠 제목" hname="대상 컨텐츠 제목">
+          <label>컨텐츠제목</label>
+        </div>
+      </div>
+
+
+	<div class="col-sm-12">
+        <div class="md-form-group">
+		<textarea class="md-input "  name="db_memo"  style="height:70px;overflow:auto;">{memo}</textarea>
+          <label>메모</label>
+        </div>
+      </div>
+	
+	<div class="col-sm-12">
+        <div class="md-form-group">
+
+	    <select  name="db_use_st" id="db_use_st" class="md-input">
+		<option value="Y" {? use_st =='Y' || use_st ==''}selected{/}>사용</option>
+		<option value="N" {? use_st =='N'}selected{/}>사용안함</option>
+	    </select>
+          <label>사용여부</label>
+        </div>
+      </div>	
+	
+	
+</form>
+</div>
+<script type="text/javascript" src="/trunk/scripts/jquery.form.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+function submit_data(){
+	var validated_t = 'Y';
+	$('.parsley-validated').each(function(){
+		if($(this).val() ==''){
+			alert("["+$(this).attr('hname')+'] 은 필수값입니다.');
+			$(this).focus();
+			validated_t = '';
+			return false;
+		}
+	});
+	
+
+
+	if(validated_t == "Y"){
+		
+		var frm = $("#dataForm");
+		var stringData = $("#dataForm").serialize();
+		frm.ajaxSubmit({
+			type : 'post',
+			url : '<?=$viewpage?>/{idx}',
+			data : stringData, //json 형태로 form data변경
+			dataType : 'html',//( default : xml,json,script,text,html )
+			success : function(data){
+				
+				{? idx}
+					alert('수정되었습니다.');
+				{:}
+					alert('등록되었습니다.');
+				{/}
+				
+				$('#dataModal').modal('hide');
+				reload_data_table();
+			},
+			error : function(request, status, error) {
+				alert(request.responseText);
+				alert('저장실패.... 다시시도해 주십시요');
+			}
+		});
+
+		
+		
+	}
+}
+
+//모달 버튼에 바인딩
+$('#data_submit_btn').unbind('click').click(function(){
+	submit_data();
+});
+
+setTimeout(function(){
+	$('#db_keyword').focus();
+},700);
+
+// ]]>
+</script>
+

@@ -1,0 +1,19 @@
+{? files_LIST}
+<style type="text/css" title="">
+.attach_fileList{width:100%;}
+.attach_fileList .fileItem{margin:5px}
+.attach_fileList .fileItem li{margin:10px;}
+.attach_fileList .fileItem li .spec{font-size:11px}
+</style>
+<div class="attach_fileList">
+	<ul class="fileItem">
+		{@ files_LIST}
+		{? .str_type !='image'}
+			<li><plug:btn size="1" type="a" href="{.pe_url}" value="다운로드" style="margin-right:20px"/> <img src="/images/icon/{=strtolower(.str_ftype)}.gif" alt="" onerror="this.src='/images/icon/default.gif'" /> <a href="{.pe_url}">{.str_upfile}</a> <span class="spec">(용량 : {.bytes} / 다운로드 : {.num_down+0})</span>
+			
+			</li>
+		{/}
+		{/}
+	</ul>
+</div>
+{/}

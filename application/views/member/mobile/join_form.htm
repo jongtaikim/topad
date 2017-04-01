@@ -1,0 +1,267 @@
+
+	<script>
+
+	writesubmit = function (  ) {
+
+
+		if ($("input[name=userid]").val()==""){
+			alert("아이디를 입력해주세요");
+			$("input[name=userid]").focus();
+			return false ;
+		}	
+
+
+		if ($("input[name=name]").val()==""){
+			alert("이름을 입력해주세요");
+			$("input[name=name]").focus();
+			return false ;
+		}	
+
+		if ($("input[name=chkval]").val()=="N"){
+			alert("사용가능한 아이디를 입력해주세요. ");
+			return false ;
+		}	
+
+
+		if ($("input[name=pwd]").val()==""){
+			alert("패스워드를 입력해주세요");
+			$("input[name=pwd]").focus();
+			return false ;
+		}		
+
+		if ($("input[name=repasswd]").val()==""){
+			alert("패스워드를  입력해주세요");
+			$("input[name=repasswd]").focus();
+			return false ;
+		}		
+
+		if ($("input[name=pwd]").val() != $("input[name=repasswd]").val()){
+			alert("패스워드가 일치하지 않습니다.");
+			return false ;
+		}					
+		
+		if ($("input[name=email]").val()==""){
+			alert("이메일을 입력해주세요");
+			$("input[name=email]").focus();
+			return false ;
+		}	
+
+
+		if ($("input[name=phone]").val()==""){
+			alert("연락처를 입력해주세요");
+			$("input[name=phone]").focus();
+			return false ;
+		}	
+
+
+		var _data = $('#login_frm').serialize();		
+		
+		$('#login_frm').submit();
+		
+	}
+		
+	formcheckid = function ( val ) {
+
+//		var _data = $('#login_frm').serialize(); 		
+		var val ;
+
+		$.ajax({
+			 type: 'GET',
+			 url: '/user/member/ajaxCont/userid?userid='+val,
+			 dataType : "html", //전송받을 데이터의 타입
+			 success : function(jsondata) {
+			
+			
+
+	            if ( $("input[name=userid]").val().length <=4 ) {
+	            	$('#checkidval').html("<font color=red>※ 4~16자.</font>") ;
+					return;
+	            }       
+	            
+	            if ( jsondata == 'N' ) {		            
+		            $('#checkidval').html("<font color=red>※ 이미 사용중인 아이디입니다.</font>") ;
+		            $('#chkval').val('N');
+				$('#userid').focus();
+	            } else {
+		            $('#chkval').val('Y');		            
+	            	$('#checkidval').html("<font color=blue>※ 사용가능한 아이디입니다.</font>") ;
+	            } 
+
+//				$('#sdsdfsdsfsfsd').html(jsondata) ;
+			},
+			error: function(request,status,error) {
+				alert(request.responseText);
+			}
+		 });		 		 		
+	}
+
+
+	formcheckpwd = function ( )  {
+		if ($("input[name=pwd]").val() != $("input[name=repasswd]").val()){
+			$('#checkpwdval').html("<font color=red>※ 패스워드가 불일치 합니다.</font>") ;
+		} else {
+			$('#checkpwdval').html("<font color=blue>※ 패스워드가 일치 합니다.</font>") ;
+		}		
+	}
+
+
+
+	$(document).ready(function(){ 
+	
+		$('#phone').change(function(){
+			var tmp_p = str_replace("-","",$(this).val());
+			if(strlen(tmp_p) > 10){
+
+				tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,4)+'-'+substr(tmp_p,7,4);
+			}else{
+				tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,3)+'-'+substr(tmp_p,6,4);
+			}
+			
+			$(this).val(tmp_p);
+		});
+
+	});
+	
+	
+	</script>
+<div id="sdfs123"></div>
+	
+<div class="cont_top"><img src="/application/views/mobile/images/sub_new/join_top_04.png"></div>
+<div id="content" style="width:94%; margin:0 3% 0 3%;" >
+	<div class="cont_top3"><img src="/application/views/mobile/images/join/join02.png"></div>
+	<div class="title">
+		<h3 style="font-size:14px">* 표기사항은 필수 입력 사항입니다.</h3>
+	</div>
+
+	<form name="login_frm" id="login_frm" method="POST" >
+	<input type="hidden" name="mode" id="mode" value="write">     
+	<input type="hidden" name="chkval" id="chkval" value="N">
+	<input type="hidden" name="kakaid" id="kakaid" value="">
+	<input type="hidden" name="in_path" id="in_path" value="mobile">
+
+	<div class="join">
+		<div class="enter">
+			<ul>
+				<li><input type="text"  name="userid" id="userid" onchange="formcheckid( this.value );" placeholder="* 아이디"></li>
+				<li><span id="checkidval"> </span></li>
+				<li><input type="password"  name="pwd" placeholder="* 패스워드 [영문자/숫자, 4~16자]"></li>
+				<li><input type="password" name="repasswd" onkeyup="formcheckpwd( this.value );"  placeholder="* 패스워드확인">
+				
+				</li>
+				<li><span id="checkpwdval"></span></li>
+				<li><input type="text" name="username"  placeholder="* 이름"></li>
+				<li><input type="date" name="birth"  placeholder="* 생년월일"></li>
+				<li><input type="email" name="email_full"  placeholder="* 이메일"></li>
+				<div class="radio_ok"><span>※ 이메일 수신동의</span> 
+				<input type="radio" name="email_ch" value="Y" checked  >동의 &nbsp<input type="radio"   name="email_ch" value="N">동의안함
+				</div>
+				<li class="area">
+					<select name="addr1">
+						<option value="" selected> 지역을 선택하세요</option>
+						<option value="충북">충북</option>
+						<option value="충남">충남</option>
+						<option value="제주">제주</option>
+						<option value="전북">전북</option>
+						<option value="전남">전남</option>
+						<option value="인천">인천</option>
+						<option value="울산">울산</option>
+						<option value="서울">서울</option>
+						<option value="부산">부산</option>
+						<option value="대전">대전</option>
+						<option value="대구">대구</option>
+						<option value="광주">광주</option>
+						<option value="경북">경북</option>
+						<option value="경남">경남</option>
+						<option value="경기">경기</option>
+						<option value="강원">강원</option>
+					</select>
+				</li>
+				<li><input type="text" name="phone" id="phone" placeholder="* 연락처"></li>
+				<div class="radio_ok"><span >※ SMS 수신동의</span> <input type="radio" name="ckyog" id="ckyog1" value="Y" checked>동의 &nbsp<input type="radio" name="ckyog" id="ckyog2" value="N">동의안함</div>
+
+				<script type="text/javascript">
+				{? ckyog== 'Y'}
+					$('#ckyog1').attr('checked',true);
+				{:}
+					$('#ckyog2').attr('checked',true);
+				{/}
+				</script>
+				<li class="area">
+
+					<select name="etc_1" class="data_etc_1_select"  >
+						<option value="" >관심수술분야를 선택해주세요</option>
+						
+					</select>
+				
+				</li>
+				<li class="area">
+
+				<select name="etc_2" >
+					<option value="" >수술예상시기를 선택해주세요</option>
+					<option value="1개월이내" >1개월이내</option>
+					<option value="3개월이내" >3개월이내</option>
+					<option value="6개월이내" >6개월이내</option>
+					<option value="6개월이후" >6개월이후</option>
+				</select>				
+
+				</li>
+			</ul>
+			<!--div class="joincheck"><input type="checkbox" name="email_ch" id="email_ch" value="Y" >전화상담 동의</div-->
+		</div>
+		<div class="btn2">
+			<button type="button" style="margin:0 2% 0 0;" onclick="writesubmit();" ><span>회원가입</span></button>
+			<button type="button"  onclick="go_url('/');"><span>취소</span></button>
+		</div>
+	</div>
+	</form>
+
+<script type="text/javascript">
+
+ 
+/**
+ * 시술항목 가져오기
+ * api -> ect_1_data
+ */	
+ function load_api_etc_1(){
+	//encodeURIComponent()
+	$.ajax({
+	type: 'GET',
+	url: '/api/load_no_sess/data_etc_1',
+	dataType: 'json',
+		success: function(data, status) {
+			var tmp = '';
+			for(i=0; i<data.length; i++) {
+				tmp += '<option value="'+data[i].item+'">'+data[i].item+'</option>';
+			}
+			
+			$('.data_etc_1_select').append(tmp);
+		},
+		error: function(request,status,error) {
+			alert(request.responseText);
+		}
+	});
+
+
+	$.ajax({
+	type: 'GET',
+	url: '/api/load_no_sess/data_etc_1_code',
+	dataType: 'json',
+		success: function(data, status) {
+			var tmp = '';
+			for(i=0; i<data.length; i++) {
+				tmp += '<option value="'+data[i].item+'">'+data[i].name+'</option>';
+			}
+			
+			$('.data_etc_1_code_select').append(tmp);
+		},
+		error: function(request,status,error) {
+			alert(request.responseText);
+		}
+	});
+	
+ }
+
+
+
+load_api_etc_1();
+</script>

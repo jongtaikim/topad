@@ -1,0 +1,219 @@
+
+<div class="col-md-12 n-mp text-center padding opa00 "  ani="fadeIn" delay="300">
+
+	<div class="tit m-t20 hidden-xs-down hidden-sm-down"><img src="images/main/tit_request.png" style="width:100%" class="m-b10"></div>
+	<div class="tit m-t20 hidden-md-up"><img src="images/sub/m/tit_request.png" style="width:100%" class="m-b10"></div>
+</div>
+
+
+
+
+<div class="col-md-12 n-mp text-center opa00 "  ani="fadeIn" delay="600">
+
+
+	<div class="contents col-md-12 n-mp">
+		<div class="post col-md-12 n-mp">
+			<div class="col-md-12 n-mp text-center padding" id="">
+				<div class="tit p-t20 ">
+					<div class="tit m-t20 hidden-xs-down hidden-sm-down">
+						<img src="images/main/tit_00.png" style="width:90%;max-width:727px" class="m-b10"  alt="">
+					</div>
+					<div class="tit m-t20 hidden-md-up">
+						<img src="images/sub/m/tit_00.png" style="width:100%;" class="m-b10"  alt="">
+					</div>
+				</div>
+
+			</div>
+
+		  <div class=" col-xs-12 col-md-12  " id="">
+			<div class="form " style="overflow:auto;;max-width:900px">
+
+			<form method="POST" id="rq_form" name="rq_form">
+
+				  <div class=" col-md-6  col-xs-12  text-left n-mp" style="margin-bottom:10px">
+					<div class="col-md-4 col-xs-4 n-mp text-right" style=";padding-right:1px"><img src="images/main/tit_01.jpg" alt="상호명"></div>
+					<div class="col-md-8 col-xs-8 n-mp" style=""><input type="text" style="width:100%" class="main_input1 validate1" hname="상호명" id="db_subject" name="db_subject" placeholder="상호명을 입력하세요." ></div>
+
+				  </div>
+				  <div class=" col-md-6 col-xs-12  text-left n-mp" style="margin-bottom:10px">
+					<div class="col-md-4  col-xs-4 n-mp text-right " style=";padding-right:1px"><img src="images/main/tit_02.jpg" alt="연락처"></div>
+					<div class="col-md-8  col-xs-8 n-mp " style=""><input type="text" style="width:100%" class="main_input1 validate1 handphone_chk"  hname="연락처" id="db_phone" name="db_phone" placeholder="연락처를 입력하세요."></div>
+				  </div>
+				  <div class=" col-md-6 col-xs-12  text-left  n-mp" style="margin-bottom:10px">
+					<div class="col-md-4 col-xs-4 n-mp text-right " style=";padding-right:1px"><img src="images/main/tit_03.jpg" alt="담당자"></div>
+					<div class="col-md-8  col-xs-8 n-mp " style=""><input type="text" style="width:100%" class="main_input1 validate1" hname="담당자" id="db_name" name="db_name" placeholder="담당자는 필수입니다."></div>
+				  </div>
+				  <div class=" col-md-6 col-xs-12  text-left n-mp " style="margin-bottom:10px">
+					<div class="col-md-4 n-mp col-xs-4 n-mp text-right" style=";padding-right:1px"><img src="images/main/tit_04.jpg" alt="업종"></div>
+					<div class="col-md-8 n-mp col-xs-8 n-mp" style=""><input type="text" style="width:100%" class="main_input1 validate1" hname="업종"  id="db_subjectext" name="db_subjectext" placeholder="업종을 입력하세요."></div>
+				  </div>
+				  <div class=" col-md-12 col-xs-12 text-left  n-mp">
+					<div class="col-md-2 col-xs-4 n-mp text-right " style=";padding-right:1px"><img src="images/main/tit_05.jpg" alt="문의내용" ></div>
+					<div class="col-md-10 col-xs-8 n-mp" style=""><textarea style="width:100%;"  id="db_comment" name="db_comment" class="validate1" hname="문의내용"></textarea></div>
+				 </div>
+				  <div class="button col-md-12 n-mp"><button type="button" onclick="cons_in()"><img src="images/main/btn_send.jpg" width="100%"></button></div>
+				</div>
+
+			</form>
+
+			<script type="text/javascript">
+				function cons_in(){
+					var val_at = 'Y';
+					$('.validate1').each(function(){
+						if($(this).attr('hname')){
+							if($(this).val()==''){
+								alert("["+$(this).attr('hname')+']는 필수입니다.');
+								$(this).focus();
+								val_at = 'N';
+								return false;
+							}
+						}
+					});
+
+					$('.handphone_chk').each(function(){
+						
+					var tmp_p = str_replace("-","",$(this).val());
+					
+					if(strlen(tmp_p) > 10){
+						tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,4)+'-'+substr(tmp_p,7,4);
+					}else{
+						tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,3)+'-'+substr(tmp_p,6,4);
+					}
+					
+				 	$(this).val(tmp_p);
+
+					  var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;
+					   var strValue = $(this).val();
+					   var chkFlg = rgEx.test(strValue);
+					   if(!chkFlg){
+						    alert("올바른 휴대폰번호가 아닙니다.");
+						    $(this).focus();
+							val_at = 'N';
+						    return false;
+					   }
+					});
+					
+
+					if(val_at == "Y"){
+						var targetUrl 	= "/user/ctl_online/item_add";
+						var frm 		= $("#rq_form");
+						var stringData 	= frm.serialize();
+						//$.ajax({
+						frm.ajaxSubmit({
+							type 	: 'POST',
+							url 	: targetUrl,
+							data 	: stringData, 	//json 형태로 form data변경
+							dataType: 'html',		//( default : xml,json,script,text,html )
+							success: function(data, status) {
+								alert(data);
+								//alert('등록되었습니다.');
+								$('.validate1').each(function(){
+									//$(this).val('');
+								});
+							},
+							error 	: function(request, status, error) {
+								alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+							}
+						});
+					}
+
+				}
+
+			</script>
+
+		</div>
+
+		</div>
+	  </div>
+
+</div>
+
+
+<style>
+    .map{margin:auto;width:100%; background:url(./images/main/map.jpg) top center; height:352px;}
+    .map2{margin:auto;width:100%; background:url(./images/main/map.jpg) -629px 0px; height:352px;}
+    .map .post { width:100%;max-width:1000px; height:352px; margin:0 auto; position:relative;}
+    .map .post img{ position:absolute; bottom:40px; right:40px; cursor:pointer;}
+    .map2 .post { width:100%;max-width:1000px; height:352px; margin:0 auto; position:relative;}
+    .map2 .post img{ position:absolute; cursor:pointer;}
+
+</style>
+
+<div class="col-md-12 n-mp hidden-xs-down hidden-sm-down opa00" id=""  ani="fadeIn" delay="400">
+    <div class="map" >
+        <div class="post">
+            <img src="images/main/txt_contactus.png" usemap="#Map" border="0">
+            <map name="Map" id="Map">
+              <area shape="rect" coords="0,164,136,241" href="/data/doc2.pdf"  target="_blank"/>
+              <area shape="rect" coords="138,164,274,241" href="/data/doc1.pdf"  target="_blank"/>
+            </map>
+        </div>
+      </div>
+</div>
+
+<div class="col-md-12 n-mp hidden-md-up opa00 " id=""  ani="fadeIn" delay="800">
+	<div class="map2 " >
+		<div class="post  ">
+			<div class="" >
+
+                <img src="images/main/txt_contactus2.png"  usemap="#Map2" border="0" style="width:200px; bottom:0px; left:0%;" >
+                    <div class="pos_a" style="border:0px solid blue;width: 81px;height: 50px;bottom: 30px;left: 9px;" onclick="location.href='/data/doc2.pdf'"></div>
+                    <div class="pos_a" style="border:0px solid blue;width: 81px;height: 50px;bottom: 30px;left: 90px;"  onclick="location.href='/data/doc1.pdf'"></div>
+
+            </a>
+
+		</div>
+	  </div>
+</div>
+
+
+
+
+<div class="col-md-12 n-mp text-center " id="" style="background-color:#333;height:90px;">
+	<div id="footerwrap" class="container ">
+
+		<div class="logo_g hidden-xs-down col-md-3 text-right "><img src="images/main/ci_gray.png" alt="it company" class="m-t20" style="margin-left:30px"></div>
+		<div class="address col-md-9 hidden-xs-down "><img src="images/main/txt_copy.png" alt="copyright" class="m-t20"></div>
+		<div class="address col-md-9 hidden-md-up "><img src="images/main/txt_copy_m.png" alt="copyright" class="m-t20" style="width:80%"></div>
+
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="ifrModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:520px">
+      <div class="modal-body " id="ifr_modify_body">
+        <iframe name="ifr_data" id="ifr_data" src="" width="100%" height="700px" scrolling="yes" frameborder=0></iframe>
+      </div>
+	  <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function ifr_view(url){
+	$('#ifrModal').modal('show');
+	$('#ifr_data').attr('src',url);
+}
+
+function popup_view(url,w,h){
+	if(!w) w = 800;
+	if(!h) h = 600;
+
+	 cw=(screen.availWidth /2);     //화면 넓이
+	 ch=screen.availHeight;    //화면 높이
+
+
+
+	 ml=(cw-w)/2;        //가운데 띄우기위한 창의 x위치
+	 mt=(ch-h)/2;         //가운데 띄우기위한 창의 y위치
+
+	var myWindow = window.open(url, "tomew", "toolbar=no, scrollbars=yes, resizable=yes, top="+mt+", left="+ml+", width="+w+", height="+h);
+}
+</script>
+
+

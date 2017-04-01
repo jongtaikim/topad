@@ -1,0 +1,54 @@
+
+						<table class="table table-bordered table-striped1  table-hover table-condensed" border="1" cellspacing="0"  style="margin-top:5px;font-size:12px" id="member_data_table">
+						<thead class="b-b b-2x bg-light lt ">
+							<tr >
+								
+
+								<th class="text-center">아이디</th>
+								<th class="text-center">이름</th>
+								<th class="text-center">생년월일</th>
+						
+								<th class="text-center">지역</th>
+								<th class="text-center">이메일</th>
+								
+								<th class="text-center">수신</th>
+								<th class="text-center">휴대폰</th>
+								<th class="text-center">수신</th>
+								<th class="text-center" >관심수술</th>
+								<th class="text-center">수술예상</th>
+								<th class="text-center">가입날짜</th>
+								<th class="text-center">최종접속</th>
+
+								
+							</tr>
+						</thead>
+						<tbody class=" "> 
+							{@ LIST}
+							<tr> 
+								
+								<td >{.userid}</td>
+								<td >{.username}</td>
+								<td >{.birth2}</td>
+								<td >{.addr}</td>
+								<td >{.email}</td>
+								<td >{.email_ch }</td>
+								<td >{.celphone }</td>
+								
+								<td >{.ckyog }</td>
+								<td >{.etc_1 }</td>
+								<td >{.etc_2 }</td>
+								<td >{=substr(.regdate,0,10) }</td>
+								<td >{=substr(.edit_date,0,10) }</td>
+						
+								
+								
+							</tr>
+							{:}
+							<tr>
+								<td colspan="14" align="center" height="100px" class="last">회원이 없습니다.</td>
+							</tr>
+							{/}
+						</tbody>
+						</table>
+
+					

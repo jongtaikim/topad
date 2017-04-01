@@ -1,0 +1,75 @@
+<script type="text/javascript" src="/trunk/scripts/jquery.form.js"></script>
+
+<style>
+.login {width:200px;height:24px;}
+.login input {margin-right:10px;}
+input.login {width:286px;color:#777;padding-left:5px;border:1px solid #ccc;}
+.addition {width:1000px;padding:30px 0;margin:0 auto;clear:both;}
+</style>
+<form method="post" action="" name="frmLogin" style="clear:both">
+	<table cellpadding="0" cellspacing="0"  align="center">
+	<tbody><tr>
+		<td style="background:url('/images/community/login_bg.jpg') no-repeat;height:348px;" align="center">
+			<table cellpadding="0" cellspacing="0" width="1000px" align="center">
+			<input type="hidden" name="reurl" value="{? reurl}{reurl}{:}/main{/}">
+			<input type="hidden" name="act" value="login">
+			<tbody><tr>				
+				<td style="padding:70px 0 0 0;" align="center">
+					<table cellpadding="0" cellspacing="0" width="54%">
+					<tbody><tr>
+						<td>
+							<table cellpadding="0" cellspacing="0" border="0">
+								<tbody><tr>
+                                	<td rowspan="2" width="80" style="text-align:left;"><img src="/images/community/login_icon.jpg"></td>
+                                    <td width="70" style="padding-top:10px;">아이디</td>
+									<td><input type="text" class="login" name="userid" id="userid" placeholder="아이디" style="width:286px;height:22px;margin-top:10px" ></td>
+								</tr>
+								<tr>
+                                	<td style="padding-bottom:10px;">비밀번호</td>
+									<td><input type="password" class="login" name="pwd" placeholder="비밀번호" style="width:286px;height:22px;margin-bottom:10px" ></td>
+								</tr>
+							</tbody></table>
+						</td>
+						<td style="padding-left:10px;"><input type="image" id="" src="/images/community/login_btn_new.jpg" border="0" align="absbottom"></td>
+					</tr>
+					<tr>
+					  <td colspan="2" style="padding-left:124px;"><input type="checkbox" name="saveid" value="Y"> 아이디 저장</td>
+					  </tr>	
+					</tbody></table> 
+					
+					<br>
+					<br>
+					<br>
+                    
+                    <table cellpadding="0" cellspacing="0" border="0" align="center" width="355" style="padding-top:20px;line-height:180%;">
+                        <tbody><tr>
+                        	<td style="padding-right:5px"><img src="/images/community/join_icon.png" style="vertical-align:middle"></td>
+                            <td>회원가입을 아직 하지 않으셨나요?</td>
+                            <td width="122"><a href="/user/member/member_join/2"><img src="/images/community/join_btn_1.png" alt="회원가입" ></a></td>
+                        </tr>
+				<tr>
+					<td colspan="3" height="10px"></td>
+				</tr>
+                        <!--tr>                           
+                        	<td style="padding-right:5px;"><img src="/images/community/join_icon.png" style="vertical-align:middle"></td>
+                            <td>회원 아이디/비밀번호를 잊으셨나요?</td>
+                            <td><a href="/user/member/member_findid"><img src="/images/community/join_btn_2.png" alt="아이디/비밀번호 찾기"></a></td>
+                        </tr-->
+                    </tbody></table>
+				</td>
+			</tr>
+			</tbody></table>
+            
+		</td>
+	</tr>	
+	</tbody></table>
+</form>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+	if($.cookie('cookie_userid')){
+		$('#userid').val($.cookie('cookie_userid'));
+	}
+});
+
+</script>

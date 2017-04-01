@@ -1,0 +1,71 @@
+<style type="text/css">
+
+    .realstory ul.list {
+		margin:0 auto;
+		margin-top:20px;
+        padding:5px;
+    }
+    
+    .realstory div.title {
+		margin:0 0 -10px 5px;
+		font-size: 1.8em;
+		color:#3c3c3c;
+		letter-spacing:-2px;
+	}
+
+    .realstory ul.list li {
+		width:90%;
+		padding:5%;
+        display: block;
+    }
+
+    .realstory ul.list img{
+        width: 100%;
+        float: left;
+    }
+   
+    .realstory ul.list h3 {
+		clear:both;
+		padding:10px 0 0 0;
+		height:30px;
+        font-size: 18px;
+		font-weight:500;
+		color:#ff7a22;
+    }
+
+    .realstory ul.list p{
+        font-size: 16px;
+        line-height: 22px;
+        overflow:hidden;
+        color:#999;
+    }
+	
+	.box-shadow {
+		border:1px solid #d4d4d4;
+		margin-bottom: 10px;
+	}
+</style>
+
+<!-- 이미지 롤링순서: real_top_01.png / real_top_02.png / real_top_03.png -->
+<div class="flexslider">
+    <ul class="slides">		
+        <li><a href="/user/page/doc/191210?cate=191210"><img src="/application/views/mobile/images/sub_new/real/real_top_01.png" border="0"></a></li>
+        <li><a href="/user/page/doc/191211?cate=191211"><img src="/application/views/mobile/images/sub_new/real/real_top_02.png" border="0"></a></li>
+        <li><a href="/user/page/doc/191212?cate=191212"><img src="/application/views/mobile/images/sub_new/real/real_top_03.png" border="0"></a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+
+	  $(".slide_s .flex-control-nav").css({ "top":"-40px", "text-align":"right", "height":"20px", "display":"none"});
+      $(".flex-control-paging li a").html("");
+
+    });
+</script>

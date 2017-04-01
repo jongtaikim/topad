@@ -1,0 +1,183 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+{? admin_pre}
+<script type="text/javascript">
+// <![CDATA[
+
+function checkSelected() {
+	form = document.forms['itemForm'];
+	ids = form.elements['ids[]'];
+	if (!ids) return false;
+	if (!ids.length) ids = [ids];
+	flag = false;
+	for (i = 0,cnt=ids.length; i<cnt; i++) {
+		if (ids[i].checked) {
+			flag = true;
+			break;
+		}
+	}
+	if(!flag) {
+		alert('항목을 선택하여 주십시오.');
+		return false;
+	}
+	return true;
+}
+
+
+
+function checkall() {
+
+var all = document.getElementById("all").value;
+
+if ( all == 'Y')
+{
+uncheckall() 
+ return;
+
+}else{
+  var form = document.itemForm;
+  for (i=0; i < form.elements.length; i++) {
+ if (form.elements[i].name =="ids[]") {
+    form.elements[i].checked = true;
+	
+ }
+  }
+  document.itemForm.all.value = "Y";
+ 
+  
+  return;
+}
+}
+
+function uncheckall() {
+  var form = document.itemForm;
+  for (i=0; i < form.elements.length; i++) {
+ if (form.elements[i].name =="ids[]") {
+  form.elements[i].checked = false;
+ }
+  }
+  document.itemForm.all.value = "";
+
+ return;
+}
+
+
+
+function selectItem() {
+	form = document.forms['itemForm'];
+	if (!checkSelected()) return false;
+	if (!confirm('선택하신 작업을 실행 하시겠습니까?')) return false;
+	
+	if(!$('mode')){
+		alert('작업을 선택하여 주세요.');
+		return false;
+	}
+	form.method="post";
+	form.submit();
+}
+// ]]>
+</script>
+{/}
+
+
+{str_top}
+
+
+<!-- board list -->
+					<div id="boardList" class="clearfix">
+						<div class="head clearfix">
+							
+								<p class="title txt-strong-B">{str_title}</p>
+							
+							<p class="count">total : {=number_format(total +0)}</p>
+						</div>
+						<div class="listWrap clearfix">
+							<table cellpadding="0" cellspacing="0">
+								
+								<thead>
+									<tr>
+										<th width="7.3%" scope="col" class="text-center">no</th>
+										<th width="74.7%" scope="col" class="subject text-center">subject</th>
+										<th width="18%" scope="col" class="text-center">date</th>
+									</tr>
+								</thead>
+								<tbody>
+									{@ gong_LIST}
+									<tr>
+										
+										<td><strong>[공지]</strong></td>
+										<td><p class="title">{? .is_recent} <img class="new" alt="새글" src="./images/icon/ic_new.gif" width="10" height="9">&nbsp;&nbsp;{/}<a href="/user/board/read_view/{.num_mcode}/{.num_serial}?cate={cate}&ch={_GET.ch}"><strong>{.str_title}</strong></a></p></td>
+										<td>{=substr(.dt_date,0,10)}</td>
+									</tr>
+									{/}
+
+									{@ TAB_BOARD}
+									<tr>
+										
+										<td>{.num}</td>
+										<td><p class="title">
+											{? .num_input_pass}<img src="./images/icon/secret.gif" alt="비밀 글" align="absmiddle" />&nbsp;&nbsp;{/}
+											{? .is_recent} <!--img class="new" alt="새글" src="/images/icon/ic_new.gif" width="10" height="9">&nbsp;&nbsp;-->{/}
+
+
+											<a href="/user/board/read_view/{.num_mcode}/{.num_serial}?cate={cate}&ch={_GET.ch}" class="board_view_link">{.str_title}</a>
+											</p></td>
+										<td>{=substr(.dt_date,0,10)}</td>
+									</tr>
+									{:}
+									<tr>
+										<td  colspan="3" height="100px" align="center" style="text-align:center">글이 없습니다.</td>
+									</tr>
+
+									{/}
+								</tbody>
+							</table>
+						</div>
+						
+					</div>
+					<!--// board list-->
+
+					<div style="" class="clearfix">
+						
+						
+						<div class=" ">
+						<br>
+							<form method="get" id="search_form" action="/user/board/list_view/{mcode}?cate={_GET.cate}&ch={_GET.ch}">
+
+							<div class="text-left f_l col-md-4" style="padding-left:0px">
+						
+							{? write_pre}
+								<a href="/user/board/write/{mcode}/<?=_QS?>" class="btn btn-default btn-xl">글쓰기</a>
+							{/} 
+							</div>
+
+							<div class="text-right f_r col-md-4" style="padding-right:0px">
+								<div class="input-group m-b ">
+								    <input type="text" class="form-control" name="search_value" value="{search_value}">
+									<span class="input-group-btn">
+										<button class="btn btn-dark waves-effect" type="button" onclick="$('#search_form').submit();">검색</button>
+								    </span>
+								 </div>
+								<input type="hidden" name="search_key" id="search_key" value="str_title"/>
+							</div>
+							</form>
+						</div>
+
+					</div>
+
+
+					<div class="  text-center m-t20 clearfix" >
+							
+							<plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="4"/> 
+						</div>
+
+
+				<script type="text/javascript">
+				// <![CDATA[
+				$('#like_str_title').keyup(function(eventcode){
+					if(eventcode.keyCode=='13'){
+						$('#search_form').submit()
+					}
+				})
+
+				// ]]>
+				</script>

@@ -1,0 +1,23 @@
+<Files imgfont>
+    ForceType application/x-httpd-php
+</Files>
+<Files imgfontnobg>
+    ForceType application/x-httpd-php
+</Files>
+RewriteEngine On
+
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+  
+RewriteCond %{REQUEST_URI} !^/img/(.*)$
+RewriteCond %{REQUEST_URI} !^/image/(.*)$
+RewriteCond %{REQUEST_URI} !^/images/(.*)$
+RewriteCond %{REQUEST_URI} !^/js/(.*)$
+RewriteCond %{REQUEST_URI} !^/css/(.*)$
+RewriteCond %{REQUEST_URI} !^/config/(.*)$
+
+RewriteRule ^(.*)$ /index.php/$1 [L]
+php_flag register_globals on    
+php_flag magic_quotes_gpc off   
+php_flag display_errors on    

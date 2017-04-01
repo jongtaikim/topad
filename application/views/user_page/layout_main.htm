@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="ko" class="white">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="" />
+ <meta name="viewport" content="width=320px; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<meta property="og:title" content="<?=_TITLE?>"/>
+	<meta property="og:image:url" content="/application/views/user_page/images/main/visual_01.jpg"/>
+	<meta property="og:description" content="마케팅은 탑애드!"/>
+	<meta property="og:site_name" content="<?=_TITLE?>"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:website" content="http://<?=$_SERVER['HTTP_HOST']?>/"/>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" type="image/x-icon" href="/images/ci.ico?v=2" />
+  <link rel="stylesheet" href="/uiset/assets/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="/uiset/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="/uiset/assets/material-design-icons/material-design-icons.css" type="text/css" />
+  <link rel="stylesheet" href="/uiset/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="/uiset/assets/styles/app.css" type="text/css" />
+  <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="css/default.css" type="text/css" media="screen" />
+
+  <!-- endbuild -->
+  <!-- jQuery -->
+  <script src="/uiset/libs/jquery/jquery/dist/jquery.js"></script>
+  <!--[if lt IE 9]> <script src="/trunk/scripts//ie/html5shiv.js"></script> <script src="/trunk/scripts/ie/respond.min.js"></script> <script src="/trunk/scripts/ie/excanvas.js"></script> <![endif]-->
+<style type="text/css" title="">
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.n-mp{margin:0px;padding:0px}
+</style>
+<title><?=_TITLE?></title>
+</head>
+<body>
+{#COMMON}
+<img src="/application/views/user_page/images/main/visual_01.jpg" class="hide" alt="" />
+<div class="" id="container">
+
+
+	{#TOP}
+
+	{#CONTENT}
+
+
+	{#FOOT}
+
+
+</div>
+
+{? popup_contents}
+	{? popup_use == 'y'}
+	<div id="layer_popup" style="position: fixed; z-index: 90;  top: 209px; left: 50%; display: none;">
+		<div id="m3pop-m3pop" style="display:block;position:relative">
+			<div style="text-align:right;position:relative;">
+				<a href="#close" class="btn_ly_close"></a>
+			</div>
+			<div class="layerPopupBody" style="width:100%;height:100%;z-index:999;">
+				<div id="layer_popup_title" style="display: none;">팝업창 안내 공지</div>
+				<div class="white" id="popup_body">{popup_contents}</div>
+			</div>
+			<div class="pop-ck-controller fbox pop-ck-closer" style="background-color:#000;padding:0px;padding-top:5px">
+				<p>
+					<input type="checkbox" name="killpop" id="chkagree" class="killpop m-l10 " >
+					<label for="chkagree" style="color:#fff">이 창을 <span id="num_kill_t">1</span>일동안 열지 않기</label>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		if(!$.cookie('ck-pop1')){
+
+			$('#layer_popup,#layer_popup_ifr,#m3pop-m3pop').show();
+            $('#layer_popup').css('margin-left', "-"+($('#popup_body').width()/3)+'px' );
+            $('.btn_ly_close').click(function(){
+				$('#m3pop-m3pop').hide();
+			});
+            $('#chkagree').click(function(){
+				$.cookie('ck-pop1', '1', { expires : parseInt(1) });
+				$('#m3pop-m3pop').hide();
+			});
+		}
+    });
+	</script>
+	{/}
+{/}
+
+
+
+<!-- Bootstrap -->
+  <script src="/uiset/libs/jquery/tether/dist/js/tether.min.js"></script>
+  <script src="/uiset/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<!-- core -->
+  <script src="/uiset/libs/jquery/underscore/underscore-min.js"></script>
+  <script src="/uiset/libs/jquery/routie/dist/routie.js"></script>
+  <script src="/uiset/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
+  <script src="/uiset/libs/jquery/PACE/pace.min.js"></script>
+  <script src="scripts/ui-include.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/config.js"></script>
+  <script src="scripts/config.lazyload.js"></script>
+  <script src="scripts/palette.js"></script>
+  <script src="scripts/ui-form.js"></script>
+  <script src="scripts/ui-jp.js"></script>
+  <script src="scripts/ui-load.js"></script>
+  <script src="scripts/ui-nav.js"></script>
+  <script src="scripts/ui-screenfull.js"></script>
+  <script src="scripts/ui-scroll-to.js"></script>
+  <script src="scripts/ui-toggle-class.js"></script>
+  <script src="/trunk/scripts/jquery.cookie.js"></script>
+  <script src="./js/common.js"></script>
+
+  <script type="text/javascript" src="/trunk/scripts/php.js"></script>
+<script type="text/javascript" src="/trunk/scripts/app.src.js"></script>
+<script type="text/javascript" src="/trunk/scripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="/trunk/scripts/jquery.form.js"></script>
+
+</body>
+</html>

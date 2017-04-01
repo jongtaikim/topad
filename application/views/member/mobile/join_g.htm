@@ -1,0 +1,85 @@
+<div class="cont_top" style="margin-bottom:20px"><img src="/application/views/mobile/images/sub_new/join_top_04.png"></div>
+
+
+<div id="content" style="width:94%; margin:0 3% 0 3%;" >
+	<div class="cont_top3" style="margin-bottom:20px"><img src="/application/views/mobile/images/join/join01.png"></div>
+	<div class="join">
+		<h4 style="font-size:15px">회원약관</h4>
+		<h5 style="font-size:12px">회원가입을 위해서 청담여신성형외과 회원가입약관·개인정보처리방침에 대한 내용을 읽고 동의해주세요.</h5>
+		<div class="join_check">
+			<textarea class="text_pra1" readonly>
+			</textarea>
+		</div>
+		
+		<p class="joincheck"><input type="checkbox" style="vertical-align:middle;" id="terms">회원약관에 동의합니다.</p>
+		<div class="push10"></div>
+		<h4 style="font-size:15px">개인정보취급방침</h4>
+		<h5 style="font-size:12px">동의를 거부할 수 있습니다. 동의 거부 시에는 이용이 제한됩니다.</h5>
+		<div class="join_check">
+			<textarea class="text_pra2" readonly>
+			</textarea>
+		</div>
+		
+		<p class="joincheck"><input type="checkbox" style="vertical-align:middle;"  id="security">개인정보취급방침에 동의합니다.</p>
+		<p class="joincheck"><input type="checkbox" style="vertical-align:middle;" onclick="allcheck();"  id="allCheck">전체동의</p>
+		<div class="btn2">
+			<button type="button" style="margin:0 2% 0 0;" onclick="chkAgree();" ><span>회원가입</span></button>
+			<button type="button"  onclick="go_url('/');"><span>취소</span></button>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+/**
+ * 이용약관 가져오기
+ * api -> pra
+ */	 
+ function load_api_pra(){
+	$.ajax({
+	type: 'GET',
+	url: '/api/load_no_sess/pra',
+	dataType: 'json',
+		success: function(data, status) {
+			
+			$('.text_pra1').val(data.no_tag_str_text1);
+			$('.text_pra2').val(data.no_tag_str_text2);
+
+			$('.text_pra1_tag').html(data.str_text);
+			$('.text_pra2_tag').html(data.str_text2);
+		},
+		error: function(request,status,error) {
+			alert(request.responseText);
+		}
+	});
+	
+ }
+
+load_api_pra()
+
+function chkAgree(){
+	if ( ! $("#terms").is(":checked") ) {
+		alert("약관에 동의 해주세요");
+		$("#terms").focus();
+	}else if (! $("#security").is(":checked") ){
+		alert("개인정보 보호정책에 동의 해주세요");
+		 $("#security").focus();
+	}else{
+		location.href = "/user/member/member_join/2";
+	}
+
+};
+
+function allcheck( ) {
+	if($("#allCheck").prop("checked")) {
+		$("input[type=checkbox]").prop("checked",true);
+	} else {
+		$("input[type=checkbox]").prop("checked",false);
+	}
+}
+
+	//url 이동
+	go_url = function ( url) {			
+		var url ;			
+		location.href= url ;
+	}		
+</script>

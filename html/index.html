@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko">
+    <meta charset="UTF-8">
+
+    <!--Page Title-->
+    <title>잇컴퍼니 - 마케팅은 잇컴퍼니</title>
+
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=720px, initial-scale=0.5, user-scalable=no"/>
+	<meta property="og:title" content="잇컴퍼니"/>
+	<meta property="og:image:url" content="http://landing.it-company.kr/images/sns_ci.jpg"/>
+	<meta property="og:description" content="홈페이지 기획부터 제작,온라인 마케팅까지 원스톱 서비스!"/>
+	<meta property="og:site_name" content="잇컴퍼니"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:website" content="http://landing.it-company.kr/"/>
+	
+	 <link rel="stylesheet" href="/uiset/assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/images/ci.ico?1" title="Favicon" />
+
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- doFollow Theme CSS -->
+    <!--link rel="stylesheet" href="css/dofollow-red.css"-->
+    <link rel="stylesheet" href="/html/css/{css_style}">
+
+    <!--Icon Fonts - Font Awesome Icons-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Animate CSS-->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+   
+
+    <!--Google Webfonts-->
+    
+</head>
+<body>
+<!-- 전환페이지 설정 -->
+<script type="text/javascript" src="http://wcs.naver.net/wcslog.js"></script> 
+<script type="text/javascript"> 
+var _nasa={};
+_nasa["cnv"] = wcs.cnv("1","10"); // 전환유형, 전환가치 설정해야함. 설치매뉴얼 참고
+</script>
+<!-- 전환페이지 설정 -->
+
+<!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 --> 
+<script type="text/javascript" src="http://wcs.naver.net/wcslog.js"> </script> 
+<script type="text/javascript"> 
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_5973448251b";
+if (!_nasa) var _nasa={};
+wcs.inflow();
+wcs_do(_nasa);
+</script>
+<!-- 공통 적용 스크립트 -->
+
+<img src="/images/sns_ci.jpg" class="hide" alt="" />
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="la-ball-scale-pulse la-2x"><div></div><div></div>
+    </div>
+</div>
+<!--End of Preloader-->
+
+{#HEAD}
+
+<!--Main Content Area-->
+<main id="content">
+
+	{#CONT1}
+	{#CONT2}
+	{#CONT3}
+	{#CONT4}
+	{#CONT5}
+
+
+    <!--Divider-->
+   
+    <!--End of Divider-->
+
+   
+
+</main>
+<!--End Main Content Area-->
+
+
+
+{#FOOT}
+
+<!-- Include JavaScript resources -->
+<script src="js/jquery.1.8.3.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/featherlight.min.js"></script>
+<script src="js/featherlight.gallery.min.js"></script>
+<script src="js/jquery.enllax.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.stickyNavbar.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/images-loaded.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
+<script src="js/site.js"></script>
+
+<script type="text/javascript" src="/trunk/scripts/php.js"></script>
+<script type="text/javascript" src="/trunk/scripts/jquery.form.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('.over_text_s').each(function(){
+			$(this).hover(
+			function(){
+				$(this).children('div').show();
+			},
+			function(){
+				$(this).children('div').hide();
+			});
+		});
+	
+	});
+	
+
+	$(document).ready(function(){ 
+		$('.autoheight').height($(window).height()-100);
+	});
+
+	$(document).resize(function(){ 
+		$('.autoheight').height($(window).height()-100);
+	});
+
+function ifr_view(url){
+	$('#ifrModal').modal('show');
+	$('#ifr_data').attr('src',url);
+}
+
+function popup_view(url,w,h){
+	if(!w) w = 800;
+	if(!h) h = 600;
+
+	 cw=screen.availWidth;     //화면 넓이
+	 ch=screen.availHeight;    //화면 높이
+
+
+	 ml=(cw-w)/2;        //가운데 띄우기위한 창의 x위치
+	 mt=(ch-h)/2;         //가운데 띄우기위한 창의 y위치
+
+	var myWindow = window.open(url, "tomew", "toolbar=no, scrollbars=yes, resizable=yes, top="+mt+", left="+ml+", width="+w+", height="+h);
+}
+
+
+
+
+function cons_in(){
+	var val_at = 'Y';
+	$('.validate1').each(function(){
+		if($(this).attr('hname')){
+			if($(this).val()==''){
+				alert("["+$(this).attr('hname')+']는 필수입니다.');
+				$(this).focus();
+				val_at = 'N';
+				return false;
+			}
+		}
+	});
+
+
+	if(val_at == "Y"){
+
+		$('.handphone_chk').each(function(){
+			
+		var tmp_p = str_replace("-","",$(this).val());
+		
+		if(strlen(tmp_p) > 10){
+			tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,4)+'-'+substr(tmp_p,7,4);
+		}else{
+			tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,3)+'-'+substr(tmp_p,6,4);
+		}
+		
+		$(this).val(tmp_p);
+
+		  var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;
+		   var strValue = $(this).val();
+		   var chkFlg = rgEx.test(strValue);
+		   if(!chkFlg){
+			    alert("올바른 휴대폰번호가 아닙니다.");
+			    $(this).focus();
+				val_at = 'N';
+			    return false;
+		   }
+		});
+
+		var targetUrl 	= "/user/ctl_online/item_add";
+		var frm 		= $("#rq_form");
+		var stringData 	= frm.serialize();
+		//$.ajax({
+		frm.ajaxSubmit({
+			type 	: 'POST',
+			url 	: targetUrl,
+			data 	: stringData, 	//json 형태로 form data변경
+			dataType: 'html',		//( default : xml,json,script,text,html )
+			success: function(data, status) {
+				alert(data);
+				//alert('등록되었습니다.');
+				$('.validate1').each(function(){
+					$(this).val('');
+				});
+			},
+			error 	: function(request, status, error) {
+				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+			}
+		});
+	}
+
+}
+
+
+
+function cons_in2(){
+	var val_at = 'Y';
+	$('.validate2').each(function(){
+		if($(this).attr('hname')){
+			if($(this).val()==''){
+				alert("["+$(this).attr('hname')+']는 필수입니다.');
+				$(this).focus();
+				val_at = 'N';
+				return false;
+			}
+		}
+	});
+
+
+
+	if(val_at == "Y"){
+
+		$('.handphone_chk2').each(function(){
+		
+		var tmp_p = str_replace("-","",$(this).val());
+		
+		if(strlen(tmp_p) > 10){
+			tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,4)+'-'+substr(tmp_p,7,4);
+		}else{
+			tmp_p = substr(tmp_p,0,3)+'-'+substr(tmp_p,3,3)+'-'+substr(tmp_p,6,4);
+		}
+		
+		$(this).val(tmp_p);
+
+		  var rgEx = /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;
+		   var strValue = $(this).val();
+		   var chkFlg = rgEx.test(strValue);
+		   if(!chkFlg){
+			    alert("올바른 휴대폰번호가 아닙니다.");
+			    $(this).focus();
+				val_at = 'N';
+			    return false;
+		   }
+		});
+		
+		
+
+		var targetUrl 	= "/user/ctl_online/item_add";
+		var frm 		= $("#rq_form2");
+		var stringData 	= frm.serialize();
+
+		//$.ajax({
+		frm.ajaxSubmit({
+			type 	: 'POST',
+			url 	: targetUrl,
+			data 	: stringData, 	//json 형태로 form data변경
+			dataType: 'html',		//( default : xml,json,script,text,html )
+			success: function(data, status) {
+				alert(data);
+				//alert('등록되었습니다.');
+				$('.validate2').each(function(){
+					$(this).val('');
+				});
+			},
+			error 	: function(request, status, error) {
+				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+			}
+		});
+	}
+
+}
+
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72551463-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

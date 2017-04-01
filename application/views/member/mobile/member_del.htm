@@ -1,0 +1,82 @@
+									
+<script>
+
+$(document).ready(function(){	
+	$("input[name=name]").focus();
+	$("#idshowhide2").hide();
+	$("#idshowhide3").hide();	
+});
+
+checkpwdubmit = function (  ) {
+
+
+
+	if ($("input[name=pwd]").val()==""){
+		alert("비밀번호를 입력해주세요");
+		$("input[name=password]").focus();
+		return false ;
+	}
+
+	var ans = confirm("회원탈퇴를 진행하시겠습니까?");
+	if (ans == false) {
+		return ;
+	}		   
+
+	var _data = $('#login_id_frm').serialize();
+	 
+	$.ajax({
+		type: 'POST',
+		url : "/user/member/member_del",
+		data : _data,
+		dataType: 'html',
+		success: function(data){
+
+		if (  data == 'Y' ) {
+				alert ( "탈퇴처리 되었습니다. " ) ;
+				location.href="/user/member/member_logout" ;
+        	}else {
+				alert ( "비밀번호가 올바르지 않습니다." ) ;
+				$("#password").val('');
+        	}
+        	
+		}
+	});
+	
+}
+
+//값을 입력하고 엔터를 쳤을 경우, 로그인 시도함. login_loading() 함수 호출
+function enterLogin(e) {
+	if(e.keyCode == 13) {
+		checkpwdubmit();
+	} 
+}
+
+
+
+</script>
+
+<div class="cont_top"><img src="/application/views/mobile/images/sub_new/join_top_05.png"></div>
+<div id="content" style="width:94%; margin:0 3% 0 3%;">
+	<div class="title">
+		<h3 style="font-size:12px">회원탈퇴 시 저장된 모든 개인정보는 DB에서 삭제되며, 작성된 게시물에 대한 권한도 모두 삭제됩니다. </h3>
+	</div>
+
+	<form id="login_id_frm" method="POST">				
+	<input type="hidden" name="re_type" value="json"/>
+	<div class="login">
+		<div class="enter" id="check_viewid1">
+			<ul>
+				<li><input type="password" name="pwd" id="password" placeholder="비밀번호"></li>
+			</ul>
+			<div class="btn1"><button type="button" value="" onclick="checkpwdubmit();"><span>확인</span></button></div>
+		</div>	
+		<!--div class="enter" style="display:none;" id="check_viewid2">
+			<div class="img"><img src="MOBILE_IMG_DIR/pw_img_01.jpg"></div>
+			<div class="result">회원님의 아이디는 <span id="checkidvalue"></span> 입니다.</div>
+			<div class="btn1"><button type="button"  onclick="go_url('/fronts/login/index');" ><span>확인</span></button></div>
+		</div-->
+		<div class="notice">ID와 비밀번호 확인이 되지 않는 회원께서는, <span>1800-2662</span>로 전화주시기 바랍니다.</div>
+	</div>
+	</form>
+</div>
+	

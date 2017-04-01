@@ -1,0 +1,63 @@
+<div style="width:1224px">
+
+<div class="col-md-6">
+  <div class="panel no-border">
+    <div class="panel-heading">
+	<span class="font-bold">상담수술</span>
+
+    </div>
+    <div class="panel-body">
+	<div ui-jp="plot" ui-options="
+	  {json_1},
+	  {
+	    series: { pie: { show: true, innerRadius: 0.6, stroke: { width: 3 }, label: { show: true, threshold: 0.05 } } },
+	    colors: ['#3f51b5','#2196f3','#66cccc','#ff0099','#009966','#336600','#ffcc33','#660000','#333300','#cc9999'],
+	    grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },   
+	    tooltip: true,
+	    tooltipOpts: { content: '%s: %p.0명' }
+	  }
+	" style="height: 380px; padding: 0px; position: relative;"><canvas class="flot-base" width="235" height="380" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 235px; height: 380px;"></canvas>
+	<canvas class="flot-overlay" width="235"
+height="380" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 235px; height: 240px;"></canvas>
+
+		</div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="col-md-6">
+        <div class="panel no-border">
+          <div class="panel-heading">
+            <span class="font-bold"><?=date("Y")?>년 월별 상담신청 현황</span>
+
+          </div>
+          <div class="panel-body">
+            <div ui-jp="plot" ui-options="
+              [
+                { data: 
+			[
+				{@ ym_data}
+					[{.label}, {.data}],
+				{/}
+				
+			], 
+			
+				points: { show: true, radius: 3}, lines: { show: true, lineWidth: 1} 
+                }
+              ], 
+              {
+                colors: ['#3f51b5', '#2196f3'],
+                series: { shadowSize: 3 },
+                xaxis: { show: true, font: { color: '#ccc' }, position: 'bottom' },
+                yaxis:{ show: true, font: { color: '#ccc' }},
+                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                tooltip: true,
+                tooltipOpts: { content: '%s월  %y 건',  defaultTheme: false, shifts: { x: 0, y: -40 } }
+              }
+            " style="height:240px" >
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

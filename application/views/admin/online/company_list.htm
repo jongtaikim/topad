@@ -1,0 +1,246 @@
+
+<div class="col-md-12 n-mp" id="">
+
+
+
+<div class="card table-responsive m-l20" style="max-width:800px">
+	  <div class="card-heading bg-light lt">
+	    <h2>키워드 상위노출 이용업체 관리</h2>
+	    <small>키워드 상위노출 업체 계약을 관리합니다.</small>
+	  </div>
+	  <div class="card-body b-t">
+
+
+	<div class="boardwrap">
+		<div class="" id="">
+		{total}건이 등록되었습니다.
+		</div>
+		<div class="" id="data_body">
+				<table class="table table-bordered table-striped1  table-hover table-condensed" border="1" cellspacing="0"  style="margin-top:5px;font-size:12px" >
+				
+				<thead class="b-b b-2x bg-light lt ">
+					<tr>
+						<th width="10%" scope="col" class="text-center">업체코드</th>
+						<th width="" scope="col" class=" text-center subject">업체명</th>
+						<th width="40%" scope="col" class="text-center">메모</th>
+						<th width="17%" scope="col" class="text-center">등록일</th>
+						<th width="17%" scope="col" class="text-center">관리</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+
+					{@ LIST}
+					<tr>
+						
+						<td class="text-center">{.num}</td>
+					
+						<td class="text-center">{.name}</td>
+						<td class="text-left p-l10">
+							<p class="p-l10">{.memo}</p>
+						</td>
+						<td class="text-center ">{=substr(.reg_date,0,10)}</td>
+						
+						<td   class="last text-center">
+
+							<a  class="btn btn-xs btn-default data_modify_btn m-t5" idx="{.idx}">수정</a>
+							<a  class="btn btn-xs btn-default data_del_btn m-t5" idx="{.idx}">삭제</a>
+							<br>
+							<a  class="btn btn-xs btn-default m-t5 m-b5" idx="{.idx}" href="/admin/keyword/keyword_list/?PageNum=050201#/{.idx}">키워드 보기</a>
+						</td>
+					</tr>
+					{:}
+					<tr>
+						<td  colspan="7" height="100px" align="center" style="text-align:center">글이 없습니다.</td>
+					</tr>
+
+					{/}
+				</tbody>
+			</table>
+				
+				<div style="margin:10px 0 10px 0;width:100%" class="">
+					 <plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="3"/> 
+				</div>
+
+		</div>
+	</div>
+
+		
+	
+	<div style="height:50px" class="b-t p-t10">
+					
+					<div style="float:left;width:20%">
+						
+						<a  class="btn btn btn-default data_modify_btn" >업체추가</a>
+						
+					</div>
+
+					<div style="float:right;text-align:right;width:68%">
+						<form method="get" id="search_form" onsubmit="reload_data_table();return false;">
+						
+			
+						<div class="col-sm-7 text-right f_r" style="padding-right:4px">
+							<div class="input-group m-b ">
+							    <div class="input-group-btn dropdown dropup">
+
+
+								<button type="button" class="btn btn-default dropdown-toggle waves-effect" type="button" id="sch_menu" data-toggle="dropdown" aria-expanded="true">
+									<span id="sch_menu_label">업체명</span> <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="sch_menu">
+								  <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:select_sch_menu('like_name')">작성자</a></li>
+								</ul>
+
+								<input type="hidden" name="search_key" id="search_key" value="like_name"/>
+
+
+								<script type="text/javascript">
+								function select_sch_menu(val_name){
+									switch (val_name) {
+									case "like_name": $('#search_key').val('like_name');;$('#sch_menu_label').text('업체명'); break;
+									}
+								}
+								{? _GET.search_key }
+									select_sch_menu('{_GET.search_key}');
+								{/}
+								</script>
+							    </div><!-- /btn-group -->
+							    <input type="text" class="form-control" name="search_value" id="search_value" value="{search_value}" >
+								
+								<span class="input-group-btn">
+								  <button class="btn btn-dark waves-effect" type="button" onclick="reload_data_table()">검색</button>
+							      </span>
+
+							  </div>
+							
+						</div>
+						</form>
+					</div>
+					
+				</div>
+
+
+
+
+
+
+
+	</div>
+</div>
+
+</div>
+
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:720px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="dataModalLabel">업체등록 등록/수정</h4>
+      </div>
+      <div class="modal-body " id="data_modify_body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="data_submit_btn">저장하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+function list_init(){
+	$(document).ready(function(){
+		
+		$('.data_del_btn').click(function(){
+			data_del($(this).attr('idx'));
+		});
+		$('.data_del_re_btn').click(function(){
+			data_del($(this).attr('idx'),'re_text');
+		});
+		$('.data_modify_btn,.data_modify_btn').click(function(){
+			load_data_view($(this).attr('idx'));
+		});
+
+		$('.how_btn').click(function(){
+			reload_data_table();
+		});
+
+	});
+
+}
+
+list_init();
+
+function data_del(idx , mode){
+	
+	 var msg = "삭제 하시겠습니까?";
+	
+	if (confirm(msg)){
+	
+	 $.ajax({
+	type: 'GET',
+	url: '/admin/keyword/company_del/'+idx,
+	dataType: 'html',
+		success: function(html, status) {
+			alert('삭제하였습니다.');
+			reload_data_table()
+		},
+		error: function(request,status,error) {
+			alert(request.responseText);
+		}
+	});
+
+	}
+	
+	
+}
+
+
+
+function load_data_view(idx){
+	if(!idx) idx='';
+	
+	if(idx){
+		$('#dataModalLabel').text('수정하기');
+	}else{
+		$('#dataModalLabel').text('등록하기');
+	}
+	
+	$('#dataModal').modal({
+	  keyboard: false
+	});
+	$('#dataModal').modal('show');
+
+	$('#data_modify_body').load('/admin/keyword/company_view/'+idx);
+
+}
+
+
+
+function reload_data_table(){
+	loading_start();
+	var datas = $('.how_btn').serialize();
+	setTimeout(function(){
+		<?
+			$a = explode("&sch_data=&",$_SERVER[REQUEST_URI]);
+			$self_script	= $a[0];
+		?>
+		 if($('#search_value').val() && $('#search_key').val()){
+			
+		
+
+			$('#data_body').load('<?=$self_script?>&sch_data=&'+$('#search_key').val()+'='+$('#search_value').val()+' #data_body');
+		}else{
+			$('#data_body').load('<?=$self_script?> #data_body');
+		}
+	},300)
+
+	setTimeout(function(){
+		list_init();
+		loading_end();
+	},900);
+}
+</script>

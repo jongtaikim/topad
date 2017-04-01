@@ -1,0 +1,71 @@
+<script type="text/javascript" src="/trunk/scripts/jquery.form.js"></script>
+
+
+<div class="cont_top" ><img src="/application/views/mobile/images/sub_new/join_top_01.png"></div>
+
+
+
+<div id="content" style="width:94%; margin:0 3% 0 3%;">
+	<div class="title m-b10">
+		<h5>아이디와 비밀번호를 입력해 주시기 바랍니다.</h5>
+	</div>
+
+	<form id="login_frm" method="POST" >    
+	<input type="hidden" name="reurl" value="{? reurl}{reurl}{:}/main{/}">
+	<input type="hidden" name="act" value="login">
+	<div class="login">
+		<div class="enter">
+			<table>
+				<colgroup>
+					<col width="70%">
+					<col width="30%">
+				</colgroup>
+				<tbody><tr>
+				<td><input type="text" name="userid" id="userid" class="userid" placeholder="아이디"></td><td rowspan="2" class="submit"><button type="button" onclick="loginwritesubmit();"><span>로그인</span></button></td></tr>
+				<tr>
+				<td><input type="password" name="pwd" id="password" class="password" placeholder="패스워드" onkeydown="enterLogin(event)"></td></tr>
+				
+			</tbody></table>
+		</div>
+		<div class="m-b20" style="height:70px;padding-top:20px">
+
+
+			<button type="button" onclick="go_url('/user/member/member_join/1');" class="btn btn-xl btn-default  f_l " style="width:49%"><span>회원가입</span></button>
+			<button type="button" onclick="go_url('/user/member/member_findid');" class="btn btn-xl btn-default  f_r" style="width:49%"><span>아이디 / 비밀번호찾기</span></button>
+		</div>
+	</div>
+	</form>
+</div>
+
+<script>
+
+$(document).ready(function(){	
+	$("input[name=userid]").focus();
+});
+
+loginwritesubmit = function () {
+
+	if ($("input[name=userid]").val()==""){
+		alert("아이디를 입력해주세요");
+		$("input[name=userid]").focus();
+		return false ;
+	}
+
+	if ($("input[name=password]").val()==""){
+		alert("패스워드를 입력해주세요");
+		$("input[name=password]").focus();
+		return false ;
+	}
+
+	$('#login_frm').submit();
+
+}
+
+//값을 입력하고 엔터를 쳤을 경우, 로그인 시도함. login_loading() 함수 호출
+function enterLogin(e) {
+	if(e.keyCode == 13) {
+		loginwritesubmit();
+	} 
+}
+
+</script>

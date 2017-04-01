@@ -1,0 +1,362 @@
+/* doFollow Landing Page Dynamic Style Index
+
+1. Website Default Styling
+2. Navigation
+3. Primary and Secondary Colors
+4. Banner
+5. Typography
+6. Buttons
+7. Parallax Elements
+8. Footer
+
+
+/*------------------------------------------------------------------------------------------*/
+/* 1. Website Default Styling */
+/*------------------------------------------------------------------------------------------*/
+
+
+body {
+    background:#fff;
+}
+
+
+/* Default Link Color */
+
+a, .la-ball-scale-pulse {
+    color:#e4473c;
+}
+
+a:hover, #header.nav-solid nav a:hover, .team-member a:hover i  {
+    color:#e4473c;
+}
+
+
+/* Default Icon Color */
+
+.icon i, i {
+    color:#e4473c;
+}
+
+
+/*------------------------------------------------------------------------------------------*/
+/* 2. Navigation */
+/*------------------------------------------------------------------------------------------*/
+
+
+/* Transparent Navigation Color on a Banner */
+
+#header nav a, #header i {
+    color:#fff;
+}
+
+
+/* Navigation Colors when the Navigation is sticky and solid */ 
+
+#header.nav-solid, #header.nav-solid a, #header.nav-solid i, #nav-mobile ul li a {
+    color:#333;
+}
+
+
+/* Navigation Active State */
+
+#header.nav-solid .active {
+    color: #e4473c;
+    border-color: #e4473c;
+}    
+
+
+
+/*------------------------------------------------------------------------------------------*/
+/* 3. Primary and Secondary Colors */
+/*------------------------------------------------------------------------------------------*/
+
+
+/* Primary Background and Text Colors */
+
+.primary-color, .featured .pricing {
+    background-color:#e4473c;
+}
+
+.primary-color, .primary-color .section-title, .primary-color .section-subtitle, .featured .pricing {
+    color:#fff;    
+}
+
+
+/* Primary Icon Colors */
+
+.primary-color .icon i, .primary-color i {
+    color:#fff;
+}
+
+
+/* Secondary Background and Text Colors */
+
+.secondary-color {
+    background-color:#f5f5f5;
+}
+
+.secondary-color, .secondary-color .section-title, .secondary-color .section-subtitle  {
+    color:#333;   
+}
+
+/* Secondary Icon Colors */
+
+.secondary-color .icon i, .secondary-color i {
+    color:#e4473c;
+}
+
+
+
+/*------------------------------------------------------------------------------------------*/
+/* 4. Banner */
+/*------------------------------------------------------------------------------------------*/
+
+
+/* Banner Background and Text Colors */
+
+#banner, #dofollow-contact {
+    background: url("../images/banner-images/banner-image-11.jpg") no-repeat center top;
+    background-size:cover;
+}
+
+
+/* Banner Icon Color */
+
+#banner i, #banner a i, .play-icon {
+    color: #fff;
+}
+
+
+
+/*------------------------------------------------------------------------------------------*/
+/* 5. Typography */
+/*------------------------------------------------------------------------------------------*/
+
+
+body {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size:14px; 
+    font-weight:normal;
+    color:#333;
+}
+
+/* Logo, if you are using Fonts as Logo and not image */
+
+#logo h1 {
+    font-family:;
+    font-size:; 
+    font-weight:;
+    color:;
+}
+
+#logo h2 {
+    font-family:;
+    font-size:; 
+    font-weight:;
+    color:;
+}
+
+
+/* Banner Typography */
+
+#banner, #dofollow-contact {
+    color: #fff;
+}
+
+#banner h1 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size:62px;
+    font-weight:700;
+    color:#fff;
+}
+
+#banner h2 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size:22px;
+    font-weight:300;
+    color:#fff;
+}
+
+
+/* Section Title and Subtitle */
+
+.section-title {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 34px; 
+    font-weight:300;
+    color:#333;
+}
+
+.section-subtitle {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 18px; 
+    font-weight:300;
+    color:#999;
+}
+
+/* Testimonial */
+
+.testimonial q {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 17px; 
+    font-weight:300;
+    color:#333;
+}
+
+/* Standard Headings h1-h6 */
+
+h1 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 40px; 
+    font-weight:300;
+    color:#333;
+}
+
+h2 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 34px; 
+    font-weight:300;
+    color:#333;
+}
+
+h3 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 30px; 
+    font-weight:300;
+    color:#333;
+}
+
+h4 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 18px; 
+    font-weight:400;
+    color:#333;
+}
+
+h5 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 16px; 
+    font-weight:400;
+    color:#333;
+}
+
+h6 {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size: 14px; 
+    font-weight:400;
+    color:#333;
+}
+
+
+/*------------------------------------------------------------------------------------------*/
+/* 6. Buttons */
+/*------------------------------------------------------------------------------------------*/
+
+/* ----------Default Buttons---------- */
+
+
+/* Button Text */
+
+.button, input[type="submit"] {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size:16px; 
+    font-weight:normal;
+    color:#fff;
+}
+
+
+/* Button Color */
+
+.button, input[type="submit"] {
+    background:#e4473c;
+    border-color:#e4473c;
+}
+
+.button i {
+    color:#e4473c;
+}
+
+/* Button Hover Color */
+
+.button:hover, input[type="submit"]:hover {
+    background:none;
+} 
+
+.button:hover, .button:hover i,  input[type="submit"]:hover {
+    color:#e4473c;
+}
+
+
+/* ----------Banner Buttons---------- */
+
+
+/* Button Text */
+
+#banner .button {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size:16px; 
+    font-weight:normal;
+    color:#fff;
+}
+
+
+/* Button Color */
+
+#banner .button, #dofollow-contact .button {
+    background:#e4473c;
+    border-color:#e4473c;
+}
+
+.button i, #dofollow-contact .button i {
+    color:#fff;
+}
+
+
+/* Button Hover Color */
+
+#banner .button:hover, #dofollow-contact .button:hover {
+    background:none;
+} 
+
+#banner .button:hover, #banner .button:hover i,  #dofollow-contact .button:hover, #dofollow-contact .button:hover i {
+    color:#fff;
+    border-color:#fff;
+}
+
+
+/*------------------------------------------------------------------------------------------*/
+/* 7. Parallax */
+/*------------------------------------------------------------------------------------------*/
+
+.banner-parallax-1 {
+    background:url(../images/parallax-images/parallax-1.png) no-repeat #e4473c;
+}
+
+.banner-parallax-2 {
+    background:url(../images/parallax-images/parallax-2.jpg) no-repeat;
+}
+
+.banner-parallax-3 {
+    background:url(../images/parallax-images/parallax-3.jpg) no-repeat;
+}
+
+/*------------------------------------------------------------------------------------------*/
+/* 8. Footer */
+/*------------------------------------------------------------------------------------------*/
+
+#landing-footer {
+    background-color:#f5f5f5;
+}
+
+#landing-footer, #landing-footer p, #landing-footer a {
+    font-family: "Nanum Gothic",'Open Sans', sans-serif, Arial, Helvetica;
+    font-size:12px;
+    font-weight:normal;
+    color:#999;
+}
+
+/* Footer Icon Color */
+
+#landing-footer i {
+    color:#999;
+}

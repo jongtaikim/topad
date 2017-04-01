@@ -1,0 +1,15 @@
+<form name="editorForm" id="editorForm" method="post" enctype="multipart/form-data">
+
+		<input type="hidden" name="mcode" value="{mcode}"/>
+		<input type="hidden" name="cate" value="{cate}"/>
+		<input type="hidden" name="layout" value="{layout}"/>
+
+		<plug:daum_editor name="contents" height="400" form="editorForm" width="1200" mode="simple" sect="{sect}">{contents}</plug:daum_editor>
+
+
+<div style="text-align:center">
+	<input type="button" name="" value="저장" class="btn btn-info btn-sm" onclick="saveContent();">
+
+</div>
+
+</form>

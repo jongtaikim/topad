@@ -1,0 +1,10 @@
+;<?php die(')'); /* WebApp Configuration File : DO NOT EDIT MANUALY */?>
+oname = "청담여신성형외과"
+ophone = "1800-2662"
+title = "청담여신성형외과"
+email = ""
+admin_id = "admin"
+admin_pw = "f41f76a1025143d057aa03dbb29b6464"
+admin_name = "관리자"
+admin_phone = "010-0000-0000"
+zipcode = "06011"

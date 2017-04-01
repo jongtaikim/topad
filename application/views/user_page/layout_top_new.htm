@@ -1,0 +1,82 @@
+<?
+$sub_view = trim(uri_string());
+if($sub_view == "main") $sub_view='';
+?>
+
+<div class="white r box-shadow-z0 m-b navbar-md">
+	<div class="navbar ng-scope">
+		<a data-toggle="collapse" data-target="#navbar-4" class="navbar-item pull-right hidden-md-up m-a-0 m-l"><i class="material-icons"></i>
+		</a>
+		<a class="navbar-brand ng-scope" href='/'>
+			 <span class="hidden-folded inline ng-binding">HOSPI</span>
+		</a>
+		<ul class="nav navbar-nav pull-right">
+			
+			
+		</ul>
+<div class="collapse navbar-toggleable-sm" id="navbar-4">
+
+	<ul class="nav navbar-nav pull-left m-r">
+		{@ site_menu_list}
+		{? .index_ == 0}
+			{? .num_view ==1}
+			<li class="nav-item dropdown dropdown-submenu pos-stc m-r10 m-l10"><a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><span><strong>{.str_title}</strong></span></a>
+				
+				<div class="dropdown-menu pull-down p-a w-full text-color text-primary-hover ng-scope" style="margin-top:-5px;z-index:9999;width:67%;margin-left:9%">
+					<span class="arrow top b-white" style="margin-left:-350px"></span>
+					<div class="row">
+						
+								{@ .sub}
+
+									<div class="col-sm-4">
+										<div class=" text-u-c m-y-sm"><strong>{..str_title}</strong> <span class="label label-sm success">{=count(..sub)}</span>
+										</div>
+										<div class="row">
+											<ul class="nav l-h-2x p-l15 p-r15" >
+												{@ ..sub}
+													{? ...sub}
+														<li class="dropdown-item dropdown-submenu m-t5 " style="padding-left:0">
+															<a href="{...menu_url}" class="dropdown-toggle1" data-toggle1="dropdown">{...str_title}</a>
+
+															
+															<!--ul class="dropdown-menu" role="menu" style="margin-left:-50px">
+																<span class="arrow left  b-white" style="top:20px"></span>
+																{@ ...sub}
+																	<li class="dropdown-item m-t5"><a href="{....menu_url}">{....str_title}</a></li>
+																{/}
+															</ul-->
+														</li>
+													{:}
+														<li class="m-t5"><a href="{...menu_url}"><span>{...str_title}</span></a></li>
+													{/}
+												{/}
+											</ul>
+										</div>
+									</div>
+									{/}
+		
+					</div>
+				</div>
+			</li>
+			{/}
+		{:}
+			{? .num_view ==1}
+				<li class="nav-item dropdown dropdown-submenu m-r5">
+					<a class="nav-link {? .sub}dropdown-toggle{/}" href="{.menu_url}" {? .sub}data-toggle="dropdown"{/}><span>{.str_title}</span></a>
+					{? .sub}
+					<ul	class="dropdown-menu pull-down text-color ng-scope"	role="menu">
+						{@ .sub}
+							<li class="dropdown-item"><a href="{..menu_url}">{..str_title}</a></li>
+						{/}
+					</ul>
+					{/}
+				</li>
+			{/}
+		{/}
+		{/}
+		
+	</ul>
+
+</div>
+</div>
+</div>

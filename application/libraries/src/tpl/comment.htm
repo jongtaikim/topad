@@ -1,0 +1,208 @@
+<link rel="stylesheet" type="text/css" href="/css/comment.css">
+<script type="text/javascript">
+// <![CDATA[
+
+function keyInputWord3 (val,count,serial){
+	var vn_sumlength=0;
+	var vn_restr='';
+	if(!serial) serial = "";
+
+	for(var i= 0;i < val.length; i++)
+	{
+		if( escape(val.charAt(i)).length > 3 ) { vn_length = 2; }
+		else if (val.charAt(i) == '<' || val.charAt(i) == '>') { vn_length = 4; }
+		else { vn_length = 1 ; }
+		sumLen = (vn_sumlength + vn_length);
+		//if(strlen(val) > count) {
+		if(sumLen > count) {
+			alert('{comment_title}은 '+count+'자 이내로 작성하셔야합니다.') 
+			vn_restr.substring(0,1000);
+			$('comment'+serial).value = vn_restr;	
+			$('textlimit'+serial).innerHTML = '<div id="textlimit">'+(sumLen-vn_length)+'/<span class="textlimit">'+count+'</span>';
+			$('comment'+serial).focus();
+			break;
+		}else{
+			vn_sumlength += vn_length;
+			vn_restr += val.charAt(i);
+			$('textlimit'+serial).innerHTML = '<div id="textlimit">'+sumLen+'/<span class="textlimit">'+count+'</span> ';
+		}
+	}
+		
+}
+
+function ChkDel(id,main,aut_del) {
+	if(confirm("삭제하시겠습니까?")){
+		location.href="/comment/del?mcode={mcode}&num_main={id}&sect="+main+"&serial="+id+"&aut_del="+aut_del;
+	}
+}
+
+
+function ChkM(serial){
+
+if(!$('w_tool_'+serial).innerHTML) {
+
+$('wtool').style.display = 'none';
+
+var text = str_replace("<BR>","\n",$('text_'+serial).innerHTML);
+var tmp_text = '<div  style="float:left">수정하기</div><div id="textlimit'+serial+'">0/<span class="textlimit">{len}</span></div><form method=post name="commentS_'+serial+'"  id="commentS_'+serial+'" action="/comment/add"  class="commentS">' +
+	 '<input type="hidden" name="sect" value="{sect}"/>' +
+	 '<input type="hidden" name="baseurl" value="<?=uri_string()?><?=_QS?>"/>'+
+	 '<input type="hidden" name="mserial" value="'+serial+'"/>' +
+	 '<textarea name="content" id="comment'+serial+'" style="width:70%;height:100px;;float:left"  hname="나도 한마디 내용" maxbyte="{len}" onkeyup="keyInputWord3(this.value,{len},'+serial+')" style="border:1px solid #cdcdcd;padding:5px" required>'+text+'</textarea>' +
+	 '<input type="submit" value="수정하기" class="button" style="height:100px;margin-left:10px;;float:left;border:1px solid #cdcdcd">' +
+ '</form>';
+
+$('w_tool_'+serial).innerHTML = tmp_text;
+
+if($('content'+serial)) keyInputWord3($('content'+serial).value,{len},serial);
+}else{
+	$('w_tool_'+serial).innerHTML = "";
+	$('wtool').style.display = '';
+}
+}
+
+
+function ChkRe(serial,group,dtb){
+
+if(!$('w_tool_'+serial).innerHTML) {
+
+$('wtool').style.display = 'none';
+
+var text = str_replace("<BR>","\n",$('text_'+serial).innerHTML);
+var tmp_text = '<img src="/images/tpl/comment/reply_icon.gif" alt="" style="float:left"> <div  style="float:left">리플달기</div> <div id="textlimit'+serial+'">0/<span class="textlimit">{len}</span></div><form method=post name="commentS_'+serial+'"  id="commentS_'+serial+'" action="/comment/add"  class="commentS">' +
+	 '<input type="hidden" name="sect" value="{sect}"/>' +
+	 '<input type="hidden" name="main_serial" value="'+serial+'"/>' +
+	 '<input type="hidden" name="main_group" value="'+group+'"/>' +
+	 '<input type="hidden" name="dtb" value="'+dtb+'"/>' +
+ 	'<input type="hidden" name="num_main" value="{id}"/>'+
+ 	'<input type="hidden" name="baseurl" value="<?=uri_string()?><?=_QS?>"/>'+
+	'<input type="hidden" name="mcode" value="{mcode}"/>'+
+	 '<input type="hidden" name="cmt_name" value="{_SESSION.NAME}"/>' +
+	 '<input type="hidden" name="cmt_pass" value="{_SESSION.PASSWORD}"/>' +
+	 '<textarea name="content" id="comment'+serial+'" style="width:70%;height:100px;margin-left:10px;float:left"  hname="나도 한마디 내용" maxbyte="{len}" onkeyup="keyInputWord3(this.value,{len},'+serial+')" style="border:1px solid #cdcdcd;padding:5px;float:left" required></textarea>' +
+	 '<input type="submit" value="리플달기" class="button" style="height:100px;margin-left:10px;border:1px solid #cdcdcd">' +
+ '</form>';
+
+$('w_tool_'+serial).innerHTML = tmp_text;
+
+if($('content'+serial)) keyInputWord3($('content'+serial).value,{len},serial);
+}else{
+	$('w_tool_'+serial).innerHTML = "";
+	$('wtool').style.display = '';
+}
+}
+
+// ]]>
+</script>
+
+	<div class="replyForm" >
+	
+	
+
+<div id="wtool">
+	{? prem}
+	<!-- 나도한마디 시작 -->
+	<form method="post" name="commentform"  id="commentform"  action="/comment/add" onsubmit="return validate(this);" class="replyFormAreaRight">
+	<input type="hidden" name="sect" value="{sect}"/>
+	<input type="hidden" name="num_main" value="{id}"/>
+	<input type="hidden" name="mcode" value="{mcode}"/>
+	<input type="hidden" name="cate" value="{cate}"/>
+	<input type="hidden" name="baseurl" value="<?=uri_string()?><?=_QS?>"/>
+		<fieldset>
+		
+		
+			<div class="replyFormArea">
+				<div class="replyContent">{comment_title}은 공백포함 {len}byte (한글 {len/2}자) 이내로 작성 가능합니다.</div>
+				
+				<div class="replyInfo">
+					<dl class="info">
+						<dt><label for="cmt_name">이름</label></dt>
+						<dd><input name="cmt_name" hname="이름" type="text" class="inputtxt" id="cmt_name" maxbyte="20" required value="{_SESSION.NAME}" {? _SESSION.NAME}readonly{/} /></dd>
+
+						<dt><label for="cmt_pass">비밀번호</label></dt>
+						<dd>
+						<input name="cmt_pass" hname="비밀번호" type="password" {? _SESSION.PASSWORD} value="{_SESSION.PASSWORD}" readonly{/} class="inputtxt" id="cmt_pass"  maxbyte="35" required />
+						
+						
+						</dd>
+						<dd><div id="textlimit">0/<span class="textlimit">{len} </span></div></dd>
+						
+					</dl>
+					
+				</div>
+				
+				<div class="reply">
+					<textarea title="댓글"  name="content" hname="나도 한마디 내용" id="comment" maxbyte="{len}" onkeyup="keyInputWord3(this.value,{len})" required></textarea> 
+					<span class="replyBtn"><input value="댓글 등록" type="submit" /></span>
+				</div>
+			</div>
+
+
+
+		</fieldset>
+	</form>
+	{/}
+		</div>
+	</div>
+	
+
+
+
+	
+	{? comment_LIST}
+		<!-- 나도한마디 리스트 시작 -->
+			<div class="feedbackList">
+				
+				{@ comment_LIST}
+				<dl class="pre2" >
+					<dt class="title">
+					
+					<span class="name" style="padding-left:{.num_dtb  * 20}px">{? .num_dtb >0}<img src="/images/tpl/comment/reply_icon.gif" alt="" style="float:left"> {/}{.str_name}</span>
+					<span class="id"> ({.str_user})</span>
+					<span class="ip">(IP:{.str_ip})</span>
+					<span class="date">{=date("Y.m.d H:i:s",dt_date)} </span>
+					</dt>
+					
+				</dl>
+				<dl class="pre" {? count(comment_LIST) == (.index_+1) }style="border-bottom:0px"{/}>
+					<dd class="text" id="text_{.num_serial}" {? .num_dtb != 0} style="padding-left:{.num_dtb  * 20+10}px"{/}>
+					{? .num_del !=1}
+						{=nl2br(.str_comment)}
+					{:}
+						{? _SESSION.ADMIN}
+						<span style="color:blue">삭제된 {comment_title}입니다.</span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:ChkDel({.num_serial},'{sect}','y');" style="color:blue">[완전히 삭제하기]</a><br>
+						<span style="red">&nbsp;&nbsp; ㄴ 관리자만 보임</span> (<span style="color:#cdcdcd">{=nl2br(.str_comment)}</span>)
+						
+					
+
+						{:}
+						<span style="color:blue">삭제된 {comment_title}입니다.</span>
+						{/}
+					{/}
+					
+					</dd>
+					<dd class="textTool">
+					{? .num_del !=1}
+						{? ((.str_user == _SESSION.USERID) ||  _SESSION.ADMIN) && .str_user}
+						<a href="javascript:ChkM({.num_serial});"><img src="/images/tpl/comment/m_btn.gif"  border="0" align="absmiddle" alt="수정하기" /></a>
+						{? _SESSION.ADMIN}<a href="javascript:ChkDel({.num_serial},'{sect}','y');" style="color:blue">{:}<a href="javascript:ChkDel({.num_serial},'{sect}');">{/}<img src="/images/tpl/comment/d_btn.gif"  border="0" align="absmiddle" alt="삭제하기" /></a>{/}
+						 &nbsp;
+						
+						{? .num_dtb<5 && _SESSION.USERID}
+						<a href="javascript:ChkRe({.num_serial},{.num_group},{.num_dtb+1});" ><img src="/images/tpl/comment/r_btn.gif"  border="0" align="absmiddle" alt="답변하기" /></a>
+						{/}
+					{/}
+					</dd>
+				</dl>
+
+				<div id="w_tool_{.num_serial}" style="text-align:left; {? .num_dtb != 0} ; margin-left:{(.num_dtb)+1 * 30+35}px {:} margin-left:35px{/}"></div>
+
+				{/}
+		</div>
+		<!-- 나도한마디 리스트 끝 -->
+		{/}
+	<!-- 나도한마디 끝 -->
+
+
+
+

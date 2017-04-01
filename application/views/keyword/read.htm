@@ -1,0 +1,57 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+
+
+<div class="section-contents clearfix">
+	<!-- Gallery View -->
+	<div id="galleryView" class="galleryType clearfix">
+		<div class="head clearfix">
+			<p class="title">{title}</p>
+			<p class="date">{=substr(date,0,10)} </p>
+		</div>
+		<div class="viewWrap clearfix">
+			<strong class="m-b20">문의글입니다.</strong>
+			<br>
+			<br>
+			<div class=" openEditorStyles" style="border:0px">
+					{comment}
+			</div>
+		</div>
+		{? text}
+		<div class="viewWrap clearfix b-t" >
+			<strong class="m-b20">답글입니다.</strong>
+			<br>
+			<br>
+			<div class=" openEditorStyles" style="border:0px">
+					{text}
+			</div>
+		</div>
+		{/}
+
+
+		
+
+		<div class="btmWrap clearfix">
+			<div class="buttons">
+				<a href="/user/ctl_online/list_view/{mcode}?cate={_GET.cate}" class="btn btn-dark btn-xl">List</a>
+				
+			</div>
+		</div>
+	</div>
+	<!-- //Gallery View --> 
+</div>
+
+
+<script type="text/javascript">
+// <![CDATA[
+
+$('.openEditorStyles').find('img').each(function(){
+	if($(this).width() >=300){
+		$(this).addClass('pointer');
+		$(this).click(function(){
+			d_alert('<div style="width:960px;height:600px;overflow:auto"><img src="'+$(this).attr('src')+'" style="max-width:960px;max-height:600px;border:3px solid #cdcdcd"></div>',960,600);
+		})
+	}
+})
+
+// ]]>
+</script>

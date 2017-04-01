@@ -1,0 +1,153 @@
+<div style="width:1124px">
+<div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading bg-white">
+          <i class=" glyphicon  glyphicon-home"></i>
+	    홈페이지 기본정보<br>
+          <small class="text-muted">홈페이지에 기본적인 정보를 설정하고 관리합니다.</small>
+        </div>
+        <div class="panel-body">
+          <form role="form"  enctype='multipart/form-data' method="post" >
+            <div class="form-group">
+              <label for="str_organ">홈페이지명</label>
+              <input type="text" value="{str_organ}" class="form-control" id="str_organ" name="str_organ" placeholder="홈페이지명을 입력하세요.">
+            </div>
+
+
+		 <div class="form-group">
+              <label for="str_title">홈페이지 타이틀</label>
+			 <input type="text" name="str_title" hname="홈페이지 타이틀" size="50" maxbyte="100" value="{str_title}" class="form-control"><br>
+			<div style="margin-top:-15px">* 홈페이지 접속시 브라이저 상단에 나타나는 제목입니다.</div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="addr">주소</label>
+              
+			<div class="m-b10 p-b10">	
+			 <input type="text" id="sample6_postcode" name="chr_zip" value="{chr_zip}" placeholder="우편번호" class="form-control f_l m-r5" style="width:80px">
+			<a href="javascript:sample6_execDaumPostcode()"  class="btn btn-default btn-sm waves-effect f_l">우편번호 찾기</a>
+			</div>
+			
+			<div class="m-t" id="" style="">
+				<input type="text" id="sample6_address" name="str_addr1" placeholder="주소" value="{str_addr1}" required maxbyte="100" readonly class="form-control" style=""><br>
+				<input type="text" id="sample6_address2" name="str_addr2" placeholder="상세주소" value="{str_addr2}" required maxbyte="100" trim="trim" class="form-control" style="margin-top:-16px">
+			</div>
+
+			<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+			<script>
+			    function sample6_execDaumPostcode() {
+				  new daum.Postcode({
+					oncomplete: function(data) {
+					    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+					    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+					    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					    var fullAddr = ''; // 최종 주소 변수
+					    var extraAddr = ''; // 조합형 주소 변수
+
+					    // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+					    if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						  fullAddr = data.roadAddress;
+
+					    } else { // 사용자가 지번 주소를 선택했을 경우(J)
+						  fullAddr = data.jibunAddress;
+					    }
+
+					    // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+					    if(data.userSelectedType === 'R'){
+						  //법정동명이 있을 경우 추가한다.
+						  if(data.bname !== ''){
+							extraAddr += data.bname;
+						  }
+						  // 건물명이 있을 경우 추가한다.
+						  if(data.buildingName !== ''){
+							extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						  }
+						  // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+						  fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+					    }
+
+					    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+					    document.getElementById('sample6_postcode').value = data.zonecode; //5자리 기초구역번호 사용
+					    document.getElementById('sample6_address').value = fullAddr;
+
+					    // 커서를 상세주소 필드로 이동한다.
+					    document.getElementById('sample6_address2').focus();
+					}
+				  }).open();
+			    }
+			</script>
+
+            </div>
+            <div class="form-group">
+              <label for="str_phone">전화번호</label>
+              <input type="text" name="str_phone" hname="전화번호" value="{str_phone}"  required trim="trim" class="form-control">
+            </div>
+
+		 <div class="form-group">
+              <label for="str_fax">팩스번호</label>
+              <input type="text" name="str_fax" hname="팩스번호" value="{str_fax}"  trim="trim" class="form-control">
+            </div>
+
+		
+           
+
+            <button type="submit" class="btn btn-dark m-b waves-effect">저장하기</button>
+        
+        </div>
+      </div>
+    </div>
+
+
+
+
+<div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading bg-white">
+          <i class=" glyphicon   glyphicon-user"></i>
+	    
+	    관리자 정보<br>
+          <small class="text-muted">관리자 정보를 설정하고 관리합니다.</small>
+        </div>
+        <div class="panel-body">
+         
+            <div class="form-group">
+              <label for="str_organ">관리자 이름</label>
+              <input type="text" size="20" name="str_master_name" hname="관리자 명" value="{str_master_name}" maxbyte="20" trim="trim" class="form-control">
+            </div>
+
+		 <div class="form-group">
+              <label for="str_organ">관리자 이메일</label>
+            <input type="email" size="10" name="str_master_email" hname="관리자 Email" value="{str_master_email}" maxbyte="300" trim="trim" class="form-control">
+            </div>
+
+		 <div class="form-group">
+              <label for="str_organ">관리자 전화번호</label>
+			<input type="text" size="20" name="str_master_phone" hname="연락처" value="{str_master_phone}" maxbyte="20" trim="trim" class="form-control">
+            </div>
+
+		 <div class="form-group">
+              <label for="str_organ">관리자 휴대전화</label>
+			<input type="text" size="20" name="str_master_mobile" hname="관리자 휴대폰번호" value="{str_master_mobile}" maxbyte="20" trim="trim" class="form-control">
+            </div>
+            
+
+            <button type="submit" class="btn btn-dark m-b waves-effect">저장하기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+<div class="col-md-12">
+	<div class="panel panel-default">
+		  <div class="panel-heading bg-white">
+		   ㆍ 기본 정보는 홈페이지 하단에 표출되는 정보입니다. 입력에 신중을 기해주시기 바랍니다.<br>
+				ㆍ홈페이지 기본 정보는  웹브라우저(ie,firefox 등)에서 표출 되는 정보이며, 검색엔진에 등록되는 정보입니다.<br>
+				ㆍ관리자 정보는 항상 최신화되어야 홈페이지의  '운영 및 관리’가 수월하게 이루어질 수 있습니다.<br>
+		  </div>
+	</div>
+</div>
+	
+</div>

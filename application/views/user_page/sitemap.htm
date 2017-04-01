@@ -1,0 +1,74 @@
+	<div class="visual_10_14"></div>
+    <div class="container">
+
+
+    <!-- sitemap -->
+<style>
+.sitemap01{width:1238px; height:600px}
+.sitemap01 ul{float:left; width:209px; margin-right:38px}
+.sitemap01 ul li{line-height:25px; }
+.sitemap01 ul li img{padding-bottom:10px}
+.sitemap01 ul li a{padding-left:15px; text-decoration:none; color:#666;}
+.sitemap01 ul li a:hover{ color:#6979ca;}
+
+.sitemap02{ width:1238px; height:450px}
+.sitemap02 ul{float:left; width:209px; margin-right:38px}
+.sitemap02 ul li{line-height:25px}
+.sitemap02 ul li img{padding-bottom:10px}
+.sitemap02 ul li a{padding-left:15px; text-decoration:none; color:#666;}
+.sitemap02 ul li a:hover{ color:#6979ca;}
+</style>
+
+
+<div>	
+<div class="sitemap01">
+
+{@ site_menu_list}
+	{? .num_view == 1 && .index_ != 4}
+	<div class="list{=sprintf('%02d',.index_+1)} f_l m-r20" style="min-height:580px;width:220px">
+
+	<ul>
+	<li style="width:209px;height:66px;border-top:solid 2px #000;border-bottom:solid 1px #cdcdcd;;margin-bottom:10px">
+		<img src="http://www.deesse.co.kr/img_font/make/RixMGoB/18/000000/ffffff/?text={=urlencode(.str_title)}" style="margin-top:24px;margin-left:12px">
+	</li>
+	{@ .sub}
+		{? ..num_view == 1 }
+		<li><a href="{..menu_url}">{..str_title}</a></li>
+			{@ ..sub}
+				{? ...num_view == 1 }
+				<li><a href="{...menu_url}">{...str_title}</a></li>
+				{/}
+			{/}
+		{/}
+	{/}
+	</ul>
+	</div>
+	{/}
+{/}
+<div class="list10">
+<ul>
+<li style="width:209px;height:66px;border-top:solid 2px #000;border-bottom:solid 1px #cdcdcd;;margin-bottom:10px">
+		<img src="http://www.deesse.co.kr/img_font/make/RixMGoB/18/000000/ffffff/?text={=urlencode('로그인/마이페이지')}" style="margin-top:24px;margin-left:12px">
+	</li>
+{? !_SESSION.USERID}
+<li><a href="/user/member/member_login">로그인</a></li>
+<li><a href="/user/member/member_join/1"> 회원가입</a></li>
+<li><a href="/user/member/member_findid"> 아이디찾기</a></li>
+<li><a href="/user/member/member_findid"> 비번찾기</a></li>
+{/}
+<li><a href="/user/page/introduce/policy"> 개인정보취급방침</a></li>
+<li><a href="/user/page/introduce/access"> 이용약관</a></li>
+{? _SESSION.USERID}
+<li><a href="/user/member/member_modify"> 회원정보수정</a></li>
+<li><a href="/user/member/member_del"> 회원탈퇴</a></li>
+{/}
+</ul>
+</div>
+
+</div>
+</div>
+<!-- sitemap E -->
+
+
+
+	</div>

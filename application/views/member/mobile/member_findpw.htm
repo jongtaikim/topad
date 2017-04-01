@@ -1,0 +1,140 @@
+<script type="text/javascript" src="/trunk/scripts/jquery.form.js"></script>
+
+				
+
+
+
+
+{? _POST.mode == "id"}
+
+
+<form  name="frm" method="post">
+	<table cellpadding="0" cellspacing="0" width="100%" align="center" style="background:url('../contents/images/community/id_bg.jpg') no-repeat;height:348px;">
+    <tr>
+    	<td style="padding-top:20px;" align="center">                    
+            <table cellpadding="0" cellspacing="0" width="370" height="138" style="line-height:140%;">
+                <tr>
+                   <td align="center">회원님의 아이디는 <span class="point "><strong>{userid}</strong></span> 입니다.</td>
+                </tr>                  
+                <tr>
+                	<td colspan="2" align="center"><a href="/user/member/member_login"><img src="../contents/images/community/bt_login_new.jpg" align="middle" alt="로그인" ></a></td>
+                </tr>               
+            </table>
+        </td>
+        
+    </tr>
+	</table>
+</form>
+
+
+
+
+
+
+
+{:}
+
+<script>
+
+$(document).ready(function(){	
+	$("input[name=name]").focus();
+	$("#idshowhide2").hide();
+	$("#idshowhide3").hide();	
+});
+
+checkpwdubmit = function (  ) {
+
+	if ($("input[name=userid]").val()==""){
+		alert("아이디를 입력해주세요");
+		$("input[name=userid]").focus();
+		return ;
+	}
+	/*
+	if ($("input[name=email]").val()==""){
+		alert("이메일을 입력해주세요");
+		$("input[name=email]").focus();
+		return  ;
+	}
+	*/
+	if ($("input[name=phone]").val()==""){
+		alert("휴대폰번호를 입력해주세요");
+		$("input[name=phone]").focus();
+		return  ;
+	}
+
+	var _data = $('#login_id_frm').serialize();
+	
+	$.ajax({
+		type: 'POST',
+		url : "/user/member/member_findid",
+		data : _data,
+		dataType: 'html',
+		success: function(data){
+			alert(data)
+        	if (  data.etcval == 'Y' ) {
+
+				alert ( "임시비밀번호를 보내드렸습니다.") ;
+
+        	}else {
+				alert ( "정보가 일치하지 않습니다." ) ;
+//				location.href="/main/login/id_search" ;
+			}
+			
+		}
+	});
+
+
+}
+
+//값을 입력하고 엔터를 쳤을 경우, 로그인 시도함. login_loading() 함수 호출
+function enterLogin(e) {
+	if(e.keyCode == 13) {
+		checkpwdubmit();
+	} 
+}
+
+
+
+
+</script>
+<div class="cont_top"><img src="/application/views/mobile/images/sub_new/join_top_03.png"></div>
+<div id="content" style="width:94%; margin:0 3% 0 3%;">
+	<div class="title">
+		<h3 style="font-size:13px">회원가입시 등록하셨던 아이디와 휴대폰 번호를 입력하시면 휴대폰으로 임시 비밀번호가 발송됩니다.</h3>
+	</div>
+	<form id="login_id_frm" method="post">
+	
+	<input type="hidden" name="mode" value="pw_json"/>
+	<input type="hidden" name="etc_val" value="1">
+	<div class="login">
+		<div class="enter" id="check_viewid1">
+			<ul>
+				<li><input type="text" name="userid" placeholder="아이디"></li>
+				<!--li><input type="text" name="name" id="name" placeholder="이름"></li-->
+				<!--li><input type="email" name="email" id="email" placeholder="이메일"></li-->
+				<li><input type="number" name="phone" id="phone" placeholder="휴대폰"></li>
+			</ul>
+			<div class="btn1"><button type="button" onclick="checkpwdubmit();"><span>확인</span></button></div>
+		</div>
+		
+		<div class="notice">ID와 비밀번호 확인이 되지 않는 회원께서는, <span>1800-2662</span>로 전화주시기 바랍니다.</div>
+		<div class="btn2">
+			<button type="button" value="next" style="margin:0 2% 0 0;" onclick="go_url('/user/member/member_join/1');"><span>회원가입</span></button>
+			<button type="button" value="next" onclick="go_url('/user/member/member_findid');"><span>아이디찾기</span></button>
+		</div>
+	</div>
+	</form>
+</div>
+
+
+<script>
+	//url 이동
+	go_url = function ( url) {			
+			var url ;			
+			location.href= url ;
+	}			
+	
+</script>	
+
+
+{/}

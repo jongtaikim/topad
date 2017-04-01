@@ -1,0 +1,34 @@
+
+
+              <div id="nav" style="font-size:12px">
+                <nav ui-nav>
+                  <ul class="nav">
+                  <li class="nav-header m-v-sm h4 b-b " style="padding-top:3.5px;padding-bottom:3.5px;margin-bottom:0px">
+				<span class="fa fa-bars"></span> 관리메뉴
+			    </li>
+
+			  {@ admin_MENU}
+                    <li {? pn_1 == .index_ } <? if(_FUNCTION !="main"){?>class="active"<?}?>{/}>
+                      <a md-ink-ripple>
+                         <span class="pull-right text-muted">
+                          <i class="fa fa-caret-down"></i>
+                        </span>
+                       
+                        <i class=" {.icon} i-10"></i>
+                        <span class="font-normal">{.title}</span>
+                      </a>
+                      <ul class="nav nav-sub">
+			    {@ .submenu}
+				<li>
+                          <a md-ink-ripple href="{..link}{? !..no_pn}/{..pn}{/}" class="{? menu_title ==..title }text-info{/}" style="margin-left:-42px;{? pn_3 == (..index_ +1)} font-weight: blod{/}" target="{..target}" ><i class=" {..icon} m-r5"></i> {..title}</a>
+                        </li>
+				{/}
+                      </ul>
+                    </li>
+			  {/}
+                   
+                  </ul>
+                </nav>
+		</div>
+
+

@@ -1,0 +1,54 @@
+{? _GET.cate == '1912'}
+<?
+//리얼스토리 롤러
+include 'application/views/board/skin/mobile_board/realstory_roll.htm';
+?>
+{/}
+
+
+<link rel="stylesheet" type="text/css" href="./style.css">
+<div class="cont_top2">
+	{str_mobile_text}
+</div>
+
+
+
+<!-- board list -->
+		<div id="boardList" class="clearfix" >
+			<div class="head clearfix">
+				
+					<p class="title txt-strong-B">{str_title}</p>
+				
+				<p class="count">total : {=number_format(total +0)}</p>
+			</div>
+			<div class="listWrap clearfix">
+				<br>
+				<br>
+				{@ TAB_BOARD}
+				<div class="panel panel-card">
+				  <div class="item">
+					<a href="/user/board/read_view/{.num_mcode}/{.num_serial}?cate={cate}&ch={_GET.ch}" class="board_view_link">
+					    <img src="{.str_file_url1}" class="w-full r-t b-b" alt="">
+					 </a>
+				    
+				  </div>
+				 
+				  <div class="p">
+				    <h4>{.str_title}</h4>
+				    <h5>{.str_text}</h5>
+				   
+				  </div>
+				</div>
+				{/}
+
+			</div>
+			
+		</div>
+		<!--// board list-->
+
+		
+
+		<div class="  text-center m-t20 m-b20 clearfix" >
+			<plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="4"/> 
+		</div>
+

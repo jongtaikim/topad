@@ -1,0 +1,317 @@
+
+<script type="text/javascript">
+
+</script>
+
+<style type="text/css" title="">
+.menuSetupBody{width:100%;float:left}
+.menuSetupBody .line{width:100%;float:left;margin-bottom:20px;border-bottom:1px dashed #cdcdcd}
+
+.menuSetupBody .line .deb1{width:23.5%;float:left;min-height:320px;border:1px solid #cdcdcd;margin-right:8px;margin-bottom:10px}
+
+.menuSetupBody .line .deb1_plus{width:23%;float:left;border:2px dashed #cdcdcd;margin-right:8px;margin-bottom:10px;background-image:url(./images/menu_add_bg.gif);text-align:center;min-height:394px;}
+
+.menuSetupBody .line .deb1 .title{width:100%;float:left;padding:4px 0 3px 0;border-bottom:1px solid #cdcdcd;text-align:center;background-color:#f0f0f0;background-image:url(/images/quick_fom_bg.gif);}
+.menuSetupBody .line .deb1 .title img{width:11px;height:11px;float:right;margin:0 2px}
+
+.menuSetupBody .line .deb1 .plus{float:left;padding:5px 0 5px 0;text-align:center;}
+
+.menuSetupBody .line .deb1 .itemBody{width:100%;float:left;min-height:320px;padding-top:5px}
+
+.menuSetupBody .line .deb1 .itemBody .item{width:90%;float:left;background-image:url(/images/quick_fom_bg.gif);padding:5px 0 0 5px;margin:2px 4px 2px 4px;font-size:11px}
+.menuSetupBody .line .deb1 .itemBody .item .item_title{margin:0px;}
+.menuSetupBody .line .deb1 .itemBody .item .item_title img{width:11px;height:11px;float:right;margin:0 2px}
+
+.menuSetupBody .line .deb1 .itemBody .debBody{width:100%;float:left;min-height:2px;padding-bottom:1px;}
+
+.item{border:1px solid #c7c7c7}
+.t_handle { cursor:move;float:left;width:100%}
+.code_title{color:#c2c2c2}
+.menu_title{color:#181818}
+.color2s {color:#6600ff}
+
+.topMenuBody{width:98%;float:left;margin-bottom:20px;border:1px solid #cdcdcd}
+.topMenuBody .item{width:10.9%;border:1px solid #cdcdcd;margin:2px;float:left;height:36px;padding:2px;text-align:center;background-image:url(/images/quick_fom_bg.gif);font-size:11px}
+.topMenuBody .item img{width:11px;height:11px;float:right;margin:0 2px}
+.selected {font-weight:bold;color:#ff0066 }
+</style>
+<iframe name="hidden_ifr"  id="hidden_ifr" width="100%" height="100" scrolling="no" style="display:none"></iframe>
+
+
+
+
+<form method="post" id="editForm" style="margin-top:20px">
+<input type="hidden" name="modes" id="modes" value="">
+<input type="hidden" name="actionY" id="actionY" value="">
+
+
+<div style="color:#504954; font-weight:bold; padding-top:4px;float:left;width:100%;margin-bottom:10px">
+	대메뉴 순서변경
+</div>
+<div class="topMenuBody" id="1deb_menu" oncontextmenu='return false' onselectstart='return false'>
+	{@ LIST}
+	<div class="item t_handle" ondblclick="pop({.num_mcode})" id="{.num_mcode}">
+		<div style="padding:4px">
+			{.str_title}
+		</div>
+		{? !.submenu}<a href=href="#" onclick="deletes({.num_mcode})"><img src="/images/btn_close_1.gif" alt="삭제" align="absmiddle"></a>&nbsp;{/}
+		<a href="javascript:pop({.num_mcode})"><img src="/images/icon/option.gif" alt="옵션" align="absmiddle"></a>
+		<a href="javascript:addPop({.num_mcode})"><img src="/images/icon/add.gif" alt="추가" align="absmiddle"></a>
+		<input type="hidden" name="cates[]" value="{.num_cate}">
+	</div>
+		{? (.index_+1) == count(LIST) && count(LIST) <8}
+
+		<div class="item t_handle">
+			<div style="padding:4px">
+				<plug:btn size="1" type="button" event="onclick" js="addPop()" value="메뉴추가" style="margin-top:5px"/>
+			</div>
+		</div>
+
+		{/}
+
+	{:}
+		
+		<div style="padding:4px">
+			<plug:btn size="1" type="button" event="onclick" js="addPop()" value="메뉴추가" style="margin-top:5px"/>
+		</div>
+
+	{/}
+	
+</div>
+
+<div style="color:#504954; font-weight:bold; padding-top:4px;float:left;width:100%;margin-bottom:10px">
+	<img src="./images/subtitle_icon_01.gif">하위메뉴관리
+</div>
+<div class="menuSetupBody">
+	{@ LIST}
+		{? .index_ == 0}
+			<div class="line">
+		{/}
+		<div class="deb1">
+			<div class="title">{.str_title} </div>
+				<div class="itemBody" id="2deb_{.num_cate}"  oncontextmenu='return false' onselectstart='return false' onclick="preMove()">
+					
+				</div>
+			<div class="plus" style="padding:5px 0 5px 25px;">
+				<plug:btn size="1" type="button" event="onclick" js="addPop({.num_mcode})" value="2단계 메뉴추가" icon="add" style="margin:5px 0px 10px 25px"/>
+			</div>
+		</div>
+		{? (.index_+1) == count(LIST) && count(LIST) <8}
+		<div class="deb1_plus">
+			
+			<plug:btn size="1" type="button" event="onclick" js="addPop()" value="1단계 메뉴추가" style="margin-top:170px" icon="add"/>
+
+		</div>
+		{/}
+
+		{? (.index_+1) % 4 == 0}
+			</div>
+			<div class="line">
+		{/}
+	{/}
+		</div>
+</div>
+
+<div style="text-align:center">
+	<plug:btn size="2" type="submit" id="btn_submit" value="메뉴위치 적용하기" icon="check"/>
+	<plug:btn size="2" type="button" value="초기화" icon="refresh" event="onclick" js="resets();"/>
+</div>
+
+</form>
+
+
+<script type="text/javascript">
+// <![CDATA[
+
+function deletes(mcode){
+	 if($$('actionY').value){
+		 if (confirm('메뉴순서상태를 저장하시겠습니까?')) {
+			$$('editForm').target='hidden_ifr';
+			$$('editForm').submit(); 
+			$$('editForm').target='';
+			$$('actionY').value='';
+		 }
+	 }
+	 if (!confirm('메뉴를 삭제합니다. 정말 실행하시겠습니까?\n\n(※ 게시판일 경우 데이터도 모두 삭제됩니다.)')) return false;
+	if(mcode) {
+		//encodeURIComponent()
+		$.ajax({
+		type: 'GET',
+		url: '/site_adm/menu_delete/'+mcode,
+		dataType: 'html',
+		success: function(html, status) {
+				
+				if(strlen(mcode) > 2){
+					el = $$(mcode);
+					layer = el.parentNode;
+					layer.removeChild(el);
+				}else{
+					location.reload();
+				}
+
+			}
+		});
+		
+		
+		//$$('hidden_ifr').src='/site_adm/menu_delete/'+mcode;	
+
+	}
+}
+
+function resets(){
+	
+	 if (!confirm('메뉴순서가 초기화 됩니다. 정말 실행하시겠습니까?')) return false;
+	
+	$$('modes').value="reset";
+	$$('editForm').submit();
+	location.reload();
+}
+
+function pop(mcode){
+	 selectReset(mcode);
+	 if($$('actionY').value){
+		 if (confirm('메뉴순서상태를 저장하시겠습니까?')) {
+			$$('editForm').target='hidden_ifr';
+			$$('editForm').submit(); 
+			$$('editForm').target='';
+			$$('actionY').value='';
+		 }
+	 }
+	layerPopupOpen2(700,'메뉴옵션','', '/site_adm/menu_option/'+mcode,'y');
+}
+
+function addPop(mcode){
+	
+	 if($('#actionY').val()){
+		 if (confirm('메뉴순서상태를 저장하시겠습니까?')) {
+			$('#editForm').submit(); 
+		 }
+	 }
+	if(!mcode){
+		layerPopupOpen2(600,'신규메뉴 추가','', '/site_adm/menu_add/','y');
+	}else{
+		layerPopupOpen2(600,'신규메뉴 추가','', '/site_adm/menu_add/'+mcode,'y');
+	}
+}
+
+
+function appendPanel(layer, name, title,  avail_layer,delayer,mcode) {
+html_layers = '';
+for(i=0, cnt = avail_layer.length; i<cnt; i++) {
+html_layers += '<option value="' + avail_layer[i] + '"' + 
+				(layer == avail_layer[i] ? ' selected' : '') +
+				'>' + avail_layer[i] + '</option>';
+}
+
+html = 
+'<div style="float:left;width:100%"><div class="item" id="name"><input type="hidden" name="pannels[]" value="' + name + '">'+
+'<select name="' + name + '[layer]" id="' + name + '[layer]"  onchange="moveLayout(\'' + name + '\',this.value);" style="display:none">' + html_layers + '</select><input type="hidden" id="' + name + '[layer2]" name="' + name + '[layer2]" value="'+delayer+'"><div class="item_title " id="title_'+name+'" onclick="preMove(this.id)" ondblclick="pop(\''+mcode+'\')">'+title+' &nbsp;<a href="#" onclick="deletes(\''+mcode+'\');"><img src="/images/btn_close_1.gif" alt="삭제" align="absmiddle"></a>&nbsp;<a href="javascript:pop(\''+mcode+'\')"><img src="/images/icon/option.gif" alt="옵션" align="absmiddle"></a>&nbsp;<a href="javascript:addPop(\''+mcode+'\')"><img src="/images/icon/add.gif" alt="추가" align="absmiddle"></a></div></div>';
+
+html = html+'<div class="debBody" id="3deb_'+name+'"  oncontextmenu="return false" onselectstart="return false" onclick="onerMove()"></div></div>';
+
+
+el = document.createElement('DIV');
+el.id = name;
+el.className = " t_handle";
+el.innerHTML = html;
+
+document.getElementById(layer).appendChild(el);
+
+new Draggable(name, {revert:true,handle:'t_handle',onUpdate:OnLayerChange});
+
+}
+
+
+
+function appendPanelSub(layer, name, title,  avail_layer,delayer,mcode) {
+html_layers = '';
+for(i=0, cnt = avail_layer.length; i<cnt; i++) {
+html_layers += '<option value="' + avail_layer[i] + '"' + 
+				(layer == avail_layer[i] ? ' selected' : '') +
+				'>' + avail_layer[i] + '</option>';
+}
+
+html = 
+'<div style="float:left;width:100%"><div class="item" id="name" style="margin-left:20px"><input type="hidden" name="pannelsSub[]" value="' + name + '">'+
+'<select name="' + name + '_sub[layer]" id="' + name + '_sub[layer]"  onchange="moveLayout(\'' + name + '_sub\',this.value);" style="display:none">' + html_layers + '</select><input type="hidden" id="' + name + '_sub[layer2]" name="' + name + '_sub[layer2]" value="'+delayer+'"><div id="title_'+name+'" class="item_title" onclick="onerMove(this.id)" ondblclick="pop(\''+mcode+'\')">'+title+' &nbsp;<a href="#" onclick="deletes(\''+mcode+'\')"><img src="/images/btn_close_1.gif" alt="삭제"  align="absmiddle"></a>&nbsp;<a href="javascript:pop(\''+mcode+'\')"><img src="/images/icon/option.gif" alt="옵션" align="absmiddle"></a></div></div></div>';
+
+
+
+
+el = document.createElement('DIV');
+el.id = name;
+el.style.width = '89%';
+el.style.border = '0px solid #cdcdcd';
+el.style.margin = '4px 0 4px 0';
+el.className = " t_handle";
+el.innerHTML = html;
+
+document.getElementById(layer).appendChild(el);
+
+new Draggable(name, {revert:true,handle:'t_handle',onUpdate:OnLayerChangeSub});
+
+}
+
+
+function selectReset(mcode){
+
+{@ LIST}
+	
+	{@ .submenu}
+			if($$('{..num_mcode}')) $$('{..num_mcode}').className = " t_handle";
+		{@ ..submenu}
+			if($$('{...num_mcode}')) $$('{...num_mcode}').className = " t_handle";
+		{/}
+	{/}
+{/}
+ 
+ if(mcode > 4){
+	 $$(mcode).className = " t_handle selected";
+ }
+
+}
+
+
+function preMove(idx){
+	{@ LIST}
+	Sortable.create("2deb_{.num_cate}", {dropOnEmpty:true,overlap:'vertical',treeTag:'div',tag:'div',containment:[{menusas}],accept:["{.num_cate}"],constraint:'horizontal',onUpdate:OnLayerChange});
+	{/}
+
+	
+}
+
+function onerMove(idx){
+
+{@ LIST}
+	{@ .submenu}
+	Sortable.create("3deb_{..num_cate}", {dropOnEmpty:true,overlap:'vertical',treeTag:'div',tag:'div',containment:[{submenu_list}],accept:["{..num_cate}"],constraint:'horizontal',onUpdate:OnLayerChangeSub});
+	{/}
+{/}
+
+}
+
+preMove();
+
+{@ LIST}
+	{@ .submenu}
+	appendPanel('2deb_{=substr(..num_cate,0,2)}','{..num_cate}','<span class="menu_title"> {..str_title}</span>',[{menusas}],'{..num_cate}','{..num_mcode}');	
+	{/}
+{/}
+
+onerMove();
+
+{@ LIST}
+	{@ .submenu}
+		{@ ..submenu}
+			appendPanelSub('3deb_{=substr(...num_cate,0,4)}','{...num_cate}','<span class="menu_title"> {...str_title}</span>',[{submenu_list}],'{...num_cate}','{...num_mcode}');	
+		{/}
+	{/}
+{/}
+
+
+Sortable.create("1deb_menu", {dropOnEmpty:false,containment:["1deb_menu"],constraint:'horizontal',treeTag:'div',tag:'div'});
+
+
+
+// ]]>
+</script>

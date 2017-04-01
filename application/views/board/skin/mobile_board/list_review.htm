@@ -1,0 +1,68 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+
+
+
+<!-- board list -->
+					<div id="boardList" class="clearfix">
+						<div class="head clearfix">
+							
+								<p class="title txt-strong-B">{str_title}</p>
+							
+							<p class="count">total : {=number_format(total +0)}</p>
+						</div>
+						<div class="listWrap clearfix">
+							<table cellpadding="0" cellspacing="0">
+								
+								<thead>
+									<tr>
+										
+										<th width="20%" scope="col" class="text-center">분류</th>
+										<th width="" scope="col" class="subject text-center">제목</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									
+
+									{@ TAB_BOARD}
+									<tr>
+										
+										
+										<td style="font-size:12px">{.str_category2}</td>
+										
+										<td class="text-left" style="text-align:left;font-size:12px">
+											
+										<a href="/user/board/read_view/{.num_mcode}/{.num_serial}?cate={cate}&ch={_GET.ch}" class="board_view_link">{.str_title}</a>
+										</td>
+										
+									</tr>
+									{:}
+									<tr>
+										<td  colspan="3" height="100px" align="center" style="text-align:center">글이 없습니다.</td>
+									</tr>
+
+									{/}
+								</tbody>
+							</table>
+						</div>
+						
+					</div>
+					<!--// board list-->
+
+					<div style="" class="clearfix text-center">
+						
+						
+						{? write_pre}
+								<a href="/user/board/write/{mcode}/<?=_QS?>" class="btn btn-default btn-xl">글쓰기</a>
+							{/} 
+
+					</div>
+
+
+					<div class="  text-center m-t20  m-b20 clearfix" >
+							
+							<plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="4"/> 
+						</div>
+
+
+			

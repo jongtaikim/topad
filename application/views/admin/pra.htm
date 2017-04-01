@@ -1,0 +1,69 @@
+<script type="text/javascript">
+loading_start();
+$(document).ready(function(){ 
+	loading_end();
+});
+</script>
+<div style="width:1124px" class="p-l20">
+<div class="card">
+  <div class="card-heading bg-light lt">
+    <h2>약관관리</h2>
+    <small>사이트 회원가입시 회원들이 동의할 약관을 설정합니다.</small>
+  </div>
+  <div class="card-body b-t">
+    <div>
+
+
+ 
+		<!--content-->
+		<form name="editorForm" id="editorForm" method="POST" enctype="multipart/form-data">
+
+
+			<ul class="nav nav-tabs m-b20">
+				<li {? mode=="member"}class="active"{/}>
+					<a href="/admin/site_adm/pra/member/?PageNum={PageNum}">회원약관</a>
+				</li>
+				<li {? mode!="member"}class="active"{/}>
+					<a href="/admin/site_adm/pra/prict/?PageNum={PageNum}">개인정보 취급방침</a>
+				</li>
+				
+			</ul>
+
+		{? mode == "member"}
+
+				
+				
+				<plug:daum_editor name="str_text" height="250" form="editorForm" width="780" sect="par/member">{str_text}</plug:daum_editor>
+				
+		{:} 
+
+				 
+
+				<plug:daum_editor name="str_text2" height="250" form="editorForm" width="780" sect="par/prict">{str_text2}</plug:daum_editor>
+
+		{/}
+		 
+		<div style="text-align:center">	
+			<a href="javascript:saveContent();" class="btn btn-dark btn-xl">저장</a>
+			
+		</div>
+
+		</form>
+ 
+
+		
+		<!--content end-->
+		</div>
+
+	</div>
+</div>
+
+<div class="">
+	<div class="panel panel-default">
+		  <div class="panel-heading bg-white">
+			  ㆍ회원들에가 고지할 각종 약관을 관리합니다.<br>
+			ㆍ개인정보보호정책은 민감한 부분이오니 신중히 입력해주시기 바랍니다.<br>
+		  </div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,68 @@
+<style>
+.login {width:200px;height:24px;}
+.login input {margin-right:10px;}
+input.login {width:286px;color:#777;padding-left:5px;border:1px solid #ccc;}
+input.name{width:192px;height:22px;border:1px solid #ccc;}
+input.findid{width:40px;height:22px;border:1px solid #ccc;}
+.addition {width:1000px;padding:30px 0;margin:0 auto;clear:both;}
+.point{font-weight:bold;color:#ff0000;}
+.form_m{
+border:1px solid #ECECEC;
+		border-top:3px solid #333;
+		margin:0 auto;
+		background:#FCFCFC;
+		height:400px;
+		padding:0 10px 0 10px;
+		width:990px;}
+
+.ed2, .se {
+		width:200px;
+		height:22px;
+		font-size:1em;
+		line-height:22px;
+		border-radius:0px;
+		border:1px solid #ccc;
+		margin-right:5px;
+}
+img{display:inline;}
+</style>
+
+<script type="text/javascript">
+<!--
+	function find_idpw2()
+	{
+		var f = document.frm;
+
+		if ($("input[name=pwd]").val()==""){
+			alert("비밀번호를 입력해주세요");
+			$("input[name=pwd]").focus();
+			return  ;
+		}	
+
+
+		var ans = confirm("회원탈퇴를 진행하시겠습니까?");
+		if (ans == false) {
+			return ;
+		}		 
+
+		f.submit();
+	}	
+
+
+//-->
+</script>
+<form  name="frm" method="post">
+<input type="hidden" name="userids" value="{_SESSION.USERID}">
+	<table cellpadding="0" cellspacing="0" width="100%" align="center" style="background:url('../contents/images/community/modify_bg.jpg') no-repeat;height:256px;">
+    <tr>
+    	<td style="padding-top:30px;" align="center">                    
+            <table cellpadding="0" cellspacing="0" width="370" height="138" style="line-height:140%;">
+                <tr>
+                   <td align="center">비밀번호 <input type="password" class="ed2" name="pwd" value=""> <a href="javascript:find_idpw2()"><img src="../contents/images/community/btn_ok.jpg" align="middle" alt="확인" style="margin:0 0 5px 0;" ></a></td>
+                </tr>                                               
+            </table>
+        </td>
+        
+    </tr>
+	</table>
+</form>

@@ -1,0 +1,84 @@
+<script type="text/javascript">
+loading_start();
+$(document).ready(function(){ 
+	loading_end();
+});
+</script>
+<div style="width:1124px" class="m-l20">
+<div class="card m-l25">
+  <div class="card-heading bg-light lt">
+    <h2>팝업관리</h2>
+    <small>사이트에 개시할 팝업창을 관리합니다.</small>
+  </div>
+  <div class="card-body b-t ">
+    <div>
+
+
+ 
+		<!--content-->
+		<form name="editorForm" id="editorForm" method="POST" enctype="multipart/form-data">
+		
+		<input type="hidden" name="PageNum" value="{_GET.PageNum}"/>
+		
+		<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" class="tableTemp01" summary="">
+		
+			<tbody>
+				<tr>
+					<td style="padding-right:20px">
+						<div class="form-group">
+						  <label for="def_passwd">팝업 시작일</label>
+						  <input type="date" size="30" name="popup_start"  value="{popup_start}" id="popup_start" hname="팝업시작일"  class="form-control" required/>
+						</div>
+					</td>
+					<td  style="padding-right:20px">
+						<div class="form-group">
+						  <label for="def_passwd">팝업 종료일</label>
+						  <input type="date" size="30" name="popup_end"  value="{popup_end}" id="popup_end" hname="팝업종료일"  class="form-control" required />
+						</div>
+					</td>
+
+					<td>
+						<div class="form-group">
+						  <label for="def_passwd">팝업 사용여부</label>
+						<select name="popup_use" class="form-control">
+							<option value="n" {? popup_use != 'y'} selected{/}>사용안함</option>
+							<option value="y" {? popup_use == 'y'} selected{/}>사용함</option>
+						</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<div class="" id="">
+							<plug:daum_editor name="contents" height="250" form="editorForm" width="780" sect="popup/popup">{contents}</plug:daum_editor>
+									
+							 
+							<div style="text-align:center">	
+								<a href="javascript:saveContent();" class="btn btn-dark btn-xl">저장</a>
+								
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+			
+		
+		
+
+				
+		
+
+		</form>
+ 
+
+		
+		<!--content end-->
+		</div>
+
+	</div>
+</div>
+
+
+</div>
+

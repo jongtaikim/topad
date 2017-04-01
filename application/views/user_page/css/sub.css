@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.n-mp{margin:0px;padding:0px}
+#container .cont_visual01{width:100%;margin:0 auto; height:530px;background:url(../images/sub/sub_v_01.jpg) bottom center;}
+#container .cont_visual02{width:100%;margin:0 auto; height:530px;background:url(../images/sub/sub_v_02.jpg) bottom center;}
+#container .cont_visual03{width:100%;margin:0 auto; height:530px;background:url(../images/sub/sub_v_03.jpg) bottom center;}
+#container .cont_visual04{width:100%;margin:0 auto; height:530px;background:url(../images/sub/sub_v_04.jpg) bottom center;}
+#container .cont_visual05{width:100%;margin:0 auto; height:530px;background:url(../images/sub/sub_v_05.jpg) bottom center;}
+
+#container{width:100%;}
+#container .tit{  margin:2% auto 1% auto; max-width:1000px; width:100%; clear:both; overflow:hidden;}
+#container #contents{margin:auto;width:1000px;}
+#container #map{margin:auto;width:100%; background:url(../images/main/map.jpg) top center; height:352px;}
+#container #map .post { width:1000px; height:352px; margin:0 auto; position:relative;}
+#container #map .post img{ position:absolute; bottom:40px; right:40px; cursor:pointer;}
+
+/* contents */
+
+#container .section{ margin:0 auto; text-align:center; padding:50px 0 40px;}
+#container .cont_w{ max-width:1000px; margin:0 auto; text-align:center;}
+#container .cont_w .cont_tit{text-align:center; padding:0 0 40px 0;}
+#container .cont_w .cont_tit_L{text-align:left; padding:0 0 40px 0;}
+#container .cont_w .cont{text-align:center; padding:0 0 6% 0;}
+
+#container .cont_v{ width:100%; background-color:#ddd; max-height:502px; background:url(../images/sub/cont_it_03_bg.jpg)}
+#container .cont_v .img{margin:0 auto; text-align:center;}
+
+#container .cont_g{ width:100%; background-color:#d9d9d9; padding-bottom:30px;}
+#container .cont_g .img{margin:0 auto; text-align:center; padding:0 0 30px 0;}
+
+#container .cont{ background-color:#eee; width:100%; padding-bottom:30px; overflow:hidden;  z-index:100}
+#container .cont .list{ margin:0 auto; width:100%}
+#container .cont .list ul{ width:100%}
+
+#container .cont .list ul li .text{ padding:2% 0 3% 0; position:relative}
+#container .cont .list ul li .text .icon{ position:absolute; right:0; top:6%;}
+#container .cont .list ul li .text .icon button{ border:0; cursor:pointer; padding:0 0 0 5px; margin:0; background-color:#eee;}
+#container .cont .list ul li .subtit{}
+#container .cont .list ul li span{ font-size:1em; color:#555;}
+#container .cont .list ul li p{ font-size:1.6em; font-weight:bold; color:#333; letter-spacing:-0.05em; padding:0 0 4% 0}
+.poto_item img{width:100%;}
+
+/*portfolio */
+.klasse{ background:url(../images/sub/portfolio/klasse.jpg) top center; height:2596px;}
+.angela{ background:url(../images/sub/portfolio/angela.jpg) top center; height:5918px;}
+.bgnt{ background:url(../images/sub/portfolio/bgnt.jpg) top center; height:784px;}
+.bodyevent{ background:url(../images/sub/portfolio/bodyevent.jpg) top center; height:3627px;}
+.brouwer{ background:url(../images/sub/portfolio/brouwer.jpg) top center; height:7740px;}
+.citydaily{ background:url(../images/sub/portfolio/citydaily.jpg) top center; height:2400px;}
+.citymedia{ background:url(../images/sub/portfolio/citymedia.jpg) top center; height:1012px;}
+.citytv{ background:url(../images/sub/portfolio/citytv.jpg) top center; height:1707px;}
+.david{ background:url(../images/sub/portfolio/david.jpg) top center; height:930px;}
+.deesse{ background:url(../images/sub/portfolio/deesse.jpg) top center; height:3644px;}
+.deesse_old{ background:url(../images/sub/portfolio/deesse_old.jpg) top center; height:2596px;}
+.dual{ background:url(../images/sub/portfolio/dual.jpg) top center; height:7260px;}
+.easy{ background:url(../images/sub/portfolio/easy.jpg) top center; height:1800px;}
+.ibk{ background:url(../images/sub/portfolio/ibk.jpg) top center; height:954px;}
+.missmart{ background:url(../images/sub/portfolio/missmart.jpg) top center; height:929px;}
+.real_01{ background:url(../images/sub/portfolio/real_01.jpg) top center; height:2530px;}
+.real_02{ background:url(../images/sub/portfolio/real_02.jpg) top center; height:2486px;}
+.real_03{ background:url(../images/sub/portfolio/real_03.jpg) top center; height:3100px;}
+.real_04{ background:url(../images/sub/portfolio/real_04.jpg) top center; height:3100px;}
+.slimming{ background:url(../images/sub/portfolio/slimming.jpg) top center; height:3819px;}
+.sum{ background:url(../images/sub/portfolio/sum.jpg) top center; height:1872px;}
+.time{ background:url(../images/sub/portfolio/time.jpg) top center; height:6686px;}
+.zien{ background:url(../images/sub/portfolio/zien.jpg) top center; height:3230px;}
+
+
+
+/* contents */
+#container .contents .post { background-color:#474d5c; height:580px;}
+#container .contents .post .form{ width:100%; margin:0 auto;  border:2px solid #fff; padding:40px 30px 30px 20px;}
+#container .contents .post .form .left{ width:49.8%; float:left;  margin-bottom:10px}
+#container .contents .post .form .left ul li{ width:100%;}
+#container .contents .post .form .left img{}
+.main_input1{height:40px; border:0; padding-left:10px; margin-left:1px;}
+#container .contents .post .form .left input{ width:260px; height:40px; border:0; padding-left:10px; margin-left:1px; }
+#container .contents .post .form .right{width:49.8%; float:right;  margin-bottom:10px}
+#container .contents .post .form .right ul li{ width:100%;}
+#container .contents .post .form .right input{ width:260px; height:40px; border:0; padding-left:10px; margin-left:1px; }
+#container .contents .post .form textarea{ width:83.8%;border:0; height:110px; padding:10px; margin-left:1px;}
+#container .txt{ margin:0 auto; text-align:center; padding:60px 0 30px 0; width:1000px;}
+#container .contents .post .form .button{ margin:0 auto;text-align:center; padding-top:30px;}
+#container .contents .post .form .button button{ border:0; padding:0;}
+
+
+.push_m{margin:2%}
+.push_p{padding:2%}

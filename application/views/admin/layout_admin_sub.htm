@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title> [<?=_OID?>] <?=_ONAME?> - 관리자</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="/trunk/libs/assets/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="/trunk/libs/assets/font-awesome/css/font-awesome.css" type="text/css" />
+  <link rel="stylesheet" href="/trunk/libs/jquery/waves/dist/waves.css" type="text/css" />
+  <link rel="stylesheet" href="/trunk/styles/material-design-icons.css" type="text/css" />
+
+  <link rel="stylesheet" href="/trunk/libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="/trunk/styles/font.css" type="text/css" />
+  <link rel="stylesheet" href="/trunk/styles/app.css" type="text/css" />
+  <link rel="stylesheet" href="./css/board.css" type="text/css" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?1" />
+  <script src="/trunk/libs/jquery/jquery/dist/jquery.js"></script>
+
+
+</head>
+<body>
+
+<!--공통로드-->
+<style type="text/css" title="">
+.pop_loading{display:block; text-align:center;padding:25px;;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.26);}
+</style>
+<div id='pop_loading' class="pop_loading pos_f text-center" style='display:none;top:0;z-index:99999999999999999999'>
+	&nbsp;
+	<div class="progress" style="margin:-140px auto; width:270px">
+	  <div class="progress-bar progress-bar-striped active progress-bar-danger" id="progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+	    
+	  </div>
+	</div>
+</div>
+<script type="text/javascript">
+var ajaxt_y = '';
+
+//로딩
+function loading_start(){
+	$('#pop_loading').width($(window).width()).css('padding-top',$(window).height() / 2).show();
+}
+
+//로딩x
+function loading_end(){
+	$('#pop_loading').hide();
+}
+
+$( document ).ajaxStart(function() {
+	ajaxt_y = 'y';
+});
+
+
+$( document ).ajaxComplete(function( event, request, settings ) {
+	ajaxt_y = '';
+
+});
+</script>
+
+<?
+if(THEME != "keyword"){ 
+$colors = "blue-grey-900";
+}else{
+$colors = "blue-600";
+}
+?>
+
+<div class="app">
+  
+ 
+
+
+  <!-- aside -->
+  <aside id="aside" class="app-aside modal fade " role="menu">
+    <div class="left">
+      <div class="box bg-white">
+        <div class="navbar md-whiteframe-z1 no-radius   <?=$colors?>"  style="height:64px">
+            <!-- brand -->
+		<? if(THEME != "keyword"){ ?>
+		 <a class="navbar-brand" href="/adm/main">
+			<img src="./images/logo_hera.png" alt="" style="width:110px;margin-top:10px;margin-left:20px" />
+		<?}else{?>
+            <a class="navbar-brand" href="/admin/keyword/crontab_list/{_SESSION.COMPANY_IDX}">
+			<img src="/images/logo_hera2.png" alt="" style="width:110px;margin-top:10px;margin-left:-6px" />
+		<?}?>
+             
+      
+            </a>
+            <!-- / brand -->
+        </div>
+        <div class="box-row">
+          <div class="box-cell ">
+            <div class="box-inner" >
+
+  
+
+		{#LEFT}              
+
+             
+		 </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </aside>
+  <!-- / aside -->          
+  
+
+
+  <!-- content -->
+  <div id="content" class="app-content" role="main">
+    <div class="box ">
+			
+			
+			
+		    <!-- Content Navbar -->
+		    <div class="navbar md-whiteframe-z1 no-radius <?=$colors?>  ">
+		    
+			<!-- Open side - Naviation on mobile -->
+			<a md-ink-ripple  data-toggle="modal" data-target="#aside" class="navbar-item pull-left visible-xs visible-sm"><i class="mdi-navigation-menu i-24"></i></a>
+			<!-- / -->
+			<!-- Page title - Bind to $state's title -->
+			<div class="navbar-item pull-left h4" >
+			<?=_ONAME?>
+			</div>
+			<!-- / -->
+
+			
+
+			<ul class="nav navbar-nav navbar-right " style="margin-left:-20px;margin-right:0px">
+			   {? !_SESSION.KEYWORD_SES}
+
+					   <li>
+					    <a md-ink-ripple href="/">
+						<i class="glyphicon glyphicon-home  "></i> 
+						홈페이지 바로가기
+					    </a>
+					  </li>
+				  {/}
+				    <li class="m-r20 visible-md visible-lg">
+				    <a md-ink-ripple href="/admin/site_adm/logout">
+					<i class="mdi-social-person-outline "></i> 
+					로그아웃
+				    </a>
+				  </li>
+			</ul>
+		    
+		    </div>
+		     <!-- Open side - Naviation on mobile -->
+
+		    <!-- Content -->
+			
+			{?  _GET.PageNum}
+			 <div class="box  bg-white b-b" style="height:56px;padding-left:10px;padding-top:10px">
+				<div class="navbar-item pull-left h4" style="margin-top:10px;margin-left:10px;margin-right:30px" id="menu_title">
+					{menu_title}
+				</div>
+
+				<ul class="nav navbar-nav navbar-left " id="tool_menu">
+				{@ admin_MENU_tab}
+
+					{? .submenu}
+					 <li class="dropdown">
+					  <a md-ink-ripple="" data-toggle="dropdown" aria-expanded="false" class="text-info">
+					   <i class="{.icon}"></i> 업체선택 <i class="fa fa-caret-down"></i>
+					  </a>
+					  <ul class="dropdown-menu dropdown-menu-scale pull-right pull-up text-color" style="margin-top:40px">
+					  {@ .submenu}
+					    <li role="presentation">
+						<a href="{..link}" ><i class="{..icon}"></i> {..title}</a>
+					    </li>
+					    {/}
+					  </ul>
+				</li>
+					{:}
+				    <li role="presentation">
+					<a href="{.link}" class="text-info" id="tool_menu{.index_+1}"><i class="{.icon}"></i> {.title}</a>
+				    </li>
+				    {/}
+				 {/}
+				
+				</ul>
+			</div>
+			{/}
+
+			<div class="box-row ">
+			  <div class="box-cell">
+			    <div class="box-inner p-t15 autoheight " style="overflow:auto;">
+				
+				
+					{#CONTENT}
+			
+			    </div>
+			  </div>
+			</div>
+		 
+		  <!-- / content -->
+
+ 
+
+	</div><!--box-->
+</div>
+
+
+
+
+<div class="modal fade" id="ifrModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:520px">
+      <div class="modal-body " id="ifr_modify_body">
+        <iframe name="ifr_data" id="ifr_data" src="" width="100%" height="700px" scrolling="yes" frameborder=0></iframe>
+      </div>
+	  <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function ifr_view(url){
+	loading_start();
+	$('#ifrModal').modal('show');
+	$('#ifr_data').attr('src',url);
+
+	setTimeout('loading_end()',2300);
+}
+
+function popup_view(url,w,h){
+	if(!w) w = 800;
+	if(!h) h = 600;
+
+	 cw=screen.availWidth;     //화면 넓이
+	 ch=screen.availHeight;    //화면 높이
+
+	 w=650;    //띄울 창의 넓이
+	 h=650;    //띄울 창의 높이
+
+	 ml=(cw-w)/2;        //가운데 띄우기위한 창의 x위치
+	 mt=(ch-h)/2;         //가운데 띄우기위한 창의 y위치
+
+	var myWindow = window.open(url, "tomew", "toolbar=no, scrollbars=yes, resizable=yes, top="+mt+", left="+ml+", width="+w+", height="+h);
+}
+</script>
+
+
+{#COMMON}
+
+<link rel="stylesheet" type="text/css" href="/trunk/scripts/themes/default/style.css">
+
+
+<script src="/trunk/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/trunk/libs/jquery/waves/dist/waves.js"></script>
+
+<script src="/trunk/scripts/ui-load.js"></script>
+<script src="/trunk/scripts/ui-jp.config.js"></script>
+<script src="/trunk/scripts/ui-jp.js"></script>
+<script src="/trunk/scripts/ui-nav.js"></script>
+<script src="/trunk/scripts/ui-toggle.js"></script>
+<script src="/trunk/scripts/ui-form.js"></script>
+<script src="/trunk/scripts/ui-waves.js"></script>
+<script src="/trunk/scripts/ui-client.js"></script>
+<script src="/trunk/scripts/php.js"></script>
+<script src="/trunk/scripts/jquery.validate.min.js"></script>
+<script src="/trunk/scripts/additional-methods.min.js"></script>
+<script src="/trunk/scripts/messages_ko.js"></script>
+
+<script src="/trunk/scripts/parsley.min.ko.js"></script>
+<script src="/trunk/scripts/parsley.extend.js"></script> 
+<script type="text/javascript" src="/trunk/scripts/jstree.js"></script>	
+
+<script type="text/javascript" src="/trunk/scripts/jquery.url.js"></script>
+<script type="text/javascript" src="/trunk/scripts/jquery.cookie.js"></script>
+<script type="text/javascript" src="/trunk/scripts/jquery-ui-1.10.4.custom.min.js"></script>
+<script type="text/javascript" src="/trunk/scripts/jquery.nicescroll.js"></script>
+
+<script type="text/javascript">
+// <![CDATA[
+
+	$(window).ready(function(){ 
+		$('.autoheight').height($(window).height()-140);
+	});
+
+	$(window).resize(function(){ 
+		$('.autoheight').height($(window).height()-140);
+	});
+
+
+// ]]>
+</script>
+
+</body>
+</html>

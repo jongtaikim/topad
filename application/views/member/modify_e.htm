@@ -1,0 +1,317 @@
+<link rel="stylesheet" type="text/css" href="/css/doc_style.css">
+<style type="text/css" title="">
+/* UI Object */
+.form_table{margin:1em 0;font-size:12px;font-family:Tahoma, Geneva, sans-serif}
+.form_table input,
+.form_table textarea,
+.form_table select,
+.form_table table,
+.form_table button{font-size:12px}
+.form_table table{width:97%;border:0;border-top:2px solid #940018;margin:10px auto}
+.form_table caption{padding:8px 0;font-weight:bold;text-align:left}
+.form_table th,
+.form_table td{padding:8px;border:0;vertical-align:top}
+.form_table th{color:#333;}
+.form_table td{color:#666}
+.form_table thead th{border-bottom:1px solid #ccc;background:#f8f8f8}
+.form_table tbody th{border-bottom:1px solid #ddd;background:#fafafa;text-align:right}
+.form_table tfoot th{border-bottom:1px solid #ddd}
+.form_table tbody td{border-bottom:1px solid #ddd}
+.form_table tfoot td{border-bottom:1px solid #ddd;font-weight:bold;color:#333}
+.form_table .item{position:relative;margin:-4px 0}
+.form_table .item .i_help{position:absolute;top:4px;right:0}
+.form_table .item .i_label{ top:6px; left:10px}
+.form_table .item .i_dsc{margin:2px 0}
+.form_table .item .i_check,
+.form_table .item .i_radio{width:13px;height:13px;margin:2px 5px 2px 0;padding:0;vertical-align:middle}
+.form_table .item .i_text{position:relative;margin:2px;padding:3px 4px;border:1px solid #b7b7b7;border-right-color:#e1e1e1;border-bottom-color:#e1e1e1;background:transparent}
+.form_table .item .hide{visibility:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
+.form_table .item select{margin:2px}
+.form_table .item label{margin:0 10px 0 0;cursor:pointer}
+input{color:#000}
+/* //UI Object */
+</style>
+<script type="text/javascript" src="/js/ajax.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+	function juminChks() {
+		if(!$$('jumin1').value){
+			alert('주민/사업자 번호를 입력해주시기 바랍니다.');
+			return false;
+		}
+		var jumin = $$('jumin1').value;
+		jumin = str_replace("-","",jumin);
+		var params = 'jumin=' + jumin;  
+		sendRequest("/user_page/ajaxCont/jumin", params, juminChksFromServer, "POST");
+	}
+	function juminChksFromServer() {
+		if (httpRequest.readyState == 4) {
+			if (httpRequest.status == 200) {
+				var str_text = httpRequest.responseText;
+				//alert(str_text);
+				if(str_text =="Y"){
+					alert('이미 가입된 주민/사업자 번호 입니다.');
+					$$('juminChk').value='';
+					$$('jumin1').value = '';
+					
+				}else{
+					$$('juminChk').value='y';
+					alert('사용가능한 주민/사업자 번호 입니다.');
+					//$$('str_sex1').focus();
+				}
+			}
+		}
+	}
+
+	function idChks() {
+		if(!$$('str_id').value ){
+			alert('아이디를 입력해주시기 바랍니다.');
+			return false;
+		}
+		var params = 'userid=' + $$('str_id').value ;  
+		sendRequest("/user_page/ajaxCont/userid", params, idChksFromServer, "POST");
+	}
+	function idChksFromServer() {
+		if (httpRequest.readyState == 4) {
+			if (httpRequest.status == 200) {
+				var str_text = httpRequest.responseText;
+				//alert(str_text);
+				if(str_text =="Y"){
+					alert('이미 가입된 아이디 입니다.');
+					$$('idChk').value='';
+				}else{
+					$$('idChk').value='y';
+					alert('사용가능한 아이디 입니다.');
+					$$('str_passwd').focus();
+				}
+			}
+		}
+	}
+
+	function schoolSch(){
+		layerPopupOpen(600,'학교검색','', '/user_page/school_sch/','y');
+	}
+
+	
+	function submits(){
+		
+		if($$('yak1').checked == true){
+			if(validate($$('joinForm'))){
+				$$('joinForm').submit();
+			}
+		}else{
+			alert('회원약관에 동의해주시기 바랍니다.')
+			return false;
+		}
+	}
+
+// ]]>
+</script>
+
+
+<form name="joinForm" id="joinForm" method="post" enctype="multipart/form-data" onsubmit="return validate(this)">
+<input type="hidden" name="chr_mtype" id="chr_mtype" value="{types}" required>
+<p class="buTitle33" style="margin-bottom:0px;padding-left:18px;width:95%;margin:10px auto">단체회원 기본정보</p>
+
+<div class="form_table">
+<table border="1" cellspacing="0" summary="표의 요약을 반드시 넣어 주세요">
+<tbody>
+
+<tr>
+	<th scope="row">아이디</th>
+	<td colspan="3">
+		{str_id} ({=date("Y년 m월 d일 가입",dt_date)})
+	</td>
+</tr>
+
+<tr>
+	<th scope="row">비밀번호</th>
+	<td colspan="3">
+		<div class="item">
+			
+			<input class="i_text" name="str_passwd" id="str_passwd"  type="password"  style="width:130px" hname="비밀번호" required minbyte="6" maxbyte="20">
+			
+		</div>
+	</td>
+</tr>
+
+<tr>
+	<th scope="row">단체명</th>
+	<td>
+		<div class="item">
+			<input class="i_text" name="str_organ" id="str_organ" value="{str_organ}" hname="단체명" type="text"  style="width:130px"  required>
+		</div>
+	</td>
+	<th scope="row">지점명</th>
+	<td>
+		<div class="item">
+			<input class="i_text" name="str_area" id="str_area" value="{str_area}" hname="지점명" type="text"  style="width:130px"> (없으면 공백)
+		</div>
+	</td>
+</tr>
+
+<tr>
+	<th scope="row">대표자성명</th>
+	<td colspan="3">
+		<div class="item">
+			<input class="i_text" name="str_name" id="str_name"  value="{str_name}" hname="성명" type="text"  style="width:130px">
+		</div>
+	</td>
+</tr>
+
+<tr>
+	<th scope="row">담당자성명</th>
+	<td colspan="3">
+		<div class="item">
+			<input class="i_text" name="str_manage" id="str_manage" value="{str_manage}" hname="담당자성명" type="text"  style="width:130px">
+		</div>
+	</td>
+</tr>
+
+
+<tr>
+	<th scope="row">주민/사업자 번호</th>
+	<td colspan="3">
+		{num_jumin}
+	</td>
+	
+</tr>
+
+<tr>
+	<th scope="row">이메일</th>
+	<td colspan="3">
+		<div class="item">
+			<input class="i_text" name="email1" id="email1" hname="이메일" type="text" value="{email1}" maxbyte="50" style="width:100px"  required >@<input name="email2" id="email2" hname="이메일" value="{email2}" type="text"  maxbyte="50" required />
+										
+			<select name="emailSelect1" onchange = "$$('email2').value=this.value" required>
+				<option value="">Email 주소 선택</option>
+				<option value="">직접입력</option>
+				<option value="gmail.com">구글(G메일)</option>
+				<option value="naver.com">네이버</option>
+				<option value="nate.com">네이트</option>
+				<option value="dreamwiz.com">드림위즈</option>
+				<option value="yahoo.co.kr">야후</option>
+				<option value="empal.com">엠파스</option>
+				<option value="paran.com">파란</option>
+				<option value="hanmail.net">한메일</option>
+			</select>
+		
+		</div>
+	</td>
+</tr>
+
+<tr>
+	<th scope="row">대표번호</th>
+	<td colspan="3">
+		<div class="item">
+			
+			<input type="text" size="50" name="str_phone" value="{str_phone}" required class="i_text" style="width:100px"/>
+		</div>
+	</td>
+
+</tr>
+<tr>
+	
+	<th scope="row">휴대폰</th>
+	<td colspan="3">
+		<div class="item">
+			<input type="text" size="50" name="str_handphone" value="{str_handphone}" required class="i_text" style="width:100px"/>
+		</div>
+	</td>
+</tr>
+
+
+<tr>
+	<th scope="row">주소</th>
+	<td colspan="3">
+		<div class="item">
+			<plug:load src="zipsearch" name="chr_zip" title="우편번호" value="{chr_zip}" addr="str_addr1" focus="str_addr2" required="true" style="width:60px"/> <br />
+			<input type="text" size="50" name="str_addr1" value="{str_addr1}" required maxbyte="100" readonly class="i_text" /><br>
+			<input type="text" size="50" name="str_addr2" value="{str_addr2}" required maxbyte="100" trim="trim" class="i_text" />
+		</div>
+	</td>
+</tr>
+
+</table>
+</div>
+</fieldset> 
+
+
+<p class="buTitle33" style="margin-bottom:0px;padding-left:18px;width:95%;margin:10px auto">단체회원 계좌정보</p>
+
+<div class="form_table">
+<table border="1" cellspacing="0" summary="표의 요약을 반드시 넣어 주세요">
+<tbody>
+
+
+
+
+<tr>
+	<th scope="row" width="130px">환불입금은행</th>
+	<td colspan="3">
+		<div class="item">
+			<select name="str_bank" id="str_bank" hname="은행선택" required>
+			<option value="">--선택--</option>
+			<option value="국민" {? str_bank == "국민"} selected{/}>국민</option>
+			<option value="외환" {? str_bank == "외환"} selected{/}>외환</option>
+			<option value="수협" {? str_bank == "수협"} selected{/}>수협</option>
+			<option value="농협" {? str_bank == "농협"} selected{/}>농협</option>
+			<option value="축협" {? str_bank == "축협"} selected{/}>축협</option>
+			<option value="산업" {? str_bank == "산업"} selected{/}>산업</option>
+			<option value="기업" {? str_bank == "기업"} selected{/}>기업</option>
+			<option value="우리" {? str_bank == "우리"} selected{/}>우리</option>
+			<option value="조흥" {? str_bank == "조흥"} selected{/}>조흥</option>
+			<option value="제일" {? str_bank == "제일"} selected{/}>제일</option>
+			<option value="서울" {? str_bank == "서울"} selected{/}>서울</option>
+			<option value="신한" {? str_bank == "신한"} selected{/}>신한</option>
+			<option value="한미" {? str_bank == "한미"} selected{/}>한미</option>
+			<option value="대구" {? str_bank == "대구"} selected{/}>대구</option>
+			<option value="부산" {? str_bank == "부산"} selected{/}>부산</option>
+			<option value="광주" {? str_bank == "광주"} selected{/}>광주</option>
+			<option value="제주" {? str_bank == "제주"} selected{/}>제주</option>
+			<option value="전북" {? str_bank == "전북"} selected{/}>전북</option>
+			<option value="경남" {? str_bank == "경남"} selected{/}>경남</option>
+			<option value="새마을금고" {? str_bank == "새마을금고"} selected{/}>새마을금고</option>
+			<option value="신용협동조합" {? str_bank == "신용협동조합"} selected{/}>신용협동조합</option>
+			<option value="상호저축" {? str_bank == "상호저축"} selected{/}>상호저축</option>
+			<option value="시티" {? str_bank == "시티"} selected{/}>시티</option>
+			<option value="홍콩상하이" {? str_bank == "홍콩상하이"} selected{/}>홍콩상하이</option>
+			<option value="도이치" {? str_bank == "도이치"} selected{/}>도이치</option>
+			<option value="우체국" {? str_bank == "우체국"} selected{/}>우체국</option>
+			<option value="하나" {? str_bank == "하나"} selected{/}>하나</option>
+		</select>		
+
+		</div>
+	</td>
+</tr>
+
+<tr>
+	<th scope="row">예금주</th>
+	<td colspan="3">
+		<div class="item">
+			<input class="i_text" name="str_bank_name" id="str_bank_name" value="{str_bank_name}" hname="예금주" type="text"  maxbyte="50" style="width:160px"  required >
+		
+		</div>
+	</td>
+</tr>
+<tr>
+	<th scope="row">환불용계좌</th>
+	<td colspan="3">
+		<div class="item">
+			<input class="i_text" name="str_bank_number" id="str_bank_number" value="{str_bank_number}" hname="환불계좌" type="text"  maxbyte="50" style="width:160px"  required >
+		
+		</div>
+	</td>
+</tr>
+
+</table>
+</div>
+</fieldset>
+
+
+
+<div style="text-align:center;margin-top:20px;">
+	<plug:btn size="2" icon="add" type="submit" id="btn_submit" value="회원정보수정"/>
+</div>
+</form>
+

@@ -1,0 +1,553 @@
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading bg-white"> 
+	 <i class="fa  fa-home"></i> {menu_location} &gt; <strong class="text-primary">{str_title}</strong>
+  </div>
+  <div class="panel-body pos_r" style="font-size:12px">
+
+
+			
+
+
+
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="javascript:open_menu_option('{mcode}','')">메뉴옵션</a>
+		</li>
+		{? str_type !="menu"}
+		<li>
+			<a href="javascript:open_menu_option('{mcode}','menu_right')">메뉴권한설정</a>
+		</li>
+		{/}
+		{? sub_cnt > 1}
+		<li>
+			<a href="javascript:open_menu_option('{mcode}','menu_listorder')">하위메뉴 순서변경</a>
+		</li>
+		{/}
+	
+		
+	</ul>
+
+
+<form name="editorForm" id="editorForm" method="post" enctype="multipart/form-data" style="margin-top:20px" onsubmit="return validate(this);">
+<input type="hidden" name="cate" value="{num_cate}">
+
+
+	<fieldset>
+		<div style="color:#504954; font-weight:bold; padding-top:4px" style="margin-bottom:10px">
+			메뉴 설정  
+		</div>
+		<div class="" style="margin-top:5px;">
+		<table border="0" cellspacing="0" class="table table-bordered" >
+			<tbody>
+				<tr>
+					<th class="bg-light lt text-right w130 " style="vertical-align:middle;padding-right:10px">메뉴명</th>
+					<td>
+						<div class="item">
+							<input type="text" size="50" name="str_title" hname="메뉴명" value="{str_title}" class="parsley-validated" required trim="trim"/>
+						</div>
+					</td>
+				</tr>
+
+			
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">메뉴숨기기</th>
+					<td>
+						<div class="item">
+							<input type="radio" name="num_view" value="1" {? num_view ==1} checked{/}> 표출
+							<input type="radio" name="num_view" value="0" {? num_view ==0} checked{/}> 숨김
+							<div style="color:#993366">(숨김상태에서는 메뉴바에 표출되지 않습니다.)</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">메뉴형태</th>
+					<td>
+						<div class="item">
+							<select name="str_type" class="parsley-validated">
+							<!--{@ MENU_TYPE}-->
+								<option value="{.key_}" {? str_type ==.key_} selected{/}>{.value_}</option>
+							<!--{/}-->
+							</select>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">메뉴주소</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="menu_url" class="fom01" style="width:280px;border:0px" value="{menu_url}">
+						</div>
+					</td>
+				</tr>
+				
+		
+
+				
+				
+			</tbody>
+		</table>
+		</div>
+</fieldset>
+
+{? str_type == "doc"}
+<div style="color:#504954; font-weight:bold; padding-top:4px" style="margin-bottom:10px">
+	웹페이지 설정  
+</div>
+
+<fieldset>
+		
+		<div class="" style="margin-top:5px;">
+		<table border="0" cellspacing="0" class="table table-bordered">
+			<tbody>
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">상단 추가 내용</th>
+					<td>
+						<div class="item padding3">
+							<textarea name="str_menu_top" style="width:100%;height:80px;">{str_menu_top}</textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">웹페이지 상단</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_inc_file2" value="{str_inc_file2}" style="width:400px" placeholder="출력할 html,php,이미지 경로입력">
+						</div>
+					</td>
+				</tr>
+
+				{? str_layout == "@sub_menu"}
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">LNB 설정</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_lnb_file" value="{str_lnb_file}" style="width:400px" placeholder="출력할 html,php 경로입력">
+						</div>
+					</td>
+				</tr>
+				{/}
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">웹페이지 설정</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_inc_file" value="{str_inc_file}" style="width:400px" placeholder="출력할 html,php,이미지 경로입력">
+						</div>
+					</td>
+				</tr>
+
+				<tr class="hide">
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">내용</th>
+					<td>
+						<div class="item padding3">
+							<textarea name="str_text" style="width:100%;height:180px;">{str_text}</textarea>
+						</div>
+					</td>
+				</tr>
+
+				<tr >
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">내용</th>
+					<td>
+						<div class="item padding3">
+							<a href="/admin/menu_adm/menu_docs/{num_mcode}?cate={num_cate}" target="_blank" class="btn btn-xl btn-info">내용편집</a>
+						</div>
+					</td>
+				</tr>
+				
+
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">웹페이지 하단</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_inc_file3" value="{str_inc_file3}" style="width:400px" placeholder="출력할 html,php,이미지 경로입력">
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">하단 추가 내용</th>
+					<td>
+						<div class="item padding3">
+							<textarea name="str_menu_bottom" style="width:100%;height:80px;">{str_menu_bottom}</textarea>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">레이아웃 설정</th>
+					<td>
+						<div class="item padding3">
+							<select name="str_layout">
+								{@ layout_LIST}
+								{? .key_ !="admin" && .key_ !="main"}
+									<option value="@{.key_}" {? substr(str_layout ,1)== .key_}selected{/}>{.key_}</option>
+								{/}
+								{/}
+								
+							</select>
+
+							
+						</div>
+					</td>
+				</tr>
+
+		</tbody>
+		</table>
+		</div>
+</fieldset>
+
+<div class="hide" id="">
+<div style="color:#504954; font-weight:bold; padding-top:4px" style="margin-bottom:10px">
+	모바일 웹페이지 설정  
+</div>
+
+<fieldset>
+		
+		<div class="" style="margin-top:5px;">
+		<table border="0" cellspacing="0" class="table table-bordered">
+			<tbody>
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">모바일 상단</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_mobile_inc_file" value="{str_mobile_inc_file}" style="width:400px" placeholder="출력할 html,php,이미지 경로입력">
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">모바일 내용</th>
+					<td>
+						<div class="item padding3">
+							<textarea name="str_mobile_text" style="width:100%;height:180px;">{str_mobile_text}</textarea>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">모바일 하단</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_mobile_inc_file2" value="{str_mobile_inc_file2}" style="width:400px" placeholder="출력할 html,php,이미지 경로입력">
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+</fieldset>
+</div>
+{/}
+
+{? str_type == "link"}
+<div style="color:#504954; font-weight:bold; padding-top:4px" style="margin-bottom:10px">
+	링크메뉴 설정  
+</div>
+
+<fieldset>
+		
+		<div class="form_table" style="margin-top:5px;">
+		<table border="0" cellspacing="0" class="table table-bordered">
+			<tbody>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">URL</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_url" value="{menu_url}" size="45">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">내용표시</th>
+					<td>
+						<div class="item padding3">
+							<label for="str_target1"><input type="radio" name="str_target" id="str_target1" value="_self"  {? str_target == '_self' || str_target == ''}checked{/} style="border:0px;">현재창에</label>
+							<label for="str_target2"><input type="radio" name="str_target" id="str_target2" value="_blank"{? str_target == '_blank'}checked{/} style="border:0px;">새창에</label>
+						</div>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		</div>
+</fieldset>
+{/}
+
+
+{? str_type == "board"}
+<div style="color:#504954; font-weight:bold; padding-top:4px" style="margin-bottom:10px">
+	게시판 설정  
+</div>
+
+<fieldset>
+		
+		<div class="form_table" style="margin-top:5px;">
+		<table border="0" cellspacing="0" class="table table-bordered">
+			<tbody>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">레이아웃 설정</th>
+					<td>
+						<div class="item padding3">
+							<select name="str_layout">
+								{@ layout_LIST}
+								{? .key_ !="admin" && .key_ !="main"}
+									<option value="@{.key_}" {? substr(str_layout,1,100)== .key_}selected{/}>{.key_}</option>
+								{/}
+								{/}
+								
+							</select>
+
+							
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">LNB 설정</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_lnb_file" value="{str_lnb_file}" style="width:400px" placeholder="출력할 html,php 경로입력">
+						</div>
+					</td>
+				</tr>
+			
+
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">상단 파일 설정</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_inc_file2" value="{str_inc_file2}" style="width:400px" placeholder="출력할 html,php 경로입력">
+						</div>
+					</td>
+				</tr>
+
+				
+
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">상단 추가 내용</th>
+					<td>
+						<div class="item padding3">
+							<textarea name="str_menu_top" style="width:100%;height:80px;">{str_menu_top}</textarea>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">※ 모바일 상단 내용</th>
+					<td>
+						<div class="item padding3">
+							<textarea name="str_mobile_text" style="width:100%;height:80px;">{str_mobile_text}</textarea>
+						</div>
+					</td>
+				</tr>
+
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">게시판 스킨</th>
+					<td>
+						<div class="item padding3">
+							<select name="str_skin" size="1" id="str_skin">
+							
+								<option value="board" {? str_skin == 'board' }selected{/}>일반형 게시판</option>
+								<option value="web_board" {? str_skin == 'web_board' }selected{/}>웹진형 게시판</option>
+								<option value="gallery" {? str_skin == 'gallery' }selected{/}>겔러리형 게시판</option>
+								<option value="review" {? str_skin == 'review' }selected{/}>리뷰형 게시판</option>
+								<option value="media" {? str_skin == 'media' }selected{/}>미디어형 게시판</option>
+							
+							</select>
+						</div>
+					</td>
+				</tr>
+
+		
+
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">하단 추가 내용</th>
+					<td>
+						<div class="item padding3">
+							<textarea name="str_menu_bottom" style="width:100%;height:80px;">{str_menu_bottom}</textarea>
+						</div>
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">하단 파일 설정</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="str_inc_file3" value="{str_inc_file3}" style="width:400px" placeholder="출력할 html,php 경로입력">
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">페이지당 목록수</th>
+					<td>
+						<div class="item padding3">
+							<input type="text" name="num_listnum" value="{num_listnum}" class="">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">카테고리 관리</th>
+					<td>
+						<div class="item padding3">
+							<input type="checkbox" name="str_category_use" value="1" {? str_category_use ==1} checked {/}>사용
+							<script type="text/javascript">
+							// <![CDATA[
+							var cate_config_view = 'N';
+							function toggle_cate_config(){
+								if(cate_config_view=="N"){
+									$('#board_cate_v').show();$('#cateData').attr('src','/admin/menu_adm/board_category/{mcode}');
+									cate_config_view='Y';
+								}else{
+									$('#board_cate_v').hide()
+									cate_config_view='N';
+								}
+							}
+							// ]]>
+							</script>
+							<plug:btn size="1" type="button" event="onclick" js="toggle_cate_config()" value="카테고리 관리"/>
+							
+							<div  id="board_cate_v" {? !str_category_use} style="display:none"{/} >
+								  <div style="border:1px solid #CECECE; width:300px;padding:5px;margin-top:10px">
+								  <iframe name="cateData" id="cateData" {? str_category_use}src="/admin/menu_adm/board_category/{mcode}"{/} width="100%" height="170px" scrolling="no" frameborder=0></iframe>
+								  </div>
+							</div>			
+							
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">카테고리 관리2</th>
+					<td>
+						<div class="item padding3">
+							<input type="checkbox" name="str_category_use2" value="1" {? str_category_use2 ==1} checked {/}>사용
+							<script type="text/javascript">
+							// <![CDATA[
+							var cate_config_view2 = 'N';
+							function toggle_cate_config2(){
+								if(cate_config_view=="N"){
+									$('#board_cate_v2').show();$('#cateData2').attr('src','/admin/menu_adm/board_category2/{mcode}');
+									cate_config_view2='Y';
+								}else{
+									$('#board_cate_v2').hide()
+									cate_config_view2='N';
+								}
+							}
+							// ]]>
+							</script>
+							<plug:btn size="1" type="button" event="onclick" js="toggle_cate_config2()" value="카테고리 관리"/>
+							
+							<div  id="board_cate_v2" {? !str_category_use2} style="display:none"{/} >
+								  <div style="border:1px solid #CECECE; width:300px;padding:5px;margin-top:10px">
+								  <iframe name="cateData2" id="cateData2" {? str_category_use2}src="/admin/menu_adm/board_category2/{mcode}"{/} width="100%" height="170px" scrolling="no" frameborder=0></iframe>
+								  </div>
+							</div>			
+							
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">댓글사용여부</th>
+					<td>
+						<div class="item padding3">
+							<input type="checkbox" name="chr_comment" value="Y" {? chr_comment =='Y'} checked {/}> 사용하기
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">파일첨부</th>
+					<td>
+						<div class="item padding3">
+							<input type="checkbox" name="chr_upload" value="Y" {? chr_upload =="Y" } checked{/}> 사용하기
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<th class="bg-light lt text-right w130 p-r10" style="vertical-align:middle;padding-right:10px">총 사용 용량</th>
+					<td>
+						<div class="item padding3">
+							<b class="bx1_text03">{? max_disk}{max_disk}{:}0 byte{/}</b>
+						</div>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		</div>
+</fieldset>
+{/}
+
+
+
+<div style=";margin:10px 0 20px 0;float:left;width:100%" class="text-center">
+	<button type="button" class="btn btn-primary lt   m-b5   " id="" onclick="submit_data_op()">저장하기</button>
+	
+</div>
+
+</form>
+
+
+
+  </div>
+</div>
+
+<script type="text/javascript">
+var ifrContentsTimer;
+
+
+$('#editorForm').keyup(function(event){
+	if(event.keyCode == '13'){
+		//submit_data_op();
+	}
+})
+
+
+function submit_data_op(){
+	var validated_t = 'Y';
+	$('.parsley-validated').each(function(){
+		if($(this).val() ==''){
+			alert("["+$(this).attr('hname')+'] 은 필수값입니다.');
+			$(this).focus();
+			validated_t = '';
+			return false;
+		}
+	});
+	
+	if(validated_t == "Y"){
+		$.ajax({
+			type : 'POST',
+			url: '/admin/menu_adm/menu_option/{mcode}',
+			data : $('#editorForm').serialize(),
+			dataType:'html',
+			success : function(data) {
+				//alert(data);
+				alert('저장되었습니다.');
+				reload_tree();
+			}
+			,error: function(request,status,error) {
+				alert(request.responseText);
+				alert('저장실패.... 다시시도해 주십시요');
+				
+			}
+		});
+	}
+}
+
+
+</script>
+
+<br>
+<br>

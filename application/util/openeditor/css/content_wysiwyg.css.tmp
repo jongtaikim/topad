@@ -1,0 +1,7 @@
+p { margin:0; padding:0; }
+body, td, button { color:#4c4c4c; font-size:12px; font-family:굴림; line-height:1.5; }
+a, a:hover, a:link, a:active, a:visited { color:#4c4c4c; }
+div.txc-search-border { border-color:#4c4c4c; }
+div.txc-search-opborder { border-color:#4c4c4c; }
+img.tx-unresizable { width: auto !important; height: auto !important; }
+button a { text-decoration:none ; color:#4c4c4c ; }

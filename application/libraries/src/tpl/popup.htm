@@ -1,0 +1,32 @@
+{? popup_LIST}
+<script language="Javascript" type="text/javascript">
+{@ popup_LIST}
+
+if ( $.cookie("popup{.num_serial}" ) != "done" ) { 
+	
+	var msg = '<iframe name="" src="/user_page/popup_view/{.num_serial}" width="{.num_width}" height="{.num_height}" scrolling="no" frameborder=0></iframe>';
+	l_alert('{.num_serial}',msg,'{.num_width}','{.num_height}');
+
+}
+{/}
+
+
+</script>
+
+	{@ popup_LIST}
+
+	<div id="pop_l_{.num_serial}" class="main_popup window  pos_r" style=";z-index:999999999;background-color:#fff;display:none">
+		
+	    <div class="window_body align_center" style="font-size:16px;;padding:0px">
+		  
+	    </div>
+		<div class="pos_a text-right" style="top:0px;right:0px">
+			 <a href="javascript:$('#pop_l_{.num_serial}').hide()"  data-pop-close="true"  id="modal-cbtn_l{.num_serial}" class="btn_ly_close">
+				
+			</a>
+		</div>
+	    
+	</div>
+	{/}
+{/}
+

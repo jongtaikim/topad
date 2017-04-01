@@ -1,0 +1,67 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+
+<!-- board list -->
+					<div id="boardList" class="clearfix">
+						<div class="head clearfix">
+							
+								<p class="title txt-strong-B">{str_title}</p>
+							
+							<p class="count">total : {=number_format(total +0)}</p>
+						</div>
+						<div class="listWrap clearfix">
+							<table cellpadding="0" cellspacing="0" style="font-size:">
+								
+								<thead>
+									<tr>
+										<th width="7.3%" scope="col" class="text-center">no</th>
+										<th width="74.7%" scope="col" class="subject text-center">subject</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									
+
+									{@ TAB_BOARD}
+									<tr>
+										
+										<td style="font-size:13px">{.num}</td>
+										<td><p class="title">
+											{? .num_input_pass}<img src="./images/icon/secret.gif" alt="비밀 글" align="absmiddle" />&nbsp;&nbsp;{/}
+											{? .is_recent} <!--img class="new" alt="새글" src="/images/icon/ic_new.gif" width="10" height="9">&nbsp;&nbsp;-->{/}
+
+
+											<a href="/user/board/read_view/{.num_mcode}/{.num_serial}?cate={cate}&ch={_GET.ch}" class="board_view_link">{.str_title}</a>
+											</p></td>
+										
+									</tr>
+									{:}
+									<tr>
+										<td  colspan="3" height="100px" align="center" style="text-align:center">글이 없습니다.</td>
+									</tr>
+
+									{/}
+								</tbody>
+							</table>
+						</div>
+						
+					</div>
+					<!--// board list-->
+
+					
+
+					<div class="  text-center m-t20 clearfix" >
+							
+							<plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="4"/> 
+						</div>
+
+
+				<script type="text/javascript">
+				// <![CDATA[
+				$('#like_str_title').keyup(function(eventcode){
+					if(eventcode.keyCode=='13'){
+						$('#search_form').submit()
+					}
+				})
+
+				// ]]>
+				</script>

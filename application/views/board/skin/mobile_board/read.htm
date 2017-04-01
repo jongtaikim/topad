@@ -1,0 +1,71 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+
+<div class="cont_top2" style="margin-bottom:0px">
+	{str_mobile_text}
+</div>
+{? _GET.cate == '1912'}
+<?
+//리얼스토리 롤러
+include 'application/views/board/skin/mobile_board/realstory_roll.htm';
+?>
+{/}
+<div class="section-contents clearfix">
+	<!-- Gallery View -->
+	<div id="galleryView" class="galleryType clearfix">
+	{? str_skin !='media'}
+		<div class="head clearfix">
+			<p class="title">{str_title}</p>
+			<p class="date">{=substr(dt_date,0,10)} / Hit {=number_format(num_hit)}</p>
+		</div>
+	{/}
+		<div class="viewWrap clearfix">
+
+
+			<div class=" openEditorStyles" style="border:0px">
+					{? str_file_url2}
+					<div class="text-center m-b20 p-b20 " id="">
+						<img src="{str_file_url2}" alt="" />
+					</div>
+					{/}
+
+					{? strstr(str_mov,'//youtu.be/')}
+					<?
+					$utb_code = {str_mov};
+					$utb_code_ = explode("youtu.be/",$utb_code);
+					$utb_codes = $utb_code_[1];
+					?>
+					<div class="text-center m-b20 p-b20 " id="">
+						<iframe width="100%" height="320" src="https://www.youtube.com/embed/<?=$utb_codes?>" frameborder="0" allowfullscreen></iframe>
+					</div>
+					{/}
+					
+					<div class="padding text-left" id="">
+						{str_text}
+					</div>
+			</div>
+		</div>
+		<plug:load src="filelist" sect="{sect}"/>
+
+				
+
+		<div class="btmWrap clearfix">
+			<div class="buttons">
+				<a href="/user/board/list_view/{num_mcode}<?=_QS?>" class="btn btn-dark btn-xl">목록으로</a>
+				
+			</div>
+		</div>
+	</div>
+	<!-- //Gallery View --> 
+</div>
+
+
+<script type="text/javascript">
+
+
+$('.openEditorStyles').find('img').each(function(){
+	$(this).css('width','100%');
+	$(this).css('height','');
+})
+
+</script>
+

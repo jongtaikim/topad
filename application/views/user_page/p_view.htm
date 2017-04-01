@@ -1,0 +1,40 @@
+{? contents}
+	{contents}
+{/}
+{@ LIST}
+
+<div class="box box-shadow box-shadow-z0">
+	<div class="box-header dker pos_r">
+		<h3 class="">{.title}</h3><small class="text-right pos_a" style="right:20px;top:10px">{.code}
+
+</small>
+		
+	</div>
+	<div class="box-body b-t" style="text-align: center;">
+	
+
+
+	<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" class="tableTemp01" summary="">
+	
+			<tbody>
+				<tr>
+					<td style="width: 308px;"><p style="text-align: center;"><img src="{.img}"><br><br></p></td>
+					<td style="width: 392px;text-align:left" valign="top">
+					
+					{=strip_tags(.text,"<TABLE>,<TR><TD><BR>")}
+					
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+
+{/}
+
+<div class="  text-center m-t20 clearfix" >
+							
+	<plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="4"/> 
+</div>

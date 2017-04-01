@@ -1,0 +1,69 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+
+
+
+{str_top}
+
+
+<!-- board list -->
+					<div id="boardList" class="clearfix">
+						<div class="head clearfix">
+							
+								<p class="title txt-strong-B">{str_title}</p>
+							
+							<p class="count">total : {=number_format(total +0)}</p>
+						</div>
+						<div class="listWrap clearfix">
+							<br>
+							<br>
+							{@ TAB_BOARD}
+							<div class="panel panel-card">
+							  <div class="item">
+								<a href="/user/board/read_view/{.num_mcode}/{.num_serial}?cate={cate}&ch={_GET.ch}" class="board_view_link">
+								    
+								    {? !.str_file_url1 && strstr(.str_mov,'//youtu.be/')}
+									<?
+									$utb_code = {.str_mov};
+									$utb_code_ = explode("youtu.be/",$utb_code);
+									$utb_codes = $utb_code_[1];
+									?>
+									<img src="//i.ytimg.com/vi/<?=$utb_codes?>/mqdefault.jpg" alt="" class="w-full r-t b-b"/>
+								{:}
+									<img src="{.str_file_url1}" alt="" class="w-full r-t b-b"/>
+								{/}
+								 </a>
+							    
+							  </div>
+							 
+							  <div class="p">
+							    <h4 class="m-b10">{.str_title}</h4>
+							    <h5>{=strip_tags(.str_text)}</h5>
+							   
+							  </div>
+							</div>
+							{/}
+
+						</div>
+						
+					</div>
+					<!--// board list-->
+
+				
+
+
+					<div class="  text-center m-t20 clearfix" >
+							
+							<plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="4"/> 
+						</div>
+
+
+				<script type="text/javascript">
+				// <![CDATA[
+				$('#like_str_title').keyup(function(eventcode){
+					if(eventcode.keyCode=='13'){
+						$('#search_form').submit()
+					}
+				})
+
+				// ]]>
+				</script>

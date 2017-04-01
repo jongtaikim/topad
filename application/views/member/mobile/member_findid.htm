@@ -1,0 +1,134 @@
+<script type="text/javascript" src="/trunk/scripts/jquery.form.js"></script>
+
+				
+
+
+
+
+{? _POST.mode == "id"}
+
+
+<form  name="frm" method="post">
+	<table cellpadding="0" cellspacing="0" width="100%" align="center" style="background:url('../contents/images/community/id_bg.jpg') no-repeat;height:348px;">
+    <tr>
+    	<td style="padding-top:20px;" align="center">                    
+            <table cellpadding="0" cellspacing="0" width="370" height="138" style="line-height:140%;">
+                <tr>
+                   <td align="center">회원님의 아이디는 <span class="point "><strong>{userid}</strong></span> 입니다.</td>
+                </tr>                  
+                <tr>
+                	<td colspan="2" align="center"><a href="/user/member/member_login"><img src="../contents/images/community/bt_login_new.jpg" align="middle" alt="로그인" ></a></td>
+                </tr>               
+            </table>
+        </td>
+        
+    </tr>
+	</table>
+</form>
+
+
+
+
+
+
+
+{:}
+
+<script>
+
+$(document).ready(function(){	
+	$("input[name=name]").focus();
+	$("#idshowhide2").hide();
+	$("#idshowhide3").hide();
+	
+});
+
+checkidubmit = function (  ) {
+
+	if ($("input[name=name]").val()==""){
+		alert("이름을 입력해주세요");
+		$("input[name=name]").focus();
+		return false ;
+	}
+
+	if ($("input[name=email]").val()==""){
+		alert("이메일을 입력해주세요");
+		$("input[name=email]").focus();
+		return false ;
+	}
+
+	var _data = $('#login_id_frm').serialize();
+
+	$.ajax({
+		type: 'POST',
+		url : "/user/member/member_findid",
+		data : _data,
+		dataType: 'json',
+		success: function(data){
+        	if (  data.etcval == 'Y' ) {
+
+				$("#check_viewid1").hide();
+				$("#check_viewid2").show();
+				
+				$("#checkidvalue").html(data.userid);
+
+        	}else {
+				alert ( "이름과 이메일주소가 올바르지 않습니다." ) ;
+//				location.href="/main/login/id_search" ;
+			}
+			
+		}
+	});
+	
+}
+
+//값을 입력하고 엔터를 쳤을 경우, 로그인 시도함. login_loading() 함수 호출
+function enterLogin(e) {
+	if(e.keyCode == 13) {
+		checkidubmit();
+	} 
+}
+</script>
+<div class="cont_top"><img src="/application/views/mobile/images/sub_new/join_top_02.png"></div>
+<div id="content" style="width:94%; margin:0 3% 0 3%;">
+	<div class="title">
+		<h3 style="font-size:13px">회원가입 시 등록하셨던 이름과 이메일을 입력해 주시기 바랍니다.</h3>
+	</div>
+	<form id="login_id_frm" method="post">
+	
+	<input type="hidden" name="mode" value="id_json"/>
+	<input type="hidden" name="etc_val" value="1">
+	<div class="login">
+		<div class="enter" id="check_viewid1">
+			<ul>
+				<li><input type="text" placeholder="이름" name="name" id="name"></li>
+				<li><input type="email" name="email" placeholder="이메일"></li>
+			</ul>
+			<div class="btn1"><button type="button" value="" onclick="checkidubmit();"><span>확인</span></button></div>
+		</div>	
+		<div class="enter" style="display:none;" id="check_viewid2">
+			<!--div class="img"><img src="MOBILE_IMG_DIR/pw_img_01.jpg"></div-->
+			<div class="result">회원님의 아이디는 <span id="checkidvalue"></span> 입니다.</div>
+			<div class="btn1"><button type="button" onclick="go_url('/user/member/member_login');"><span>로그인</span></button></div>
+		</div>
+		<div class="notice">ID와 비밀번호 확인이 되지 않는 회원께서는, <span>1800-2662</span>로 전화주시기 바랍니다.</div>
+		<div class="btn2">
+			<button type="button" value="next" style="margin:0 2% 0 0;" onclick="go_url('/user/member/member_join/1');"><span>회원가입</span></button>
+			<button type="button" value="next" onclick="go_url('/user/member/member_findid/pw');"><span>비밀번호찾기</span></button>
+		</div>
+	</div>
+	</form>
+</div>
+
+
+<script>
+	//url 이동
+	go_url = function ( url) {			
+			var url ;			
+			location.href= url ;
+	}			
+	
+</script>	
+
+
+{/}

@@ -1,0 +1,202 @@
+<link rel="stylesheet" type="text/css" href="./style.css">
+{str_top}
+<div id="cu_top"></div>
+
+
+<div class="section-contents clearfix">
+
+<form name="tx_editor_form" id="tx_editor_form" method="post" accept-charset="<?=_CHARSET?>" enctype="multipart/form-data" style="">
+<input type="hidden" name="mcode" value="{mcode}" required="false">
+<input type="hidden" name="cate" value="{cate}" required="false">
+<input type="hidden" name="id" value="{id}" required="false">
+<input type="hidden" name="ch" value="{_GET.ch}" required="false">
+
+<fieldset>
+
+<style type="text/css" title="">
+.ss_table TD,TH {padding:15px}
+</style>
+ 
+<div class="form_table">
+	<table border="1" cellspacing="0"  style="border-top: 2px solid #818181;  border-bottom: 1px solid #494949;" class="table  table-bordered">
+		<tbody>
+			<tr>
+				<th scope="row" style="width:130px;padding:15px">Subject</th>
+				<td colspan="3" style="vertical-align:middle;padding-left:15px">
+					<div class="item">
+					
+					
+					<input class="form-control w500 f_l " title="제목" type="text" name="str_title" hname="제목" maxbyte="200" value="{board_title}" required="required"> 
+					&nbsp;
+					<input type="checkbox" name="num_input_pass"  id="num_input_pass" value = "1" {? num_input_pass}checked{/} style = "border:0px" class="m-l5">비밀글</label> 
+					</div>
+				</td>
+			</tr>
+			{? str_category_use}
+			<tr>
+				<th scope="row" style="width:130px;padding:15px">Category 1</th>
+				<td colspan="3" style="vertical-align:middle;padding-left:15px">
+					<div class="item">
+					{? str_category_use}
+						<select name="str_category"  id="str_category" class="form-control w200 f_l" required="required">
+						<option value="">-카테고리-</option>
+						<!--{@ cate_LIST}-->
+						<option value="{.str_category}" {? .str_category == str_category} selected{/}>{.str_category}</option>
+						<!--{/}-->
+						</select>
+					
+					{/}
+					</div>
+				</td>
+			</tr>
+			{:}
+			<input type="hidden" name="str_category" value="일반"/>
+			{/}
+
+			{? str_category_use2}
+			<tr>
+				<th scope="row" style="width:130px;padding:15px">Category 2</th>
+				<td colspan="3" style="vertical-align:middle;padding-left:15px">
+					<div class="item">
+					{? str_category_use2}
+						<select name="str_category2"  id="str_category2" class="form-control w200 f_l" required="required">
+						<option value="">-카테고리-</option>
+						<!--{@ cate_LIST2}-->
+						<option value="{.str_category}" {? .str_category == str_category2} selected{/}>{.str_category}</option>
+						<!--{/}-->
+						</select>
+					
+					{/}
+					</div>
+				</td>
+			</tr>
+			{:}
+			<input type="hidden" name="str_category2" value="일반"/>
+			{/}
+			{? !_SESSION.USERID }
+			<tr>
+				<th scope="row">아이디</th>
+				<td>
+					<div class="item">
+					<input class="i_text" title="아이디" type="text" name="str_user" hname="아이디" maxbyte="15" value="{str_user}" required> 
+					</div>
+				</td>
+				<th scope="row" width="12%">비밀번호</th>
+				<td>
+					<div class="item">
+					<input class="i_text" title="비밀번호" type="password" name="str_pass" hname="비밀번호" maxbyte="30" value="{str_pass}" required> 
+					</div>
+		 		</td>
+			</tr>
+			<tr>
+				<th scope="row">이름</th>
+				<td>
+					<div class="item">
+					<input class="i_text" title="이름" type="text" name="str_name" hname="이름" maxbyte="15" value="{str_name}" required> 
+					</div>
+				</td>
+				<th scope="row" width="12%">이메일</th>
+				<td>
+					<div class="item">
+					<input class="i_text" title="이메일" type="text" name="str_email" hname="이메일" maxbyte="30" value="{str_email}" required> 
+					</div>
+		 		</td>
+			</tr>
+			{:}
+			<input type="hidden" name="str_name" value = "{_SESSION.NAME}" required="false"/>
+			<input type="hidden" name="str_pass" value = "{_SESSION.PASSWORD}" required="false"/>
+			<input type="hidden" name="str_email" value = "{_SESSION.EMAIL}" required="false"/>
+			
+			{/}
+			{? admin_pre}
+			<tr>
+				<th scope="row" width="12%" style="width:130px;padding:15px">관리기능</th>
+				<td colspan="3" style="vertical-align:middle;padding-left:15px">
+					<div class="item">
+					<input type="radio" name="num_notice" value=""{? !num_notice} checked{/} style = "border:0px" required="false">일반
+			
+					<input type="radio" name="num_notice" value="1"{? num_notice == 1} checked{/} style = "border:0px" required="false"> 
+					공지
+					날짜
+					<input type="date" name="dt_date" value="{?dt_date}{=substr(dt_date,0,10)}{/}" style = "width:150px" class = "button" required="false">
+					
+					조회수<input type="text" name="num_hit" value="{num_hit}" style = "width:40px" class = "button" required="false">
+					</div>
+				</td>
+			</tr>
+			{/}
+
+			{? chr_upload}
+			<tr>
+				<th scope="row" style="width:130px;padding:15px">썸네일</th>
+				<td colspan="3" style="vertical-align:middle;padding-left:15px">
+					<div class="item">
+						<input type="file" name="str_file_url1"  accept="image/*">
+					</div>
+					{? str_file_url1}
+					<div class="m-t10" style="height:30px;overflow:hidden">
+						<img src="{str_file_url1}" style="width:50px"/> <input type="checkbox" name="del_str_file_url1" value="Y"> 삭제
+					</div>
+					{/}
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row" style="width:130px;padding:15px">본문 첨부이미지</th>
+				<td colspan="3" style="vertical-align:middle;padding-left:15px">
+					<div class="item">
+						<input type="file" name="str_file_url2"  accept="image/*">
+					</div>
+					{? str_file_url2}
+					<div class="m-t10" style="height:30px;overflow:hidden">
+						<img src="{str_file_url2}" style="width:50px"/> <input type="checkbox" name="del_str_file_url2" value="Y"> 삭제
+					</div>
+					{/}
+				</td>
+			</tr>
+			{/}
+
+			{? str_skin == 'media'}
+			<tr>
+				<th scope="row" style="width:130px;padding:15px">외부컨텐츠<br>(유튜브등..)</th>
+				<td colspan="3" style="vertical-align:middle;padding-left:15px">
+					<div class="item">
+						<input class="form-control w500 f_l " title="미디어" type="text" name="str_mov" hname="미디어" maxbyte="200" value="{str_mov}" required="required"> 
+						
+					</div>
+					ex>https://youtu.be/PFkIX0Up9cM
+					
+				</td>
+			</tr>
+			{/}
+		</tbody>  
+	</table>
+</div>     
+ 
+{? meodth == "reply"}	 
+
+	<strong>본문글</strong>
+	<div class="boardReadBody openEditorStyles" style="margin-top:4px">
+		{str_text}
+	</div>
+	<textarea name="content" style="display:none">{str_text}</textarea>
+
+	<input type="hidden" name="meodth" value="{meodth}" required="false">
+
+	<strong>답변글</strong>
+	<plug:daum_editor name="str_re_text" height="250" form="tx_editor_form" width="930" sect="{file_sect}">{str_re_text}</plug:daum_editor>
+
+{:}
+	<plug:daum_editor name="content" height="250" form="tx_editor_form" width="930" sect="{file_sect}">{str_text}</plug:daum_editor>
+{/}
+  
+<div style="text-align:center;margin-top:20px">
+	
+		<a href="javascript:saveContent();" class="btn btn-dark btn-xl">등록하기</a>
+		
+		<a href="javascript:history.go(-1)" class="btn btn-default btn-xl">취소</a>
+</div>
+ 
+ 
+</form>      
+</div>

@@ -1,0 +1,230 @@
+<style>
+.table1,.table2{ height:40px;}
+.table1{color:#777;}
+.tit{ background:#f5f5f5;border-bottom:1px solid #eee;padding-left:40px;font-weight:bold;}
+.tit1{ background:#f5f5f5;border-bottom:1px solid #ddd;padding-left:40px;font-weight:bold;}
+.tit2{ border-bottom:1px solid #eee;padding-left:40px;font-weight:bold;}
+.bgc{ background:#f5f5f5;border-bottom:1px solid #eee;}
+.bgc1{ background:#f5f5f5;border-bottom:1px solid #ddd;}
+.bgc2{ border-bottom:1px solid #eee;}
+.agree{color:#bb8902;font-weight:bold;}
+.txt{font-weight:bold;}
+.table2 span{color:#aaa;}
+.form_m{
+border:1px solid #ECECEC;
+		border-top:3px solid #333;
+		margin:0 auto;
+		background:#FCFCFC;
+		height:400px;
+		padding:0 10px 0 10px;
+		width:990px;}
+
+	.ed2, .se {
+		width:200px;
+		height:22px;
+		font-size:1em;
+		line-height:22px;
+		border-radius:0px;
+		border:1px solid #ccc;
+		margin-right:5px;
+	}
+	img{display:inline;}
+.bpad_50{padding-bottom:36px;}
+</style>
+<form id="frmEdit" method="post" name="frmEdit">
+	<input type="hidden" name="chkid" value="">
+	<input type="hidden" name="txtCouns_cont" value="">
+	<input type="hidden" name="txtSearch_mothod" value="">
+	<input type="hidden" name="txtSearch_mothod_media" value="">
+	<input type="hidden" name="txtSearch_mothod_etc" value="">
+<table cellpadding=0 cellspacing=0 align=center width=100%>
+
+
+<tr>
+	<td style="border-top:2px solid #3e3e3e;">
+		<table cellpadding=0 cellspacing=0 width=100% align=center>
+		<tr>
+		<td class="table1 tit" width=16%>아이디</td>
+		<td class="table1 bgc" >{userid}</td>
+		</tr>
+		<tr>
+			<td class="table1 tit">비밀번호</td>
+			<td class="table1 bgc"><input type="password" class="ed2" name="pwd" value="">  <span class="txt">4~16자리의 영문, 숫자, 특수문자 조합 가능</span>
+</td>
+		</tr>
+		<tr>
+			<td class="table1 tit1">비밀번호확인</td>
+			<td class="table1 bgc1"><input type="password" class="ed2" name="pwd_confirm" value="" ></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<!--개인정보입력-->
+
+<tr><td style="border-bottom:1px solid #ddd;">
+
+
+		<table cellpadding=0 cellspacing=0 width=100% align=center>
+		<tr>
+			<td width=16% class="table1 tit2">이름</td>
+			<td  class="table1 bgc2"><input type="text" class="ed2" name="usernames" id="username" value="{username}" ></td>
+		</tr>
+
+		<tr>
+			<td class="table1 tit2">생년월일</td>
+			<td class="table1 bgc2">
+				<input type="date" class="ed2" name="birth" id="birth" value="{birth2}">
+			</td>
+		</tr>
+		<tr>
+			<td class="table1 tit2">이메일</td>
+			<td class="table1 bgc2"><input type="text" class="ed2" name="email" id="email" value="" style="width:100px">	
+					@
+					<select class="ed2" style="width:140px" name="email_value2" id="email_value2" onchange="email_input2( this.value );">
+						<option value="">메일을 선택해주세요</option>
+						<option value="naver.com">naver.com</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="hotmail.com">hotmail.com</option>
+						<option value="nate.com">nate.com</option>
+						<option value="yahoo.co.kr">yahoo.co.kr</option>
+						<option value="empas.com">empas.com</option>
+						<option value="dreamwiz.com">dreamwiz.com</option>
+						<option value="freechal.com">freechal.com</option>
+						<option value="lycos.co.kr">lycos.co.kr</option>
+						<option value="korea.com">korea.com</option>
+						<option value="gmail.com">gmail.com</option>
+						<option value="hanmir.com">hanmir.com</option>
+						<option value="paran.com">paran.com</option>
+                        <option value="9999">직접입력</option>
+                    </select> 
+                    <span id="email_show2" style="display:none;"><input type="text" class="ed2" name="email_value3" id="email_value3" class="findid" style="width:96px;"></span>
+					
+			
+			
+			<span class="agree">이메일 수신동의</span> 
+				<input type="radio" name="email_ch" id="email_ch1" value="Y" checked > 동의  <input type="radio" id="email_ch2" name="email_ch" value="N"> 동의안함
+
+			
+				<script type="text/javascript">
+				$('#email').val('{email1}');
+				$('#email_value2').val('{email2}');
+				{? email_ch== 'Y'}
+					$('#email_ch1').attr('checked',true);
+				{:}
+					$('#email_ch2').attr('checked',true);
+				{/}
+				</script>
+			</td>
+		</tr>		
+		<tr>
+			<td class="table1 tit2">거주지역</td>
+			<td class="table1 bgc2">	
+				<select name="addr1" id="addr1">
+					
+					<option value="" selected="">선택하세요</option>
+					<option value="충북">충북</option>
+					<option value="충남">충남</option>
+					<option value="제주">제주</option>
+					<option value="전북">전북</option>
+					<option value="전남">전남</option>
+					<option value="인천">인천</option>
+					<option value="울산">울산</option>
+					<option value="서울">서울</option>
+					<option value="부산">부산</option>
+					<option value="대전">대전</option>
+					<option value="대구">대구</option>
+					<option value="광주">광주</option>
+					<option value="경북">경북</option>
+					<option value="경남">경남</option>
+					<option value="경기">경기</option>
+					<option value="강원">강원</option>
+
+				</select>
+				<script type="text/javascript">
+				$('#addr1').val('{addr}');
+				</script>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="table1 tit2">휴대전화</td>
+			<td class="table1 bgc2">
+
+					<input type="text" class="ed2" name="celphone1" value="{celphone1}" style="width:60px" maxlength="4" value="010">
+				 - <input type="text" class="ed2" name="celphone2" value="{celphone2}" style="width:60px" maxlength="4"> - 
+				 <input type="text" class="ed2" name="celphone3" value="{celphone3}" style="width:60px" maxlength="4" >
+				<span class="agree">SMS 수신동의</span> <input type="radio" name="ckyog" id="ckyog1" value="Y" checked > 동의  <input type="radio" name="ckyog" value="N" id="ckyog2" > 동의안함
+				<script type="text/javascript">
+				{? ckyog== 'Y'}
+					$('#ckyog1').attr('checked',true);
+				{:}
+					$('#ckyog2').attr('checked',true);
+				{/}
+				</script>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="table1 tit2">관심수술분야</td>
+			<td class="table1 bgc2">
+				<select name="etc_1" id="etc_1"  class="se data_etc_1_select" style="width:250px">
+					<option value="" >관심수술분야를 선택해주세요</option>
+					
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="table1 tit2">수술예상시기</td>
+			<td class="table1 bgc2">
+				<select name="etc_2"  id="etc_2" class="se treatment_date" style="width:250px">
+					<option value="" >수술예상시기를 선택해주세요</option>
+					
+				</select>
+			</td>
+		</tr>
+		</table>
+
+		<script type="text/javascript">
+		setTimeout(function(){
+			$('#etc_1').val('{etc_1}');
+			$('#etc_2').val('{etc_2}');
+		},500);
+		</script>
+	</td></tr>
+<!--선택정보입력-->
+
+<tr><td class="tpad_20" align=center>
+		<br>
+		<table cellpadding=0 cellspacing=0 style="padding:20px 0 40px 0;">
+		<tr>
+			<td><a href="javascript:hy_mod()"><img src="/application/views/contents/images/community/btn_ok.jpg" align="middle" alt="확인" ></a></td>
+			<td style="padding-left:10px;"><a href="/user/member/member_modify/"><img src="/application/views/contents/images/community/btn_cancel.jpg" align="middle" alt="취소" ></a></td>
+		</tr>
+		</table>
+	</td></tr>
+
+</table>
+</form>
+<script type="text/javascript" src="/trunk/scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="./js/member.js"></script>
+
+
+<!-- -->
+	</div>
+</div>
+<!-- -->
+
+<script>
+	function email_input2( temps ) {
+		
+		var temps ;
+		if ( temps == 9999 )
+		{
+			$("#email_show2").show();
+		} else {
+			$("#email_show2").hide();
+		}
+	}
+</script>
+

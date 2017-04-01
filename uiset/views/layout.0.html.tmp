@@ -1,0 +1,19 @@
+
+  
+  <!-- content -->
+  <div id="content" class="app-content box-shadow-z0" role="main">
+    <div class="app-header white box-shadow navbar-md">
+        <div ui-include="'../views/layout/header.html'"></div>
+    </div>
+    <div class="app-footer">
+      <div ui-include="'../views/layout/footer.html'"></div>
+    </div>
+    <div ui-view class="app-body" id="view"></div>
+  </div>
+  <!-- / -->
+
+  <!-- theme switcher -->
+  <div id="switcher">
+    <div ui-include="'../views/layout/switcher.html'"></div>
+  </div>
+  <!-- / -->

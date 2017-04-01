@@ -1,0 +1,10 @@
+<script type="text/javascript">
+function popup_zip(form) {
+	//wZip = window.open('/zipcode/run/{addr}/{name}/{focus}/'+form,'zipsearch','width=400, height=200,scrollbars=yes');
+	layerPopupOpen(400,'우편번호','', '/zipcode/run/{addr}/{name}/{focus}/'+form,'y');
+}
+</script>
+<div class="input-group">
+<input type="text" size="7" style="{style};width:100px" {? required }required{/} value="{value}" name="{name}" id="{name}" class="form-control" readonly pl="000-000"/>
+<input type="button" value="{title}" onClick="popup_zip(this.form.getAttribute('NAME'));" class="btn btn-dark" style="margin-left:10px">
+</div>

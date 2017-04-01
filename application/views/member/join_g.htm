@@ -1,0 +1,44 @@
+
+<table cellpadding=0 cellspacing=0 align=center width="100%">
+<tr><td class="bpad_50"><img src="/application/views/contents/images/community///join_1_1_new.jpg"></td></tr>
+<tr style=" height:50px;"><td class="bpad_50"><img src="/application/views/contents/images/community///join_1_1_tit.jpg"></td></tr>
+<!--이용약관-->
+<tr style=" height:30px; font-size:1.1em;color:#ff0000;"><td><input type=checkbox id="allCheck" style="vertical-align:middle;margin-right:2px;" onclick="allcheck();"> <b>전체동의</b></td></tr>
+<tr style=" height:40px; font-size:1.1em;color:#888888;text-decoration:underline;"><td><b>회원약관</b></td></tr>
+<tr><td class="tpad_15">
+<div id="" name="" class="text_pra1_tag" style='width:940px;height:300px;overflow:auto;line-height:14pt;padding:15px;border:1px solid #ddd; word-break:break-all;background-color:#FCFCFC'>
+
+</div>
+</td>
+<tr><td align=left style="height:40px;"> <input type=checkbox id="terms" style="vertical-align:middle;margin-right:2px;"> 회원약관에 동의합니다. <span style="float:right;color:#ccc;">동의를 거부할 수 있습니다. 동의 거부 시에는 이용이 제한됩니다.</span></td></tr>
+<tr><td style="border-top:1px dotted #ddd; height:10px;">&nbsp;</td></tr>
+<!--개인정보보호정책-->
+<tr style=" height:30px; font-size:1.1em;color:#888888; text-decoration:underline;"><td class="tpad_50"><b>개인정보 취급방침</b></td></tr>
+<tr><td class="tpad_15">
+<div id="" name="" class="text_pra2_tag" style='width:940px;height:300px;overflow:auto;line-height:14pt;padding:15px;border:1px solid #ddd; word-break:break-all;background-color:#FCFCFC;'>
+
+</div>
+</td>
+<tr><td align=left style="height:30px;"> <input type=checkbox id="security" style="vertical-align:middle;margin-right:2px;" /> 개인정보취급방침에 동의합니다. <span style="float:right;color:#ccc;">동의를 거부할 수 있습니다. 동의 거부 시에는 이용이 제한됩니다.</span></td></tr>
+<tr><td align=center style="padding:20px 0 40px 0">
+<table cellpadding=0 cellspacing=1>
+<tr>
+<td><a href="javascript:chkAgree();"><img src="/application/views/contents/images/community///bt_join_new.jpg" align="middle" alt="회원가입"></a></td>
+<td style="padding-left:6px;"><a href="/"><img src="/application/views/contents/images/community///btn_cancel.jpg" align="middle" alt="취소"></a></td>
+</tr>
+</table>
+</td>
+</table>
+
+<script>
+
+function allcheck( ) {
+	if($("#allCheck").prop("checked")) {
+		$("input[type=checkbox]").prop("checked",true);
+	} else {
+		$("input[type=checkbox]").prop("checked",false);
+	}
+}
+
+</script>
+<script type="text/javascript" src="./js/member.js"></script>

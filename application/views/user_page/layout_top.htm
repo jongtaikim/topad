@@ -1,0 +1,89 @@
+
+
+
+<div class=" dark  navbar-md pos_f animated fadeIn opa00"  id="headerwrap" style="  width:100%; ;z-index:99;padding-top:10px;background-color:#333" >
+		<div class="container" id="" style="">
+			<div class="navbar ng-scope">
+				<a  class="navbar-item pull-right hidden-md-up m-a-0 m-l" style="padding-top:18px;z-index:101;" id="navbar_btn">
+					<i class="material-icons" style="font-size:26px"></i>
+				</a>
+				<a class="navbar-brand lg ng-scope" style="padding-right:30px;" href="/">
+					<img src="./images/main/ci.png" alt="." style="width:129px;" class="hidden-xs-down m-t10">
+					<img src="images/main/ci.png" alt="." style="width:105px;" class="hidden-md-up hidden-sm-up">
+				</a>
+
+				<!--모바일-->
+				<div class="collapse navbar-toggleable-md animated fadeInUp"	id="navbar-1" style="background-color:#333;padding:10px;z-index:98">
+					<ul class="nav navbar-nav nav-active-border b-primary" style="margin-top:30px">
+						<li class="nav-item m-r10">
+							<a class="nav-link" href="/user/page/doc/10?cate=10" style="height:30px;margin-top:31px"><img src="images/main/gnb_01.png" alt="IT컴퍼니"></a>
+						</li>
+						<li class="nav-item m-r10">
+							<a class="nav-link" href="/user/page/doc/11?cate=11" style="height:30px;margin-top:31px"><img src="images/main/gnb_02.png" alt="MARKETING"></a>
+						</li>
+						<li class="nav-item m-r10">
+							<a class="nav-link" href="/user/page/doc/12?cate=12" style="height:30px;margin-top:31px"><img src="images/main/gnb_03.png" alt="DESIGN/IT"></a>
+						</li>
+						<li class="nav-item m-r10">
+							<a class="nav-link" href="/user/page/doc/13?cate=13" style="height:30px;margin-top:31px"><img src="images/main/gnb_04.png" alt="EXPERIENCE"></a>
+						</li>
+						<li class="nav-item m-r10">
+							<a class="nav-link" href="/user/page/doc/14?cate=14" style="height:30px;margin-top:31px"><img src="images/main/gnb_05.png" alt="CUSTMER CENTER" ></a>
+						</li>
+					</ul>
+				</div>
+				<!--모바일-->
+
+
+
+
+				<!--데탑-->
+				<div class="collapse navbar-toggleable-xs hidden-md-down  animated fadeInDown "	 style="padding-left:30px">
+					<ul class="nav navbar-nav nav-active-border b-primary" >
+						<li class="nav-item slips" style="">
+							<a class="nav-link m-r10 pull-left" href="/user/page/doc/10?cate=10" style="height:30px;margin-top:31px;border-color:#8ca492"><img src="images/main/gnb_01.png" alt="IT컴퍼니"></a>
+							<img src="./images/main/gnb_bar.png" class="pull-right hidden-sm-down spit_img">
+						</li>
+
+						<li class="nav-item slips m-r10">
+							<a class="nav-link m-r10 pull-left " href="/user/page/doc/11?cate=11" style="height:30px;margin-top:31px;border-color:#8ca492"><img src="images/main/gnb_02.png" alt="MARKETING"> </a>
+							<img src="./images/main/gnb_bar.png" class="pull-right hidden-sm-down spit_img">
+						</li>
+						<li class="nav-item slips m-r10">
+							<a class="nav-link m-r10 pull-left " href="/user/page/doc/12?cate=12" style="height:30px;margin-top:31px;border-color:#8ca492"><img src="images/main/gnb_03.png" alt="DESIGN/IT"> </a>
+							<img src="./images/main/gnb_bar.png" class="pull-right hidden-sm-down spit_img">
+						</li>
+						<li class="nav-item slips m-r10">
+							<a class="nav-link m-r10 pull-left " href="/user/page/doc/13?cate=13" style="height:30px;margin-top:31px;border-color:#8ca492"><img src="images/main/gnb_04.png" alt="EXPERIENCE"> </a>
+							<img src="./images/main/gnb_bar.png" class="pull-right hidden-sm-down spit_img">
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link m-r10 pull-left " href="/user/page/doc/14?cate=14" style="height:30px;margin-top:31px;border-color:#8ca492"><img src="images/main/gnb_05.png" alt="CUSTMER CENTER" ></a>
+						</li>
+					</ul>
+				</div>
+				<!--데탑-->
+
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var in_nav = '';
+		$('#navbar_btn').click(function(){
+			if(!in_nav){
+				$('#navbar-1').addClass('in');
+				in_nav = 'y';
+			}else{
+				$('#navbar-1').removeClass('in');
+				in_nav='';
+			}
+		});
+
+		$(window).resize(function(){
+			$('#navbar-1').removeClass('in');
+			in_nav='';
+		});
+
+
+	</script>

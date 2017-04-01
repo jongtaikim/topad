@@ -1,0 +1,114 @@
+<link rel="stylesheet" type="text/css" href="/css/modalLogin.css">
+
+<!--ui object -->
+
+<div class="mw_login open">
+<div class="bg">
+</div>
+<div id="login" class="g_login">
+
+<form id="g_login" class="g_login" method="post" >
+<input type="hidden" name="str_type" value="{str_type}">
+<input type="hidden" name="mcode" value="{num_mcode}">
+<input type="hidden" name="cate" value="{num_cate}">
+<input type="hidden" name="id" value="{id}">
+<input type="hidden" name="mode" value="{mode}">
+
+<fieldset>
+
+<div class="item" style="margin:0px 0 10px 0">
+	암호를 입력하여 주세요. </div>
+<div class="item">
+<label style="position:absolute; visibility:visible" class="i_label" for="upw">password</label>
+<input id="upw" class="i_text upw" value="" type="password" name="password"  hname="비밀번호" {? !_SESSION.ADMIN}required{/}> </div>
+
+<div style="margin:5px;text-align:right">
+
+	<plug:btn size="2" type="submit" value="확인"/>
+	<plug:btn size="2" type="button" event="onclick" js="history.go(-1)" value="취소"/>
+	
+</div>
+
+<br>
+<br>
+
+
+<label for="keepid"></label>
+</p>
+<ul class="help">
+<li class="first">
+	<a class="o_anchor" href="#">암호입력창</a>
+</li>
+{? admin_pre}<li>※ 관리권한 있는 회원은 공백으로도 처리됩니다.</li>{/}
+</ul>
+</fieldset> </form>
+
+</div>
+</div>
+<p>
+
+<!--//ui object -->
+
+
+
+
+
+
+<script type="text/javascript">
+jQuery(function($){
+	var loginWindow = $('.mw_login');
+	var login = $('#login');
+	var uid = $('.i_text.uid');
+	var upw = $('.i_text.upw');
+	var oid = $('.i_text.oid');
+	
+	
+	
+	// Input Clear
+	var i_text = $('.item>.i_label').next('.i_text');
+	$('.item>.i_label').css('position','absolute');
+	i_text
+		.focus(function(){
+			$(this).prev('.i_label').css('visibility','hidden');
+		})
+		.blur(function(){
+			if($(this).val() == ''){
+				$(this).prev('.i_label').css('visibility','visible');
+			} else {
+				$(this).prev('.i_label').css('visibility','hidden');
+			}
+		})
+		.change(function(){
+			if($(this).val() == ''){
+				$(this).prev('.i_label').css('visibility','visible');
+			} else {
+				$(this).prev('.i_label').css('visibility','hidden');
+			}
+		})
+		.blur();
+	// Validation
+	$('#login>.g_login input[type=submit]').click(function(){
+		if(uid.val() == '' && upw.val() == ''){
+			alert('ID와 PASSWORD를 입력하세요!');
+			return false;
+		}
+		else if(uid.val() == ''){
+			alert('ID를 입력하세요!');
+			return false;
+		}
+		else if(upw.val() == ''){
+			{? !admin_pre}
+			alert('PASSWORD를 입력하세요!');
+			return false;
+			 {/}
+		}
+	});
+	$('#login>.o_login input[type=submit]').click(function(){
+		if(oid.val() == ''){
+			alert('Open ID를 입력하세요!');
+			return false;
+		}
+	});
+	
+});
+</script>

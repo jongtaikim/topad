@@ -1,0 +1,313 @@
+<?
+$company_idx = {company_idx};
+foreach( $_GET as $val => $value ){
+	if(substr($val,0,5) !="like_" && substr($val,0,4) !="sch_"){
+		if($val !="year" && $val !="month"){
+			$qs .= $val."=".$value."&";
+		}
+	}
+}
+$qs = "?".$qs;
+$listpage= "/admin/keyword/crontab_list";
+$viewpage= "/admin/keyword/crontab_view";
+$data_title = "키워드 순위";
+?>
+
+<input type="hidden" id="year" value="{year}"/>
+<input type="hidden" id="month" value="{month}"/>
+
+<div class="col-lg-11  col-md-12 col-xs-12 n-mp m-l25" >
+
+
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 " id="card_body2">
+
+
+	<div class="card table-responsive" id="content_body2" style="min-height:400px">
+		  <div class="card-heading bg-light lt">
+		    <h2>{? company_name}{company_name}{:}키워드 상위노출 현황{/}</h2>
+		  </div>
+		  <div class="card-body b-t">
+
+		<div class="m-b5" id="">
+			<strong>날짜선택</strong>
+		</div>
+		<div class="box" >
+
+				<div class="btn-group m-b8 m-r30">
+				  <? for($ii=2015; $ii<2018; $ii++) {?>
+					<button type="button" class="btn btn-sm btn-default year<?=$ii?> year_all
+						<?
+							if($_GET[year]){
+								if($_GET[year] == $ii) echo "active";
+							}else{
+								if((date("Y")+0) == $ii) echo "active";
+							}
+						?>
+
+						" val="<?=$ii?>" onclick="$('#year').val('<?=$ii?>');reload_data_table();"><?=$ii?>년</button>
+				  <?}?>
+				</div>
+
+				<div class="btn-group m-b8 ">
+				  <? for($ii=1; $ii<13; $ii++) {?>
+					<button type="button" class="btn btn-sm btn-default month<?=$ii?> month_all
+						<?
+							if($_GET[month]){
+								if($_GET[month] == $ii) echo "active";
+							}else{
+								if((date("m")+0) == $ii) echo "active";
+							}
+						?>
+
+						" val="<?=$ii?>" onclick="$('#month').val('<?=$ii?>');reload_data_table();"><?=$ii?>월</button>
+				  <?}?>
+				</div>
+		</div>
+
+		<div class="m-t10 m-b5 p-t20" id="" style="border-top:1px dashed #e9e9e9">
+			<strong>검색어 순위</strong>
+			<span style="color:#e8e8e8" class="m-l10 m-r10">|</span>
+			<small class="text-light ">{start_day} ~ {end_day} : 8시 ~ 22시 기준</small>
+		</div>
+
+		<div class="boardwrap " id="boardwrap" style="width:100%;overflow:auto;">
+			{? LIST}
+				<table  border="0" cellspacing="0" cellpadding="0" class="table table-bordered" summary="" style="font-size:11px">
+					<thead>
+						<tr>
+							<th style="background-color:rgba(241, 241, 241, 0.78);width:200px"  class="text-right">키워드/일자</th>
+							 <? for($ii=1; $ii<32; $ii++) {?>
+								<th class="text-center " style="background-color:rgba(241, 241, 241, 0.78);;">
+									<?=$ii?>
+								</th>
+							  <?}?>
+						</tr>
+					</thead>
+					<tbody>
+						{@ LIST}
+						<tr>
+							<td class="text-right" rowspan="2" style="border-bottom:2px solid #dadada;min-width:120px">
+							
+							<div class="m-b20" id="">
+								<strong>{? .use_stat==1}<span style="color:blue">※</span>{/}{.keyword} ({.r_total+0})</strong>
+							</div>
+							
+						
+							<span style="font-size:8px">{.content_title}</span>
+							</td>
+							{@ .sub}
+							<td class="text-center pos_r">
+								<span class="badge {? ..rank<4} bg-info{:}bg-light{/} badge-sm rank_btn pointer"
+									reg_date="{..reg_date}" keyword="{..keyword}" target_url="{..target_url}" rank="{..rank}" reg_h="{..reg_h}"
+								 >{..rank}
+								
+								 
+								 </span>
+								 {? !..rank}
+									&nbsp;
+								{/}
+
+								{? ..rank}
+								<span class="label bg-dark pos-rlt m-r-xs pos_a hide  " style="bottom:-40px;left:-100px">
+									<b class="arrow top b-dark "></b>
+										{..reg_date}
+										<div class="w220" style="overflow:hidden">
+											{..keyword_text}
+										</div>
+								</span>
+								{/}
+								
+								
+								
+								
+								
+
+							</td>
+							{/}
+						</tr>
+						<tr style="border-bottom:2px solid #dadada">
+
+							{@ .sub}
+							<td class="text-center pos_r" valign="bottom" style="height:100px">
+								<div class="bg-light" style="{? ..rank >0}height:{(11 - ..rank) * 10}px;{:}height:0px{/}width:20px;margin:0px auto">{..rank}
+								
+								{? ..d_rank && ..rank}
+									<br>
+									{? ..d_rank < ..rank}<span style="color:blue;font-size:8px">{=..d_rank - ..rank}↓</span>{/}
+									{? ..d_rank > ..rank}<span style="color:red;font-size:8px">+{=..d_rank - ..rank}↑</span>{/}
+								{/}</div>
+							</td>
+							{/}
+						</tr>
+						{/}
+					</tbody>
+				</table>
+			{:}
+				{? !company_idx}
+
+				<div class="padding" id="">
+					업체를 선택하여 주세요.
+				</div>
+				{/}
+			{/}
+		</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:720px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="dataModalLabel"><?=$data_title?> 등록/수정</h4>
+      </div>
+      <div class="modal-body " id="data_modify_body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="data_submit_btn">저장하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+function list_init(){
+	//팝업 말풍선
+
+	$('.rank_btn').unbind('click');
+	$('.rank_btn').click(function(){
+	var urls = "<?=$viewpage?>/"+$(this).attr('reg_date')+"/"+$(this).attr('keyword')+"/"+$(this).attr('reg_h')+"/"+$(this).attr('rank');
+		//alert(urls);
+		{? is_mobile}
+		loading_start();
+		location.href=urls;
+		{:}
+		ifr_view(urls);
+		{/}
+	})
+	$('.rank_btn').mouseenter(function(){
+		$(this).next().removeClass('hide');
+	});
+
+	$('.rank_btn').mouseleave(function(){
+		$(this).next().addClass('hide');
+	});
+}
+
+$(document).ready(function(){
+	//list_init();
+});
+
+function data_del(idx){
+
+	 var msg = "<?=$delmsg?>";
+
+	if (confirm(msg)){
+
+		 $.ajax({
+		 type: 'GET',
+		 url: '<?=$delpage?>/'+idx,
+		 dataType: 'html',
+			success: function(html, status) {
+				alert('삭제하였습니다.');
+				reload_data_table();
+			},
+			error: function(request,status,error) {
+				alert(request.responseText);
+			}
+		});
+
+	}
+}
+
+
+
+function load_data_view(company_idx,idx){
+	if(!idx) idx='';
+	if(idx){
+		$('#dataModalLabel').text('{? company_name}{company_name}{/} 키워드 수정하기');
+	}else{
+		$('#dataModalLabel').text('{? company_name}{company_name}{/} 키워드 등록하기');
+	}
+
+	$('#dataModal').modal({  keyboard: false });
+	$('#dataModal').modal('show');
+	$('#data_modify_body').load('<?=$viewpage?>/'+company_idx+'/'+idx);
+}
+
+
+var company_idx='';
+
+function reload_data_table(){
+	load_company_code(company_idx);
+}
+
+
+function load_company_code(idx){
+
+	loading_start();
+	company_idx = idx;
+
+	$('.list-group-item').removeClass('active');
+	$('.list-group-item'+idx).addClass('active');
+	$('.arrow_q').hide();
+	$('.arrow_q'+idx).show();
+
+	var idxe = str_replace("#/","",location.hash);
+	
+	if(idxe != idx && idx !=''){
+		location.href='#/'+idx;
+		company_idx = idx;
+	}
+
+
+	setTimeout(function(){
+
+		//alert('<?=$listpage?>/'+idx+'/<?=$qs?>&year='+$('#year').val()+'&month='+$('#month').val());
+
+		$('#card_body2').load('<?=$listpage?>/'+idx+'/<?=$qs?>&year='+$('#year').val()+'&month='+$('#month').val()+' #content_body2',function( response, status, xhr ) {
+		  if ( status == "success" ) {
+				list_init();
+				loading_end();
+			
+		  }
+		  });
+	},300);
+
+
+	
+}
+
+
+//앵커로 이동한거 기억하기
+$(document).ready(function(){
+	var idxe = str_replace("#/","",location.hash);
+
+	if(idxe){
+		load_company_code(idxe);
+	}
+});
+
+
+{? _SESSION._company_idx}
+	$(document).ready(function(){
+		load_company_code('{_SESSION._company_idx}');
+	});
+
+{/}
+
+</script>

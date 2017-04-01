@@ -1,0 +1,322 @@
+<?
+$company_idx = {company_idx};
+foreach( $_GET as $val => $value ){
+	if(substr($val,0,5) !="like_" && substr($val,0,4) !="sch_"){
+		$qs .= $val."=".$value."&";
+	}
+}
+$qs = "?".$qs;
+$listpage= "/admin/keyword/keyword_list";
+$viewpage = "/admin/keyword/keyword_view";
+$delpage = "/admin/keyword/keyword_del";
+$delmsg = "삭제하시겠습니까?";
+$data_title = "키워드";
+?>
+
+<div class="col-lg-12  col-md-12 n-mp" id="">
+
+<div class="col-lg-2 col-md-4 col-sm-4 n-mp" id="">
+	<div class="card table-responsive  m-l20" >
+		  <div class="card-heading bg-light lt">
+		    <h2>키워드 업체</h2>
+		    <small>업체를 선택하세요.</small>
+		  </div>
+		  <div class="card-body b-t n-mp">
+
+
+			<div class="boardwrap" id="boardwrap1">
+				<ul class="list-group n-mp ">
+					{@ company_LIST}
+					<li class="list-group-item list-group-item{.idx} pointer" onclick="load_company_code({.idx})"><a href="javascript:load_company_code({.idx})" class="block _500"><span style="color:#0088ca">{.name}</span></a> 
+						<span class="text-muted">{.memo}</span>
+
+						<span class="arrow left pull-right  b-white  arrow_q{.idx} arrow_q" style="right:8px;display:none"></span>
+					</li>
+					{/}
+				</ul>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+<div class="col-lg-8 col-md-8 col-sm-8 n-mp" id="card_body2">
+	
+	<div class="card table-responsive autoheight" id="content_body2" style="min-height:400px">
+		  <div class="card-heading bg-light lt">
+		    <h2>{? company_name}{company_name}{:}키워드 컨텐츠 관리{/}</h2>
+		    <small>상위노출 상태를 기록할 컨텐츠를 등록합니다.</small>
+		  </div>
+		  <div class="card-body b-t">
+
+
+		<div class="boardwrap" id="boardwrap">
+			{? LIST}
+
+			<div class="" id="">
+			{total}건이 등록되었습니다.
+			</div>
+			<div class="" id="data_body">
+					<table class="table table-bordered table-striped1  table-hover table-condensed" border="1" cellspacing="0"  style="margin-top:5px;font-size:12px" >
+					
+					<thead class="b-b b-2x bg-light lt ">
+						<tr>
+							<th width="5%" scope="col" class="text-center">코드</th>
+							<th width="16%" scope="col" class="text-center">업체</th>
+							<th width="" scope="col" class=" text-center subject">키워드</th>
+							<th width="11%" scope="col" class="text-center">등록일</th>
+							<th width="8%" scope="col" class="text-center">사용</th>
+							<th width="12%" scope="col" class="text-center">관리</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+
+						{@ LIST}
+						<tr>
+							<td class="text-center">{.num}</td>
+						
+							<td class="text-center">{.name}</td>
+							<td class="text-left ">
+								<p class="p-l20">
+									<b>{.keyword}</b>
+									<a href="javascript:popup_view('https://m.search.naver.com/search.naver?query={.keyword}')">
+										<i class="fa fa-copy"></i>
+									</a>
+								</p>
+								<p class="p-l20">
+									{.target_url} <a href="javascript:ifr_view('{.target_url}')"><i class="fa fa-copy"></i></a><br>
+									{.content_title}
+								</p>
+							</td>
+							<td class="text-center ">{=substr(.reg_date,0,10)}</td>
+							<td class="text-center ">{.use_st}</td>
+
+							<td class="last text-center">
+								<a  class="btn btn-xs btn-default  m-t5" href="javascript:load_data_view('{company_idx}','{.idx}');">수정</a>
+								<a  class="btn btn-xs btn-default data_del_btn m-t5" href="javascript:data_del('{.idx}');">삭제</a>
+							</td>
+						</tr>
+						{:}
+						<tr>
+							<td  colspan="7" height="100px" align="center" style="text-align:center">글이 없습니다.</td>
+						</tr>
+
+						{/}
+					</tbody>
+				</table>
+					
+					<div style="margin:10px 0 10px 0;width:100%" class="">
+						 <plug:paging2 total="{total}" listnum="{listnum}" page="{page}" idx="4"/> 
+					</div>
+
+			</div>
+
+			{:}
+				{? company_idx}
+				<div class="padding" id="">
+					등록된 키워드가 없습니다.
+				</div>
+				{:}
+				<div class="padding" id="">
+					업체를 선택하여 주세요.
+				</div>
+				{/}
+			{/}
+		</div>
+
+			
+		
+		<div style="height:50px" class="b-t p-t10">
+						
+						{? company_idx}
+						<div style="float:left;width:20%">
+							<a  class="btn btn btn-default data_modify_btn" href="javascript:load_data_view('{company_idx}');">키워드 추가</a>
+						</div>
+						{/}
+						{? LIST }
+						<div style="float:right;text-align:right;width:68%">
+							<form method="get" id="search_form" onsubmit="reload_data_table();return false;">
+							
+				
+							<div class="col-sm-7 text-right f_r" style="padding-right:4px">
+								<div class="input-group m-b ">
+								    <div class="input-group-btn dropdown dropup">
+	
+
+									<button type="button" class="btn btn-default dropdown-toggle waves-effect" type="button" id="sch_menu" data-toggle="dropdown" aria-expanded="true">
+										<span id="sch_menu_label">키워드</span> <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="sch_menu">
+									  <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:select_sch_menu('like_keyword')">키워드</a></li>
+									  <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:select_sch_menu('like_target_url')">대상URL</a></li>
+									</ul>
+
+									<input type="hidden" name="search_key" id="search_key" value="like_keyword"/>
+
+
+									<script type="text/javascript">
+									function select_sch_menu(val_name){
+										switch (val_name) {
+										case "like_keyword": $('#search_key').val('like_keyword');;$('#sch_menu_label').text('키워드'); break;
+										case "like_target_url": $('#search_key').val('like_target_url');;$('#sch_menu_label').text('대상URL'); break;
+										}
+									}
+									{? _GET.search_key } select_sch_menu('{_GET.search_key}');{/}
+									</script>
+								    </div>
+
+								       <input type="text" class="form-control" name="search_value" id="search_value" value="{search_value}" >
+									
+									<span class="input-group-btn">
+										<button class="btn btn-dark waves-effect" type="button" onclick="reload_data_table()">검색</button>
+									</span>
+
+								  </div>
+								
+							</div>
+							</form>
+						</div>
+						{/}
+						
+					</div>
+
+
+		</div>
+	</div>
+	</div>
+
+</div>
+
+
+
+
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:720px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="dataModalLabel"><?=$data_title?> 등록/수정</h4>
+      </div>
+      <div class="modal-body " id="data_modify_body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="data_submit_btn">저장하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+function list_init(){
+
+}
+
+list_init();
+
+function data_del(idx){
+	
+	 var msg = "<?=$delmsg?>";
+	
+	if (confirm(msg)){
+	
+		 $.ajax({
+		 type: 'GET',
+		 url: '<?=$delpage?>/'+idx,
+		 dataType: 'html',
+			success: function(html, status) {
+				alert('삭제하였습니다.');
+				reload_data_table();
+			},
+			error: function(request,status,error) {
+				alert(request.responseText);
+			}
+		});
+
+	}
+}
+
+
+
+function load_data_view(company_idx,idx){
+	if(!idx) idx='';
+	if(idx){
+		$('#dataModalLabel').text('{? company_name}{company_name}{/} 키워드 수정하기');
+	}else{
+		$('#dataModalLabel').text('{? company_name}{company_name}{/} 키워드 등록하기');
+	}
+	
+	$('#dataModal').modal({  keyboard: false });
+	$('#dataModal').modal('show');
+	$('#data_modify_body').load('<?=$viewpage?>/'+company_idx+'/'+idx);
+}
+
+
+var company_idx='';
+
+function reload_data_table(){
+
+	load_company_code(company_idx);
+}
+
+
+function load_company_code(idx){
+	loading_start();
+	
+	company_idx = idx;
+	
+	$('.list-group-item').removeClass('active');
+	$('.list-group-item'+idx).addClass('active');
+	$('.arrow_q').hide();
+	$('.arrow_q'+idx).show();
+	
+	var idxe = str_replace("#/","",location.hash);
+	
+	if(idxe != idx && idx !=''){
+		location.href='#/'+idx;
+		company_idx = idx;
+	}
+	
+
+	setTimeout(function(){
+		 if($('#search_value').val() && $('#search_key').val()){
+			$('#card_body2').load('<?=$listpage?>/'+idx+'/<?=$qs?>&sch_data=&'+$('#search_key').val()+'='+$('#search_value').val()+' #content_body2');
+		}else{
+			$('#card_body2').load('<?=$listpage?>/'+idx+'/<?=$qs?> #content_body2');
+		}
+		
+	},300);
+
+	setTimeout(function(){
+		list_init();
+		loading_end();
+	},900);
+}
+
+
+//앵커로 이동한거 기억하기
+$(document).ready(function(){ 
+	var idxe = str_replace("#/","",location.hash);
+	if(idxe){
+		load_company_code(idxe);
+	}
+});
+
+{? _SESSION._company_idx}
+	$(document).ready(function(){ 
+		load_company_code('{_SESSION._company_idx}');
+	});
+	
+{/}
+
+</script>

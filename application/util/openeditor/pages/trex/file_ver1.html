@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Daum에디터 - 파일 첨부</title> 
+<script src="../../js/popup.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="../../css/popup.css" type="text/css"  charset="utf-8"/>
+<script type="text/javascript">
+// <![CDATA[
+	
+	function done() {
+		if (typeof(execAttach) == 'undefined') { //Virtual Function
+	        return;
+	    }	 
+	
+		 {@ file_LIST}
+		var _mockdata = {
+			'attachurl': 'http://<?=$_SERVER[HTTP_HOST]?>{.pe_url}',
+			'originalurl': '/data/files/{.file_name}',
+			'filemime': '{.file_type}',
+			'filename': '{.client_name}',
+			'filesize': {=round(.file_size)}
+		};
+		execAttach(_mockdata);
+		{/}
+		closeWindow();
+	}
+
+	function initUploader(){
+	    var _opener = PopupUtil.getOpener();
+	    if (!_opener) {
+	        alert('잘못된 경로로 접근하셨습니다.');
+	        return;
+	    }
+	    
+	    var _attacher = getAttacher('file', _opener);
+	    registerAction(_attacher);
+	}
+	
+</script>
+<style type="text/css" title="">
+.upFild{width:240px;border:1px solid #cdcdcd;margin-bottom:5px}
+</style>
+</head>
+<body>
+<form method="post" action="/plug_daum_editor_upload/uploadComFile/" enctype="multipart/form-data" >
+<input type="hidden" name="str_sect"  id="str_sect" value="{str_sect}">
+<script type="text/javascript">
+// <![CDATA[
+	$('#str_sect').val(opener.$('#org_sect').val());
+// ]]>
+</script>
+<div class="wrapper">
+	<div class="header">
+		<h1>파일 첨부</h1>
+	</div>	
+	<div class="body">
+		<dl class="alert">
+		    <dt>파일 첨부 확인</dt>
+		    <dd>
+		    	<input type="file" name="upfile_name1" class="upFild"><br>
+				<input type="file" name="upfile_name2" class="upFild"><br>
+				<input type="file" name="upfile_name3" class="upFild"><br>
+				<input type="file" name="upfile_name4" class="upFild"><br>
+				<input type="file" name="upfile_name5" class="upFild"><br>
+				<input type="file" name="upfile_name6" class="upFild"><br>
+				<input type="file" name="upfile_name7" class="upFild"><br>
+				<input type="file" name="upfile_name8" class="upFild"><br>
+				<input type="file" name="upfile_name9" class="upFild"><br>
+				<input type="file" name="upfile_name10" class="upFild"><br>
+			</dd>
+		</dl>
+	</div>
+	<div class="footer">
+		<p><a href="#" onclick="closeWindow();" title="닫기" class="close">닫기</a></p>
+		<ul>
+			<li class="submit">
+				<plug:btn size="2" type="submit" id="btnSubmit" value="업로드"/>
+			</li>
+			<li class="cancel" style="margin-left:5px">
+				<plug:btn size="2" type="button" event="onclick" js="closeWindow();" value="취소"/>
+			</li>
+		</ul>
+	</div>
+</div>
+
+</form>
+
+<script type="text/javascript">
+// <![CDATA[
+initUploader();
+{? error}
+	alert('{=strip_tags(error)}');
+{:}
+	{? file_LIST}
+		done();
+	{/}
+{/}
+document.getElementById('str_sect').value = opener.document.getElementById('sect').value
+// ]]>
+</script>
+</body>
+</html>

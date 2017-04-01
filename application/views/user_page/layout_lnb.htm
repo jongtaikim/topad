@@ -1,0 +1,87 @@
+
+	<nav class="navside white r box-shadow-z0 m-b " style="border:1px solid rgba(120, 130, 140, 0.13);">
+		
+		<div class="nav-border b-primary" flex="">
+			<ul class="nav ng-scope" ui-nav="">
+				
+				
+				{@ site_menu_list}
+					{? .num_cate == substr(_GET.cate,0,2)}
+						<li class="nav-header hidden-folded">
+						
+						<span class="text-xl ">
+							<strong><i class="fa  fa-align-right"></i> {.str_title}</strong></span>	
+						</li>
+						<li><div class="b-b b m-v-sm"></div></li>
+						{@ .sub}
+							{? ..sub}
+							{? ..num_view ==1}
+								<li {? ..num_cate == substr(_GET.cate,0,4)}class="active dker  "{/}>
+									<a><span class="nav-caret text-muted"><i class="fa fa-caret-down"></i></span> 
+										 <span class="nav-text " >{..str_title}</span>
+									</a>
+									<ul class="nav-sub">
+										{@ ..sub}
+										<li><div class="b-b b m-v-sm"></div></li>
+										{? ...sub}
+											
+											<li {? ...num_cate == substr(_GET.cate,0,6)}class="active over_plus  "{:} class="over_plus"{/}>
+												<a><span class="nav-caret text-muted">
+													<i class="fa fa-caret-down"></i></span> 
+													<span class="nav-text {? ...num_cate == substr(_GET.cate,0,6)}text-info{/}">{...str_title}</span>
+												</a>
+												<ul class="nav-sub " style="margin-left:-48px;font-size:12px">
+													{@ ...sub}
+													<li><a  href="{....menu_url}"><span class="nav-text {? ....num_cate == substr(_GET.cate,0,8)} text-info  {/}">· {....str_title}</span></a></li>
+													{/}
+												</ul>
+											</li>
+
+										{:}
+											<li {? ...num_cate == substr(_GET.cate,0,6)}class="active dker   "{/}><a href="{...menu_url}"><span class="nav-text {? ...num_cate == substr(_GET.cate,0,6)} text-info  {/}">{...str_title}</span></a></li>
+										
+										{/}
+										
+										
+
+										{/}
+									</ul>
+								</li>
+
+							{/}
+							{:}
+								{? ..num_view ==1}
+								<li {? ..num_cate == substr(_GET.cate,0,4)} class="active   "{/}>
+									<a href="{..menu_url}"><span class="nav-text">{..str_title}</span></a>
+								</li>
+								{/}
+							{/}
+							{? ..num_view ==1}
+							<li><div class="b-b b m-v-sm"></div></li>
+							{/}
+						
+						{/}
+					{/}
+				{/}
+			</ul>
+		</div>
+		
+	</nav>
+
+
+	
+	<div class="box r b-l b-r b-t b-b" style="margin-top:36px;" >
+		<ul class="list inset" style="margin-bottom:0px">
+			<li class="list-item">
+				<a class="md-btn md-raised md-fab md-mini m-r pos-rlt md-fab-offset pull-right red" style="margin-top:-30px;font-size:16px" href="/docs/hospi_doc.pdf" target="_blank"><i class="fa fa-file-pdf-o m-l2"></i></a>
+			</a>
+				<div class="list-body ">
+					<a href="/docs/hospi_doc.pdf" target="_blank">
+						<div>카달로그 다운로드</div>
+						<small class="text-muted text-ellipsis">2015 HOSPI PRODUCT CATALOG</small>
+					</a>
+
+				</div>
+			</li>
+		</ul>
+	</div>

@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#wrap {width:100%; height:100%;margin:auto;}
+#headerwrap{width:100%;height:80px;margin:0 auto;background-color:#444; position:fixed; }
+#headerwrap #header{margin:0 auto;width:1000px;position:relative;height:80px;}
+#headerwrap #header #logo{position:absolute; top:18px; left:0; width:139px; height:43px;}
+#headerwrap #header #gnb{position:absolute; top:26px; right:0; width:800px; height:43px;;}
+#headerwrap #header #gnb ul{ margin:0 auto; width:800px; height:50px; }
+#headerwrap #header #gnb ul li{ float:left; cursor:pointer; padding:15px 16px;}
+#container .visual{width:100%;margin:0 auto; height:1000px;background:url(../images/main/visual_01.jpg) bottom center;}
+.slips{background:url(../images/main/gnb_bar.png) no-repeat right 32px;padding-right:26px;padding-left:6px}
+
+/* gnb */
+#container{width:100%;}
+#container .banner{ cursor:pointer;}
+#container .banner ul{ width:100%;  overflow:hidden;}
+#container .banner ul li{ float:left; width:25%;}
+#container .banner ul li img{ width:100%;}
+#container .tit{ margin:30px auto 20px auto; max-width:1000px; width:100%; clear:both; overflow:hidden;}
+#container #contents{margin:auto;width:1000px;}
+.map{margin:auto;width:100%; background:url(../images/main/map.jpg) top center; height:352px;}
+.map .post { width:100%;max-width:1000px; height:352px; margin:0 auto; position:relative;}
+.map .post img{ position:absolute; bottom:40px; right:40px; cursor:pointer;}
+
+/* contents */
+#container .contents .post { background-color:#92857f; height:580px;}
+#container .contents .post .form{ width:100%; margin:0 auto;  border:2px solid #fff; padding:40px 30px 30px 20px;}
+#container .contents .post .form .left{ width:49.8%; float:left;  margin-bottom:10px}
+#container .contents .post .form .left ul li{ width:100%;}
+#container .contents .post .form .left img{}
+.main_input1{height:40px; border:0; padding-left:10px; margin-left:1px;}
+#container .contents .post .form .left input{ width:260px; height:40px; border:0; padding-left:10px; margin-left:1px; }
+#container .contents .post .form .right{width:49.8%; float:right;  margin-bottom:10px}
+#container .contents .post .form .right ul li{ width:100%;}
+#container .contents .post .form .right input{ width:260px; height:40px; border:0; padding-left:10px; margin-left:1px; }
+#container .contents .post .form textarea{ width:83.8%;border:0; height:110px; padding:10px; margin-left:1px;}
+#container .txt{ margin:0 auto; text-align:center; padding:60px 0 30px 0; width:1000px;}
+#container .contents .post .form .button{ margin:0 auto;text-align:center; padding-top:30px;}
+#container .contents .post .form .button button{ border:0; padding:0;}
+
+/* footer */
+#footerwrap{background-color:#444;height:80px; font-size:1em; width:100%; }
+
+#footerwrap #bottom .logo_g{ }
+#footerwrap #bottom .address{}
+
