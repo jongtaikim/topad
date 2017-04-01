@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8b8d408b-062b-427d-b171-31d0325495b9" name="topad51311.cafe24.com" url="http://topad51311.cafe24.com">
+        <fileTransfer host="topad51311.cafe24.com" port="21" rootFolder="/www" username="topad51311">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
