@@ -60,8 +60,8 @@ class Site_adm extends CI_Controller {
 			$this->webapp->moveBack('잘못된 아이디로 로그인을 시도 하였습니다.');
 		}
 		
-		
-		
+
+
 			if(($_POST[userid] == _ADMIN_ID && md5($_POST[password]) == _ADMIN_PW) ){
 				
 				$member_type = $this->config->item('member_type');
@@ -84,7 +84,9 @@ class Site_adm extends CI_Controller {
 
 
 
-		}
+		}else{
+                $this->webapp->moveBack('비밀번호를 확인해주시기 바랍니다.');
+            }
 
 		 break;
 		} 
@@ -127,8 +129,7 @@ class Site_adm extends CI_Controller {
 				'member_count'=>$this->member->total_member(),
 
 			));
-		
-		
+
 		$tpl->define("CONTENT", $this->display->getTemplate("admin/main.htm"));
 		
 		$tpl->printAll();
