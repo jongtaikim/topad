@@ -170,22 +170,36 @@ class ctl_online extends CI_Controller {
 			$datas[title] = $datas[name]."님이 문의를 남겨주셨습니다";
 			$datas[comment] = addslashes($_POST[db_comment]);
 			
-			if(!$datas[comment]){
+			//if(!$datas[comment]){
 				$msg .= $datas[title]."<br><br>";
 				$msg .= "상호명 : ".$datas[subject]."<br>";
 				$msg .= "연락처 : ".$datas[phone]."<br>";
 				$msg .= "담당자 : ".$datas[name]."<br>";
 				$msg .= "업종 : ".$datas[subjectext]."<br>";
 				$msg .= "문의내용 : ".$datas[comment]."<br>";
-			}
+			//}
 
 			$this->mdl_online->online_add($datas);
-			
+
+                  
+            
 				$this->load->library('email');
-				$this->email->from('sbpark83@naver.com', '잇컴퍼니 상담신청');
+
+                $config['mailtype'] = 'html';
+                $config['charset'] = 'utf-8';
+                $config['newline'] = "\r\n";
+                $config['wordwrap'] = TRUE;
+
+                $this->email->initialize($config);
+
+				$this->email->from('tad3651@topad-creative.co.kr', '탑애드 상담신청');
 				//$this->email->to('sbpark83@naver.com','리치박'); 
-				$this->email->to('now17@naver.com','리치박'); 
-				//$this->email->to('now17@nate.com','리치박'); 
+				$this->email->to('tad3651@topad-creative.co.kr','탑애드');
+				//$this->email->to('now17@nate.com','리치박');
+
+
+
+
 				$this->email->subject($datas[title]);
 				
 				

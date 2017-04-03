@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="8b8d408b-062b-427d-b171-31d0325495b9" name="topad51311.cafe24.com" url="http://topad51311.cafe24.com">
-        <fileTransfer host="topad51311.cafe24.com" port="21" rootFolder="/www" username="topad51311">
+        <fileTransfer host="topad51311.cafe24.com" port="21" rootFolder="/www" password="dfd2dfc1dfdbdfcedfc5dfcfdfc7df9fdf9bdf99df9bdf9b" username="topad51311">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
